@@ -387,6 +387,11 @@ return [
             'icon_color' => 'cyan',
             'url' => '#',
         ],
+        [
+            'text' => 'Gestionar Pacientes',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-user',
+        ],
     ],
 
     /*
