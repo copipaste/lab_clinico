@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'ANALISIS CLINICOS',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Analisis</b>Clinico',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -300,6 +300,12 @@ return [
             'text' => 'search',
             'topnav_right' => true,
         ],
+        // [
+        //     'text' => 'Ingresar',
+        //     'url' => 'login',
+        //     'topnav_right' => true,
+        //     'can' => 'gues',
+        // ],
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
@@ -321,6 +327,12 @@ return [
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',
+        ],
+        [
+            'text' => 'Tipos de Seguros',
+            'url' => '/tiposeguro',
+            'icon' => 'far fa-fw fa-file',
+
         ],
         ['header' => 'account_settings'],
         [

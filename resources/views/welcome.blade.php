@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Buzon | Support')
+@section('title', 'Analisis Clinico')
 
 @section('content_header')
     <div>
