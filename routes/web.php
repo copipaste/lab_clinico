@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoSeguroController;
 use App\Http\Controllers\TipoAnalisis2Controller;
@@ -40,4 +41,6 @@ Route::get('/landingpage', function () {
     return view('landingpage');
 });
 
+
+Route::resource('/pacientes', PacienteController::class)->names('pacientes');
 

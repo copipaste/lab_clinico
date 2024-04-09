@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('telefono');
             $table->foreignId('idTipoSeguro')->constrained('tipo_seguros');
             $table->foreignId('idHistorial')->constrained('historiales');
+            $table->foreignId('idUser')->constrained('users');
             $table->timestamps();
         });
     }
