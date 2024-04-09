@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/landingpage', function () {
     return view('landingpage');
 });
+
+
+
+Route::resource('/pacientes', PacienteController::class)->names('pacientes');
