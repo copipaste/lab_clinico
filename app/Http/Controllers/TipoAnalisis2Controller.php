@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TipoAnalisis;
+use App\Models\tipo_analisis2;
 use Illuminate\Http\Request;
 
-
-class TipoAnalisisController extends Controller
+class TipoAnalisis2Controller extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
 
-        $tipoanalisis = tipoanalisis::all();
-        return view('VistaTipoAnalisis.index', compact('tipoanalisis'));
+        $tipoanalisis = tipo_analisis2::all();
+        return view('VistaTiposAnalisis.index', compact('tipoanalisis'));
     }
 
     /**
@@ -39,15 +38,15 @@ class TipoAnalisisController extends Controller
         ]);
 
         // Crear una nueva instancia del modelo TipoSeguro
-        $tipoSeguro = new TipoAnalisis();
+        $tipoanalisis = new tipo_analisis2();
 
         // Asignar los valores del formulario a las propiedades del modelo
-        $tipoSeguro->nombre = $request->nombre;
-        $tipoSeguro->descripcion = $request->descripcion;
-        $tipoSeguro->precio = $request->precio;
+        $tipoanalisis->nombre = $request->nombre;
+        $tipoanalisis->descripcion = $request->descripcion;
+        $tipoanalisis->precio = $request->precio;
 
         // Guardar el tipo de seguro en la base de datos
-        $tipoSeguro->save();
+        $tipoanalisis->save();
 
         // Redirigir a la página de índice de tipos de seguro con un mensaje de éxito
         return redirect()->route('tipoanalisis.index')->with('success', '¡El tipo de seguro se ha registrado exitosamente!');
@@ -57,7 +56,7 @@ class TipoAnalisisController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(TipoAnalisis $tipoAnalisis)
+    public function show(tipo_analisis2 $tipoAnalisis)
     {
         //
     }
@@ -65,15 +64,15 @@ class TipoAnalisisController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TipoAnalisis $tipoAnalisis)
+    public function edit(tipo_analisis2 $tipoanalisis)
     {
-        return view('VistaTipoAnalisis.edit', compact('tipoAnalisis'));
+        return view('VistaTiposAnalisis.edit', compact('tipoanalisis'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TipoAnalisis $tipoAnalisis)
+    public function update(Request $request, tipo_analisis2 $tipoanalisis)
     {
         // Validar los datos del formulario
         $request->validate([
@@ -81,12 +80,13 @@ class TipoAnalisisController extends Controller
             'descripcion' => 'required|string|max:255',
             'precio' => 'required|numeric',
         ]);
+        $tipoanalisis = new tipo_analisis2();
 
         // Actualizar los datos del tipo de seguro
-        $tipoAnalisis->nombre = $request->nombre;
-        $tipoAnalisis->descripcion = $request->descripcion;
-        $tipoAnalisis->precio = $request->precio;
-        $tipoAnalisis->save();
+        $tipoanalisis->nombre = $request->nombre;
+        $tipoanalisis->descripcion = $request->descripcion;
+        $tipoanalisis->precio = $request->precio;
+        $tipoanalisis->save();
 
         // Redirigir a la página de índice de tipos de seguro con un mensaje de éxito
         return redirect()->route('tipoanalisis.index')->with('success', 'Los datos del tipo de seguro han sido actualizados correctamente.');
@@ -96,9 +96,9 @@ class TipoAnalisisController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TipoAnalisis $tipoAnalisis)
+    public function destroy(tipo_analisis2 $tipoanalisis)
     {
-        $tipoAnalisis->delete();
+        $tipoanalisis->delete();
         return redirect()->route('tipoanalisis.index')->with('success', 'Eliminado correctamente');
 
     }

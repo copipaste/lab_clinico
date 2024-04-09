@@ -14,6 +14,7 @@ return [
     |
     */
 
+
     'title' => 'Laboratorio Clinico',
     'title_prefix' => '',
     'title_postfix' => '',
@@ -62,6 +63,7 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
+
 
     'logo' => '<b>LABORATORIO</b>',
     'logo_img' => 'vendor/adminlte/dist/img/LAB.jpg',
@@ -300,6 +302,12 @@ return [
             'text' => 'search',
             'topnav_right' => true,
         ],
+        // [
+        //     'text' => 'Ingresar',
+        //     'url' => 'login',
+        //     'topnav_right' => true,
+        //     'can' => 'gues',
+        // ],
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
@@ -321,6 +329,18 @@ return [
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',
+        ],
+        [
+            'text' => 'Tipos de Seguros',
+            'url' => '/tiposeguro',
+            'icon' => 'far fa-fw fa-file',
+
+        ],
+        [
+            'text' => 'Tipos de Analisis',
+            'url' => '/tipoanalisis',
+            'icon' => 'far fa-fw fa-file',
+
         ],
         ['header' => 'account_settings'],
         [
