@@ -334,6 +334,12 @@ return [
             'icon' => 'far fa-fw fa-file',
 
         ],
+        [
+            'text' => 'Tipos de Analisis',
+            'url' => '/tipoanalisis',
+            'icon' => 'far fa-fw fa-file',
+
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

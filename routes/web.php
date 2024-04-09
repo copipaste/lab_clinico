@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoSeguroController;
-
+use App\Http\Controllers\TipoAnalisis2Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +26,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('tiposeguro/{tiposeguro}', [TipoSeguroController::class, 'edit'])->name('tiposeguro.edit');
     Route::put('tiposeguro/{tiposeguro}', [TipoSeguroController::class, 'update'])->name('tiposeguro.update');
     Route::delete('tiposeguro/{tiposeguro}', [TipoSeguroController::class, 'destroy'])->name('tiposeguro.destroy');
+
+
+    Route::get('tipoanalisis',[TipoAnalisis2Controller::class, 'index'])->name('tipoanalisis.index');
+    Route::post('tipoanalisis', [TipoAnalisis2Controller::class, 'store'])->name('tipoanalisis.store');
+    Route::get('tipoanalisis/{tipoanalisis}', [TipoAnalisis2Controller::class, 'edit'])->name('tipoanalisis.edit');
+    Route::put('tipoanalisis/{tipoanalisis}', [TipoAnalisis2Controller::class, 'update'])->name('tipoanalisis.update');
+    Route::delete('tipoanalisis/{tipoanalisis}', [TipoAnalisis2Controller::class, 'destroy'])->name('tipoanalisis.destroy');
 
 });
 
