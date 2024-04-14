@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Recepcionista extends Model
 {
     use HasFactory;
+
+    protected $table = 'recepcionistas';
+
+    protected $fillable = [
+        'ci',
+        'nombre',
+        'fechaNacimiento',
+        'sexo',
+        'telefono',
+        'direccion',
+        'idUsuario',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'idUser', 'id');
+    }
 }

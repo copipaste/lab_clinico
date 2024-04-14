@@ -19,13 +19,16 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call(RoleSeeder::class);
         $this->call(superUserSeeder::class);
         $this->call(PacienteSeeder::class);
+        
 
         \App\Models\User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@example.com',
             'password'=>'12345678'
+        ]);
 
     }
 }

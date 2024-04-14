@@ -21,12 +21,12 @@ class PacienteSeeder extends Seeder
             'name' => 'paciente1',
             'email' => 'paciente101@gmail.com',
             'password' => bcrypt('password'),
-        ]);
+        ])->assignRole('Paciente');
         $user2 = User::create([
             'name' => 'paciente2',
             'email' => 'paciente102@gmail.com',
             'password' => bcrypt('password'),
-        ]);
+        ])->assignRole('Paciente');
 
         $historial1 = Historial::create([
             'nroHistoria' => 'P-1',
