@@ -409,6 +409,12 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'can' => 'pacientes.index',
         ],
+        [
+            'text' => 'Historial Clinico',
+            'route' => 'historiales.index',
+            'icon' => 'fas fa-book-medical',
+            // 'can' => 'historiales.index',
+        ],
     ],
 
     /*

@@ -7,6 +7,7 @@ use App\Http\Controllers\TipoSeguroController;
 use App\Http\Controllers\TipoAnalisis2Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HistorialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/roles', RoleController::class)->names('roles');
     //Rutas Pacientes
     Route::resource('/pacientes', PacienteController::class)->names('pacientes');
+    //Rutas Historiales
+    Route::resource('/historiales', HistorialController::class)->names('historiales');
 
 });
 

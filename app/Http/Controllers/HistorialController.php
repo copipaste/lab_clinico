@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Historial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HistorialController extends Controller
 {
@@ -12,7 +13,19 @@ class HistorialController extends Controller
      */
     public function index()
     {
-        //
+        $heads = [
+            'Numero de Historia',
+            'Tipo de Analisis',
+            'Fecha',
+            'Doctor',
+            'Presion Arterial',
+            'Peso',
+            'Altura',
+            'Notas',
+        ];
+        $user = Auth::user();
+        $historiales = $user->paciente->historial->registros;
+        return view('historiales.index', compact('historiales', 'heads'));
     }
 
     /**
