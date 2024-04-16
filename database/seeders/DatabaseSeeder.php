@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Especialidad;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(superUserSeeder::class);
         $this->call(PacienteSeeder::class);
-        
+        $this->call(EspecialidadSeeder::class);
+
 
         \App\Models\User::factory()->create([
             'name' => 'admin',

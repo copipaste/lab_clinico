@@ -8,19 +8,19 @@
 
     <div class="card">
         <div class="card-body">
-            <p><strong>Carnet de Identidad:</strong> {{ $paciente->ci }}</p>
-            <p><strong>Direccion:</strong> {{ $paciente->nombre }}</p>
-            <p><strong>Nombre:</strong> {{ $paciente->nombre }}</p>
-            <p><strong>Fecha de Nacimiento:</strong> {{ $paciente->fechaNacimiento }}</p>
-            <p><strong>Sexo:</strong> {{ $paciente->sexo }}</p>
-            <p><strong>Telefono:</strong> {{ $paciente->telefono }}</p>
-            <p><strong>Especialidad:</strong> {{ $paciente->tipoSeguro->descripcion }}</p>
+            <p><strong>Carnet de Identidad:</strong> {{ $Bioquimico->ci }}</p>
+            <p><strong>Direccion:</strong> {{ $Bioquimico->nombre }}</p>
+            <p><strong>Nombre:</strong> {{ $Bioquimico->nombre }}</p>
+            <p><strong>Fecha de Nacimiento:</strong> {{ $Bioquimico->fechaNacimiento }}</p>
+            <p><strong>Sexo:</strong> {{ $Bioquimico->sexo }}</p>
+            <p><strong>Telefono:</strong> {{ $Bioquimico->telefono }}</p>
+            <p><strong>Especialidad:</strong> {{ $Bioquimico->tipoSeguro->descripcion }}</p>
         </div>
     </div>
 
     <div class="form-group mt-2">
-        <a href="{{ route('pacientes.edit', $paciente) }}" class="btn btn-primary">Editar</a>
-        <a href="{{ route('pacientes.index') }}" class="btn btn-danger">Cancelar</a>
+        <a href="{{ route('bioquimicos.edit', $Bioquimico) }}" class="btn btn-primary">Editar</a>
+        <a href="{{ route('bioquimicos.index') }}" class="btn btn-danger">Cancelar</a>
     </div>
 
 @stop

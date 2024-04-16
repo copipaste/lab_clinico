@@ -20,12 +20,13 @@
         <x-adminlte-button label="Registrar nuevo bioquimico" class="bg-white" title="Registrar nuevo bioquimico"
         data-toggle="modal" data-target="#modalpromocion" />
 
-        <x-adminlte-modal id="modalpromocion" title="Registrar paciente" size="lg" theme="dark" v-centered static-backdrop scrollable>
-            <form action="{{ route('pacientes.store') }}" method="POST">
+        <x-adminlte-modal id="modalpromocion" title="Registrar Bioquimico" size="lg" theme="dark" v-centered static-backdrop scrollable>
+            <form action="{{ route('bioquimicos.store') }}" method="POST">
                         @method('POST')
                         @csrf
                                 <x-adminlte-input name="ci" type="text" label="carnet de identidad" />
-                                <x-adminlte-input name="nombre" type="text" label="Nombre del paciente" />
+                                <x-adminlte-input name="direccion" type="text" label="direccion del bioquimico" />
+                                <x-adminlte-input name="nombre" type="text" label="Nombre del bioquimico" />
                                 <x-adminlte-input name="fechaNacimiento" type="date" label="fecha nacimiento"/>
                                 <x-adminlte-select name="sexo" label="sexo" required>
                                     <option disabled>Seleccione una opcion</option>
@@ -33,8 +34,8 @@
                                     <option value="FEMENINO" selected>FEMENINO</option>
                                 </x-adminlte-select>
                                 <x-adminlte-input name="telefono" type="text" label="Telefono" />
-                                <label for="idTipoSeguro">Tipo de Seguro</label>
-                                <x-adminlte-select name="idTipoSeguro" id="idTipoSeguro" required>
+                                <label for="idEspecialidad">Especialidad</label>
+                                <x-adminlte-select name="idEspecialidad" id="idEspecialidad" required>
                                     @foreach ($Especialidad as $seguro)
                                     <option value="{{$seguro->id}}">{{$seguro->descripcion}}</option>
                                     @endforeach
@@ -60,27 +61,28 @@
         <x-adminlte-datatable id="table1" :heads="$heads" striped head-theme="white" with-buttons>
 
 
-            @foreach($Especialidad as $paciente)
+            @foreach($Bioquimico as $paciente)
                 <tr>
 
                         <td>{{ $paciente->ci }}</td>
+                        <td>{{ $paciente->direccion }}</td>
                         <td>{{ $paciente->nombre }}</td>
                         <td>{{ $paciente->fechaNacimiento }}</td>
                         <td>{{ $paciente->sexo }}</td>
                         <td>{{ $paciente->telefono }}</td>
-                        <td>{{ $paciente->tipoSeguro->descripcion }}</td>
+                        <td>{{ $paciente->Especialidad->descripcion }}</td>
                         <td width="15px">
                             <div class="d-flex">
 
                                 {{-- esto es para el de editar membresía --}}
-                                <a href="{{route('pacientes.edit', $paciente) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                <a href="{{route('bioquimicos.edit', $paciente) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </a>
 
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR" data-toggle="modal" data-target="#modalCustom{{ $paciente->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>
                                 </button>
-                                <a href="{{ route('pacientes.show', $paciente) }}" class="btn btn-xs btn-default text-teal mx-1 shadow" title="DETALLES">
+                                <a href="{{ route('bioquimicos.show', $paciente) }}" class="btn btn-xs btn-default text-teal mx-1 shadow" title="DETALLES">
                                     <i class="fa fa-lg fa-fw fa-eye"></i>
                                 </a>
                                 <a href="{{-- route('promocion.show', $promocion) --}}" class="btn btn-xs btn-default text-info mx-1 shadow" title="HISTORIAL CLINICO">
@@ -92,9 +94,9 @@
                         </td>
 
                         <x-adminlte-modal id="modalCustom{{ $paciente->id }}" title="Eliminar" size="sm" theme="warning" icon="fa-solid fa-triangle-exclamation" v-centered static-backdrop scrollable>
-                            <div style="height: 50px;">¿Está seguro de eliminar el paciente?</div>
+                            <div style="height: 50px;">¿Está seguro de eliminar el bioquimico?</div>
                             <x-slot name="footerSlot">
-                                <form action="{{ route('pacientes.destroy', $paciente) }}" method="POST">
+                                <form action="{{ route('bioquimicos.destroy', $paciente) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <x-adminlte-button class="btn-flat" type="submit" label="Aceptar" theme="dark" />

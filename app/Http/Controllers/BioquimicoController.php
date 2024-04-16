@@ -91,9 +91,9 @@ class BioquimicoController extends Controller
     */
    public function edit(Bioquimico $Bioquimico)
    {
-     $seguros = Especialidad::all();
+     $Especialidad = Especialidad::all();
 
-     return view('bioquimicos.edit', compact('Bioquimico', 'seguros'));
+     return view('bioquimicos.edit', compact('Bioquimico', 'Especialidad'));
    }
 
    /**

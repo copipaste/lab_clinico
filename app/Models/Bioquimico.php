@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bioquimico extends Model
 {
     use HasFactory;
-    protected $table = 'pacientes';
+    protected $table = 'bioquimicos';
 
     protected $fillable = [
         'ci',
