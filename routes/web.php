@@ -8,6 +8,7 @@ use App\Http\Controllers\TipoAnalisis2Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
+use App\Models\TipoSeguro;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,11 +33,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('tiposeguro',[TipoSeguroController::class, 'index'])->name('tiposeguro.index');
-    Route::post('tiposeguro', [TipoSeguroController::class, 'store'])->name('tiposeguro.store');
-    Route::get('tiposeguro/{tiposeguro}', [TipoSeguroController::class, 'edit'])->name('tiposeguro.edit');
-    Route::put('tiposeguro/{tiposeguro}', [TipoSeguroController::class, 'update'])->name('tiposeguro.update');
-    Route::delete('tiposeguro/{tiposeguro}', [TipoSeguroController::class, 'destroy'])->name('tiposeguro.destroy');
+
+    Route::resource('/tiposeguro', TipoSeguroController::class)->names('tiposeguro');
 
 
     Route::get('tipoanalisis',[TipoAnalisis2Controller::class, 'index'])->name('tipoanalisis.index');
