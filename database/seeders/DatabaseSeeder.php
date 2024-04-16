@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EspecialidadSeeder::class);
 
 
+
         \App\Models\User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@example.com',

@@ -313,115 +313,112 @@ return [
             'topnav_right' => true,
         ],
 
-        // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
 
-        [
-            'text' => 'Tipos de Analisis',
-            'url' => '/tipoanalisis',
-            'icon' => 'far fa-fw fa-file',
-            'can' => 'tipoanalisis.index',
-        ],
-        [
-            'text' => 'Bioquimicos',
-            'url' => '/bioquimicos',
-            'icon' => 'far fa-fw fa-file',
-            // 'can' => 'bioquimicos.index',
-        ],
-        ['header' => 'account_settings'],
+        /*
         [
             'text' => 'profile',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
+        */
+
+        // PAQUETE USUARIOS
         [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Usuarios',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'users.package',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Gestionar Usuarios',
+                    'route' => 'users.index',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' => 'users.index',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'Bioquimicos',
+                    'url' => '/bioquimicos',
+                    'icon' => 'far fa-fw fa-file',
+                    'can' => 'bioquimicos.index',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Roles y Permisos',
+                    'route' => 'roles.index',
+                    'icon' => 'fas fa-fw fa-lock',
+                    'can' => 'roles.index',
                 ],
             ],
         ],
+
+        //PAQUETE HISTORIAL DE PACIENTES
         [
-            'text' => 'Gestionar Usuarios',
-            'route' => 'users.index',
-            'icon' => 'fas fa-fw fa-user',
-            'can' => 'users.index',
+            'text' => 'Historial de pacientes',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'history.package',
+            'submenu' => [
+                [
+                    'text' => 'Gestionar Pacientes',
+                    'route' => 'pacientes.index',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' => 'pacientes.index',
+                ],
+                [
+                    'text' => 'Historial Clinico',
+                    'route' => 'historiales.index',
+                    'icon' => 'fas fa-book-medical',
+                    'can' => 'historiales.index',
+                ],
+                [
+                    'text' => 'Tipos de Seguros',
+                    'url' => '/tiposeguro',
+                    'icon' => 'fas fa-fw fa-shield-alt',
+                    'can' => 'tiposeguro.index',
+                ],
+
+     
+            ],
         ],
+
+        // PAQUETES ANÁLISIS DE LABORATORIO
         [
-            'text' => 'Roles y Permisos',
-            'route' => 'roles.index',
-            'icon' => 'fas fa-fw fa-user',
-            'can' => 'roles.index',
+            'text' => 'Análisis',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'analysis.package',
+            'submenu' => [
+                [
+                    'text' => 'Tipos de Analisis',
+                    'url' => '/tipoanalisis',
+                    'icon' => 'fas fa-fw fa-flask',
+                    'can' => 'tipoanalisis.index',
+                ],
+  
+            ],
         ],
+
+        /*
         [
-            'text' => 'Tipos de Seguros',
-            'url' => '/tiposeguro',
-            'icon' => 'far fa-fw fa-file',
-            'can' => 'tiposeguro.index',
+            'text' => 'Comprobante de Pago',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'users.package',
+            'submenu' => [
+                [
+                    'text' => 'Gestionar Usuarios',
+                    'route' => 'users.index',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' => 'users.index',
+                ],
+                [
+                    'text' => 'Roles y Permisos',
+                    'route' => 'roles.index',
+                    'icon' => 'fas fa-fw fa-lock',
+                    'can' => 'roles.index',
+                ],
+            ],
         ],
-        [
-            'text' => 'Gestionar Pacientes',
-            'route' => 'pacientes.index',
-            'icon' => 'fas fa-fw fa-user',
-            'can' => 'pacientes.index',
-        ],
-        [
-            'text' => 'Historial Clinico',
-            'route' => 'historiales.index',
-            'icon' => 'fas fa-book-medical',
-            // 'can' => 'historiales.index',
-        ],
+        */
+
+  
+  
+        
     ],
 
     /*

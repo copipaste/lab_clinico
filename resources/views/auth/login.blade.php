@@ -32,7 +32,7 @@
                     <img src="{{ asset('vendor/adminlte/dist/img/LOGO_LAB.png') }}" alt="Logo de la empresa"
                         style="max-width: 100px;">
                 </span>
-                <h4 class="company_title">Analytis Lab</h4>
+                <h4 class="company_title">Analytics Lab</h4>
             </div>
             <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
                 <div class="container-fluid">
@@ -87,7 +87,7 @@
         </div>
     </div>
     <!-- Footer -->
-	<div class="container-fluid text-center footer" style="color: white; text-shadow: 1px 1px 2px black;">&copy; 2024 Analytis Lab. Todos los derechos reservados.</a></p>
+	<div class="container-fluid text-center footer" style="color: white; text-shadow: 1px 1px 2px black;">&copy; 2024 Analytics Lab. Todos los derechos reservados.</a></p>
 	</div>
 </body>
 
