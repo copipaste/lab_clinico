@@ -12,9 +12,16 @@ class TipoSeguroController extends Controller
      */
     public function index()
     {
-        $tiposeguro = tiposeguro::all();
-        return view('VistaTipoSeguro.index', compact('tiposeguro'));
+        $heads = [
+            'Id',
+            'Descripcion',
+            'Descuento',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $tiposeguro = TipoSeguro::all();
+        return view('VistaTipoSeguro.index', compact('tiposeguro', 'heads'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +44,7 @@ class TipoSeguroController extends Controller
 
         // Crear una nueva instancia del modelo TipoSeguro
         $tipoSeguro = new TipoSeguro();
-    
+
         // Asignar los valores del formulario a las propiedades del modelo
         $tipoSeguro->descripcion = $request->descripcion;
         $tipoSeguro->descuento = $request->descuento;
@@ -68,19 +75,15 @@ class TipoSeguroController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TipoSeguro $tipoSeguro)
+    public function update(Request $request, string $id)
     {
-        // Validar los datos del formulario
-        $request->validate([
+
+        request()->validate([
             'descripcion' => 'required|string|max:255',
             'descuento' => 'required|numeric',
         ]);
-
-        // Actualizar los datos del tipo de seguro
-        $tipoSeguro->descripcion = $request->descripcion;
-        $tipoSeguro->descuento = $request->descuento;
-        $tipoSeguro->save();
-
+        $tipoSeguro = TipoSeguro::findOrFail($id);
+        $tipoSeguro->update($request->all());
         // Redirigir a la página de índice de tipos de seguro con un mensaje de éxito
         return redirect()->route('tiposeguro.index')->with('success', 'Los datos del tipo de seguro han sido actualizados correctamente.');
     }

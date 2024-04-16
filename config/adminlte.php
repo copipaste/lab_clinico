@@ -15,7 +15,7 @@ return [
     */
 
 
-    'title' => 'Laboratorio Clinico',
+    'title' => 'Analytis Lab',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -65,7 +65,7 @@ return [
     */
 
 
-    'logo' => '<b>LABORATORIO</b>',
+    'logo' => '<b>Analytis Lab</b>',
     'logo_img' => 'vendor/adminlte/dist/img/LOGO_LAB.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -330,12 +330,7 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        [
-            'text' => 'Tipos de Seguros',
-            'url' => '/tiposeguro',
-            'icon' => 'far fa-fw fa-file',
-            'can' => 'tiposeguro.index',
-        ],
+
         [
             'text' => 'Tipos de Analisis',
             'url' => '/tipoanalisis',
@@ -408,6 +403,12 @@ return [
             'route' => 'roles.index',
             'icon' => 'fas fa-fw fa-user',
             'can' => 'roles.index',
+        ],
+        [
+            'text' => 'Tipos de Seguros',
+            'url' => '/tiposeguro',
+            'icon' => 'far fa-fw fa-file',
+            'can' => 'tiposeguro.index',
         ],
         [
             'text' => 'Gestionar Pacientes',
