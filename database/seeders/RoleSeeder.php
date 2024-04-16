@@ -28,6 +28,9 @@ class RoleSeeder extends Seeder
         //Usuarios
         Permission::create(['name' => 'users.index'])->syncRoles([$role1]);
 
+        //Usuarios
+        Permission::create(['name' => 'bioquimicos.index'])->syncRoles([$role1]);
+
         //Roles  
         Permission::create(['name' => 'roles.index'])->syncRoles([$role1]);
 

@@ -338,7 +338,7 @@ return [
                     'text' => 'Bioquimicos',
                     'url' => '/bioquimicos',
                     'icon' => 'far fa-fw fa-file',
-                    // 'can' => 'bioquimicos.index',
+                    'can' => 'bioquimicos.index',
                 ],
                 [
                     'text' => 'Roles y Permisos',
