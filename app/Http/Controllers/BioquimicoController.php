@@ -125,10 +125,8 @@ class BioquimicoController extends Controller
     */
    public function destroy(Bioquimico $Bioquimico)
    {
-       $id = $Bioquimico->idUser;
+       $id = $Bioquimico->id;
        $Bioquimico->delete();
-       $user = User::findOrFail($id);
-       $user->delete();
        return redirect()->route('bioquimicos.index')->with('deleted', 'Bioquimico eliminado con éxito');
 
    }
