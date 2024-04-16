@@ -2,7 +2,7 @@
 
 @section('content_header')
     <h1 class="m-0 text-dark">historial de {{Auth::user()->name}}</h1>
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
 @stop
 
  

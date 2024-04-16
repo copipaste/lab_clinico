@@ -8,6 +8,8 @@ use App\Http\Controllers\TipoAnalisis2Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
+use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\RecepcionistaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/pacientes', PacienteController::class)->names('pacientes');
     //Rutas Historiales
     Route::resource('/historiales', HistorialController::class)->names('historiales');
+
+
+    /* ------------------------------------- VISTA ESPECIALIDADES ----------------------------------------------------------- */
+Route::resource('/VistaEspecialidades', EspecialidadController::class)->names('especialidad');
+/* ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ------------------------------------- VISTA ESPECIALIDADES ---------------------------------------------------------- */
+Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('recepcionistas');
+/* ---------------------------------------------------------------------------------------------------------------------- */
+
 
 });
 

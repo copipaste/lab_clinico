@@ -415,6 +415,18 @@ return [
             'icon' => 'fas fa-book-medical',
             // 'can' => 'historiales.index',
         ],
+        [
+            'text' => 'Especialidades',
+            'route' => 'especialidad.index',
+            'icon' => 'fas fa-book-medical',
+            // 'can' => 'historiales.index',
+        ],
+        [
+            'text' => 'Recepcionistas',
+            'route' => 'recepcionistas.index',
+            'icon' => 'fas fa-book-medical',
+            // 'can' => 'historiales.index',
+        ],
     ],
 
     /*
