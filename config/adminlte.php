@@ -335,6 +335,12 @@ return [
                     'can' => 'users.index',
                 ],
                 [
+                    'text' => 'Bioquimicos',
+                    'url' => '/bioquimicos',
+                    'icon' => 'far fa-fw fa-file',
+                    // 'can' => 'bioquimicos.index',
+                ],
+                [
                     'text' => 'Roles y Permisos',
                     'route' => 'roles.index',
                     'icon' => 'fas fa-fw fa-lock',
@@ -364,7 +370,7 @@ return [
                 [
                     'text' => 'Tipos de Seguros',
                     'url' => '/tiposeguro',
-                    'icon' => 'far fa-fw fa-file',
+                    'icon' => 'fas fa-fw fa-shield-alt',
                     'can' => 'tiposeguro.index',
                 ],
 
@@ -381,7 +387,7 @@ return [
                 [
                     'text' => 'Tipos de Analisis',
                     'url' => '/tipoanalisis',
-                    'icon' => 'far fa-fw fa-file',
+                    'icon' => 'fas fa-fw fa-flask',
                     'can' => 'tipoanalisis.index',
                 ],
   

@@ -8,8 +8,8 @@ use App\Http\Controllers\TipoAnalisis2Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
-use App\Models\TipoSeguro;
-
+use App\Http\Controllers\BioquimicoController;
+use App\Http\Controllers\EspecialidadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +29,7 @@ Route::get('/', function (){
 Auth::routes();
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', function (){
-        return redirect()->route('home');
+        return redirect()->route('users.index');
     });
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -50,6 +50,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/pacientes', PacienteController::class)->names('pacientes');
     //Rutas Historiales
     Route::resource('/historiales', HistorialController::class)->names('historiales');
+
+    //ruta bioquimicos
+    //Rutas Pacientes
+    Route::resource('/bioquimicos', BioquimicoController::class)->names('bioquimicos');
 
 });
 
