@@ -29,7 +29,7 @@ Route::get('/', function (){
 Auth::routes();
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', function (){
-        return redirect()->route('home');
+        return redirect()->route('users.index');
     });
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
