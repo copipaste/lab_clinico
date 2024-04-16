@@ -64,6 +64,8 @@ class PacienteController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+
+
         $historial = new Historial();
         $historial->nroHistoria = $request->ci;
         $historial->fechaRegistro = date('Y-m-d');
