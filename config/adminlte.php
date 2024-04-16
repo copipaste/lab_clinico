@@ -342,6 +342,12 @@ return [
             'icon' => 'far fa-fw fa-file',
             'can' => 'tipoanalisis.index',
         ],
+        [
+            'text' => 'Bioquimicos',
+            'url' => '/bioquimicos',
+            'icon' => 'far fa-fw fa-file',
+            // 'can' => 'bioquimicos.index',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

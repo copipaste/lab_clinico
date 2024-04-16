@@ -8,7 +8,7 @@ use App\Http\Controllers\TipoAnalisis2Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
-
+use App\Http\Controllers\BioquimicoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +52,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/pacientes', PacienteController::class)->names('pacientes');
     //Rutas Historiales
     Route::resource('/historiales', HistorialController::class)->names('historiales');
+
+    //ruta bioquimicos
+    //Rutas Pacientes
+    Route::resource('/bioquimicos', BioquimicoController::class)->names('bioquimicos');
 
 });
 
