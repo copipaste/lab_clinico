@@ -323,87 +323,64 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-        [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
+        // [
+        //     'text' => 'pages',
+        //     'url' => 'admin/pages',
+        //     'icon' => 'far fa-fw fa-file',
+        //     'label' => 4,
+        //     'label_color' => 'success',
+        // ],
 
         [
             'text' => 'Tipos de Analisis',
             'url' => '/tipoanalisis',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-flask',
             'can' => 'tipoanalisis.index',
         ],
         ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'change_password',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
+            'text' => 'Gestionar Usuarios',
             'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Usuario',
+                    'route' => 'users.index',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Roles y Permisos',
+                    'route' => 'roles.index',
                 ],
             ],
         ],
-        [
-            'text' => 'Gestionar Usuarios',
-            'route' => 'users.index',
-            'icon' => 'fas fa-fw fa-user',
-            'can' => 'users.index',
-        ],
-        [
-            'text' => 'Roles y Permisos',
-            'route' => 'roles.index',
-            'icon' => 'fas fa-fw fa-user',
-            'can' => 'roles.index',
-        ],
+        // [
+        //     'text' => 'Gestionar Usuarios',
+        //     'route' => 'users.index',
+        //     'icon' => 'fas fa-fw fa-user',
+        //     'can' => 'users.index',
+        // ],
+        // [
+        //     'text' => 'Roles y Permisos',
+        //     'route' => 'roles.index',
+        //     'icon' => 'fas fa-fw fa-user',
+        //     'can' => 'roles.index',
+        // ],
         [
             'text' => 'Tipos de Seguros',
             'url' => '/tiposeguro',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-shield-alt', // Usamos el ícono de un escudo para representar un seguro
             'can' => 'tiposeguro.index',
         ],
+
         [
             'text' => 'Gestionar Pacientes',
             'route' => 'pacientes.index',
