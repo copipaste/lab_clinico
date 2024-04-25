@@ -12,7 +12,8 @@ class AnalisisController extends Controller
      */
     public function index()
     {
-        //
+        $analisis = Analisis::all();
+        return view('Analisis.index', compact('analisis'));
     }
 
     /**

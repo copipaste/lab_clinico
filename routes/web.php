@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\BioquimicoController;
+use App\Http\Controllers\AnalisisController;
+use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\EspecialidadController;
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +56,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     //ruta bioquimicos
     //Rutas Pacientes
     Route::resource('/bioquimicos', BioquimicoController::class)->names('bioquimicos');
+
+    //analisis
+    Route::resource('/analisis', AnalisisController::class)->names('analisis');
+    //orden
+    Route::resource('/orden', OrdenController::class)->names('orden');
 
 });
 

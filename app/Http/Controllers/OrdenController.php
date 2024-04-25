@@ -12,7 +12,8 @@ class OrdenController extends Controller
      */
     public function index()
     {
-        //
+        $orden = orden::all();
+        return view('orden.index', compact('orden'));
     }
 
     /**
