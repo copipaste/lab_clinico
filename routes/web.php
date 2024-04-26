@@ -4,7 +4,7 @@ use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoSeguroController;
-use App\Http\Controllers\TipoAnalisis2Controller;
+use App\Http\Controllers\TipoAnalisisController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
@@ -39,11 +39,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/tiposeguro', TipoSeguroController::class)->names('tiposeguro');
 
 
-    Route::get('tipoanalisis',[TipoAnalisis2Controller::class, 'index'])->name('tipoanalisis.index');
-    Route::post('tipoanalisis', [TipoAnalisis2Controller::class, 'store'])->name('tipoanalisis.store');
-    Route::get('tipoanalisis/{tipoanalisis}', [TipoAnalisis2Controller::class, 'edit'])->name('tipoanalisis.edit');
-    Route::put('tipoanalisis/{tipoanalisis}', [TipoAnalisis2Controller::class, 'update'])->name('tipoanalisis.update');
-    Route::delete('tipoanalisis/{tipoanalisis}', [TipoAnalisis2Controller::class, 'destroy'])->name('tipoanalisis.destroy');
+    Route::get('tipoanalisis',[TipoAnalisisController::class, 'index'])->name('tipoanalisis.index');
+    Route::post('tipoanalisis', [TipoAnalisisController::class, 'store'])->name('tipoanalisis.store');
+    Route::get('tipoanalisis/{tipoanalisis}', [TipoAnalisisController::class, 'edit'])->name('tipoanalisis.edit');
+    Route::put('tipoanalisis/{tipoanalisis}', [TipoAnalisisController::class, 'update'])->name('tipoanalisis.update');
+    Route::delete('tipoanalisis/{tipoanalisis}', [TipoAnalisisController::class, 'destroy'])->name('tipoanalisis.destroy');
     //Rutas Usuario
     Route::resource('/users', UserController::class)->names('users');
     //Rutas Roles

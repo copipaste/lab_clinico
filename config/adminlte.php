@@ -390,6 +390,11 @@ return [
                     'icon' => 'fas fa-fw fa-flask',
                 ],
                 [
+                    'text' => 'Analisis',
+                    'url' => '/analisis',
+                    'icon' => 'fas fa-fw fa-flask',
+                ],
+                [
                     'text' => 'Tipos de Analisis',
                     'url' => '/tipoanalisis',
                     'icon' => 'fas fa-fw fa-flask',

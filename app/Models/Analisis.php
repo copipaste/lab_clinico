@@ -10,8 +10,10 @@ class Analisis extends Model
     use HasFactory;
     protected $table = 'analisis';
 
-    protected $fillable = [
+    public function orden()
+    {
+        return $this->belongsTo(Orden::class, 'idOrden');
+    }
 
-    ];
 
 }

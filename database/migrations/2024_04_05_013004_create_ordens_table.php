@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nroOrden');
             $table->foreignId('idTipoAnalisis')->constrained('tipo_analisis');
-            $table->foreignId('idSolicitud')->constrained('solicitudes');
+            $table->foreignId('idSolicitud')->nullable()->constrained('solicitudes');
             $table->timestamps();
         });
     }
