@@ -28,7 +28,21 @@ class HemogramaCompletoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // // Validación de los datos del formulario
+        // $validatedData = $request->validate([
+        //     // Definir reglas de validación para cada campo
+        // ]);
+
+        // Crear un nuevo registro de hemograma completo
+        $hemograma = new HemogramaCompleto();
+
+        // Asignar los valores de los campos del formulario al modelo
+        $hemograma->globulosRojos = $request->input('globulosRojos');
+
+        // Guardar el nuevo registro en la base de datos
+        $hemograma->save();
+        return redirect()->route('anlisis.index')->with('success', '¡Se ha registrado exitosamente!');
+    
     }
 
     /**

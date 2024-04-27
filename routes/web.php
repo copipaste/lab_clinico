@@ -11,7 +11,10 @@ use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\BioquimicoController;
 use App\Http\Controllers\AnalisisController;
 use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\HemogramaCompletoController;
 use App\Http\Controllers\EspecialidadController;
+use App\Models\HemogramaCompleto;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,9 +61,20 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/bioquimicos', BioquimicoController::class)->names('bioquimicos');
 
     //analisis
-    Route::resource('/analisis', AnalisisController::class)->names('analisis');
+
+    // Route::resource('/analisis', AnalisisController::class)->names('analisis');
+    Route::get('analisis',[AnalisisController::class, 'index'])->name('analisis.index');
+    Route::post('analisis', [AnalisisController::class, 'store'])->name('analisis.store');
+    Route::get('/analisis/{id}/hemograma', [AnalisisController::class, 'hemograma'])->name('analisis.hemograma');
+    Route::post('/analisis/hemograma', [AnalisisController::class, 'hemogramaStore'])->name('analisis.hemogramastore');
+    Route::put('/analisis/hemograma/{id}', [AnalisisController::class, 'hemogramaUpdate'])->name('analisis.hemogramaupdate');
+    Route::get('/analisis/{id}/hormona', [AnalisisController::class, 'hormona'])->name('analisis.hormona');
+
+
     //orden
     Route::resource('/orden', OrdenController::class)->names('orden');
+
+    // Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
 
 });
 

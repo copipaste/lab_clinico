@@ -17,7 +17,7 @@
         data-toggle="modal" data-target="#modalpromocion" />
 
         <x-adminlte-modal id="modalpromocion" title="Registrar" size="lg" theme="dark" v-centered static-backdrop scrollable>
-            <form action="" method="POST">
+            <form action="{{route('analisis.store') }}" method="POST">
                         @method('POST')
                         @csrf
                                 <x-adminlte-input name="fecha" type="date" label="Fecha" />
@@ -40,17 +40,38 @@
                 <tr>
 
                     <td>{{$o->id}}</td>
-                    <td>{{ $o->orden->tipoAnalisis->nombre }}
+
+                    <td>{{ $o->orden->tipoAnalisis->nombre }}</td>
                     <td>{{$o->fecha}}</td>
                     <td>{{$o->idOrden}}</td>
                     <td>{{$o->idBioquimico}}</td>
                         <td width="15px">
                             <div class="d-flex">
+                                @if ($o->orden->tipoAnalisis->nombre == "Hemograma")
+                                @php
+                                    $hemogramaExistente = App\Models\HemogramaCompleto::where('idAnalisis', $o->id)->exists();
+                                @endphp
 
-                                {{-- esto es para el de editar membresía --}}
-                                <a href="{{route('analisis.show', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                @if (!$hemogramaExistente)
+                                    <a href="{{ route('analisis.hemograma', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                        <i class="fa fa-lg fa-fw fa-plus"></i>
+                                    </a>
+
+                                @endif
+                                <a href="{{ route('analisis.hemogramaupdate', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                    <i class="fa fa-lg fa-fw fa-pencil"></i>
+                                </a>
+                                <a href="{{ route('analisis.hemogramaupdate', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
                                     <i class="fa fa-lg fa-fw fa-eye"></i>
                                 </a>
+                            @endif
+
+                                @if ( $o->orden->tipoAnalisis->nombre=="Hormona")
+                                <a href="{{route('analisis.hormona', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                    <i class="fa fa-lg fa-fw fa-eye"></i>
+                                </a>
+                                @endif
+
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR" data-toggle="modal" data-target="#modalCustom{{ $o->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>
                                 </button>
@@ -60,7 +81,7 @@
                         <x-adminlte-modal id="modalCustom{{ $o->id }}" title="Eliminar" size="sm" theme="warning" icon="fa-solid fa-triangle-exclamation" v-centered static-backdrop scrollable>
                             <div style="height: 50px;">¿Está seguro de eliminar el seguro?</div>
                             <x-slot name="footerSlot">
-                                <form action="{{ route('analisis.destroy', $o->id) }}" method="POST">
+                                <form action="" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <x-adminlte-button class="btn-flat" type="submit" label="Aceptar" theme="dark" />
@@ -71,6 +92,8 @@
                         </x-adminlte-modal>
 
                 </tr>
+                {{-- <x-adminlte-input id="nombreanalisis_debug" name="nombreanalisis_debug" type="text" value="{{ $o->orden->tipoAnalisis->nombre }}"/> --}}
+
             @endforeach
 
         </x-adminlte-datatable>

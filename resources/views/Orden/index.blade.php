@@ -20,12 +20,10 @@
             <form action="" method="POST">
                         @method('POST')
                         @csrf
-                                <x-adminlte-input name="nroOrden" type="text" label="Nro" />
                                 <x-adminlte-input name="idTipoAnalisis" type="number" label="Tipo Analisis" />
                                 <x-adminlte-input name="idSolicitud" type="number" label="Id Solicitud" />
                                 <x-adminlte-button  class="float-left mt-3" type="submit" label="Aceptar" theme="dark" />
                                 <x-adminlte-button  class="btn btn-primary float-right mt-3" theme="light" label="Cancelar" data-dismiss="modal" />
-
                                 <x-slot name="footerSlot" >
                                 </x-slot>
             </form>
@@ -40,9 +38,7 @@
         <x-adminlte-datatable id="table1" :heads="$heads" striped head-theme="white" with-buttons>
             @foreach ($orden as $o)
                 <tr>
-
                     <td>{{$o->id}}</td>
-                    <td>{{$o->nroOrden}}</td>
                     <td>{{ $o->tipoanalisis->nombre}}</td>
                     <td>{{$o->idSolicitud}}</td>
                         <td width="15px">

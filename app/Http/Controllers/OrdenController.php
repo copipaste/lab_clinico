@@ -14,7 +14,6 @@ class OrdenController extends Controller
     {
         $heads = [
             'Id',
-            'Nro',
             'Tipo Analisis',
             'Id Solicitud',
             ['label' => 'Acciones', 'no-export' => true],
@@ -50,8 +49,7 @@ class OrdenController extends Controller
         // Crear una nueva instancia del modelo TipoSeguro
         $orden = new Orden();
 
-        // Asignar los valores del formulario a las propiedades del modelo
-        $orden->nroOrden = $request->nroOrden;
+        // Asignar los valores del formulario a las propiedades del modelo;
         $orden->idTipoAnalisis = $request->idTipoAnalisis;
         // $orden->idSolicitud = $request->idSolicitud;
 

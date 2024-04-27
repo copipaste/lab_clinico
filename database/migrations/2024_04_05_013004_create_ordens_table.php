@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ordenes', function (Blueprint $table) {
             $table->id();
-            $table->string('nroOrden');
+            $table->string('nroOrden')->nullable();
             $table->foreignId('idTipoAnalisis')->constrained('tipo_analisis');
             $table->foreignId('idSolicitud')->nullable()->constrained('solicitudes');
             $table->timestamps();
