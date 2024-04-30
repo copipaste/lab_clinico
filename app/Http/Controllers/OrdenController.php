@@ -12,7 +12,16 @@ class OrdenController extends Controller
      */
     public function index()
     {
-        //
+        $heads = [
+            'Id',
+            'Tipo Analisis',
+            'Id Solicitud',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $orden = orden::all();
+        return view('orden.index', compact('orden','heads'));
+
+
     }
 
     /**
@@ -28,7 +37,26 @@ class OrdenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+          // Validar los datos del formulario
+        //   $request->validate([
+        //     'nroOrden' => 'required|string|max:255',
+        //     'idTipoAnalisis' => 'required|exists:tipo_analisis,id',
+        //     'idSolicitud' => 'nullable|exists:solicitudes,id',
+        // ]);
+
+
+        // Crear una nueva instancia del modelo TipoSeguro
+        $orden = new Orden();
+
+        // Asignar los valores del formulario a las propiedades del modelo;
+        $orden->idTipoAnalisis = $request->idTipoAnalisis;
+        // $orden->idSolicitud = $request->idSolicitud;
+
+        // dd($request->nroOrden);
+            $orden->save();
+
+        return redirect()->route('orden.index')->with('success', '¡El tipo de seguro se ha registrado exitosamente!');
     }
 
     /**
@@ -60,6 +88,7 @@ class OrdenController extends Controller
      */
     public function destroy(Orden $orden)
     {
-        //
+        $orden->delete();
+        return redirect()->route('orden.index')->with('success', 'Eliminado correctamente');
     }
 }

@@ -326,7 +326,7 @@ return [
         [
             'text' => 'Usuarios',
             'icon' => 'fas fa-fw fa-users',
-            'can' => 'users.package',
+            // 'can' => 'users.package',
             'submenu' => [
                 [
                     'text' => 'Gestionar Usuarios',
@@ -353,7 +353,7 @@ return [
         [
             'text' => 'Historial de pacientes',
             'icon' => 'fas fa-fw fa-users',
-            'can' => 'history.package',
+            // 'can' => 'history.package',
             'submenu' => [
                 [
                     'text' => 'Gestionar Pacientes',
@@ -374,7 +374,7 @@ return [
                     'can' => 'tiposeguro.index',
                 ],
 
-     
+
             ],
         ],
 
@@ -382,15 +382,25 @@ return [
         [
             'text' => 'Análisis',
             'icon' => 'fas fa-fw fa-users',
-            'can' => 'analysis.package',
+            // 'can' => 'analysis.package',
             'submenu' => [
+                [
+                    'text' => 'Orden',
+                    'url' => '/orden',
+                    'icon' => 'fas fa-fw fa-flask',
+                ],
+                [
+                    'text' => 'Analisis',
+                    'url' => '/analisis',
+                    'icon' => 'fas fa-fw fa-flask',
+                ],
                 [
                     'text' => 'Tipos de Analisis',
                     'url' => '/tipoanalisis',
                     'icon' => 'fas fa-fw fa-flask',
                     'can' => 'tipoanalisis.index',
                 ],
-  
+
             ],
         ],
 
@@ -416,9 +426,9 @@ return [
         ],
         */
 
-  
-  
-        
+
+
+
     ],
 
     /*

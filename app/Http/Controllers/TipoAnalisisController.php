@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tipo_analisis2;
+use App\Models\TipoAnalisis;
 use Illuminate\Http\Request;
 
-class TipoAnalisis2Controller extends Controller
+class TipoAnalisisController extends Controller
 {
      /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class TipoAnalisis2Controller extends Controller
     public function index()
     {
 
-        $tipoanalisis = tipo_analisis2::all();
+        $tipoanalisis = TipoAnalisis::all();
         return view('VistaTiposAnalisis.index', compact('tipoanalisis'));
     }
 
@@ -38,7 +38,7 @@ class TipoAnalisis2Controller extends Controller
         ]);
 
         // Crear una nueva instancia del modelo TipoSeguro
-        $tipoanalisis = new tipo_analisis2();
+        $tipoanalisis = new  TipoAnalisis();
 
         // Asignar los valores del formulario a las propiedades del modelo
         $tipoanalisis->nombre = $request->nombre;
@@ -56,7 +56,7 @@ class TipoAnalisis2Controller extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(tipo_analisis2 $tipoAnalisis)
+    public function show(TipoAnalisis $tipoAnalisis)
     {
         //
     }
@@ -64,7 +64,7 @@ class TipoAnalisis2Controller extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(tipo_analisis2 $tipoanalisis)
+    public function edit(TipoAnalisis $tipoanalisis)
     {
         return view('VistaTiposAnalisis.edit', compact('tipoanalisis'));
     }
@@ -72,7 +72,7 @@ class TipoAnalisis2Controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, tipo_analisis2 $tipoanalisis)
+    public function update(Request $request, TipoAnalisis $tipoanalisis)
     {
         // Validar los datos del formulario
         $request->validate([
@@ -80,7 +80,7 @@ class TipoAnalisis2Controller extends Controller
             'descripcion' => 'required|string|max:255',
             'precio' => 'required|numeric',
         ]);
-        $tipoanalisis = new tipo_analisis2();
+        $tipoanalisis = new TipoAnalisis();
 
         // Actualizar los datos del tipo de seguro
         $tipoanalisis->nombre = $request->nombre;
@@ -96,7 +96,7 @@ class TipoAnalisis2Controller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(tipo_analisis2 $tipoanalisis)
+    public function destroy(TipoAnalisis $tipoanalisis)
     {
         $tipoanalisis->delete();
         return redirect()->route('tipoanalisis.index')->with('success', 'Eliminado correctamente');

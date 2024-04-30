@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(RoleSeeder::class);
         $this->call(superUserSeeder::class);
+        $this->call(TipoanalisisSeeder::class);
         $this->call(PacienteSeeder::class);
         $this->call(EspecialidadSeeder::class);
 

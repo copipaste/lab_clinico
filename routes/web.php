@@ -4,12 +4,17 @@ use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TipoSeguroController;
-use App\Http\Controllers\TipoAnalisis2Controller;
+use App\Http\Controllers\TipoAnalisisController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\BioquimicoController;
+use App\Http\Controllers\AnalisisController;
+use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\HemogramaCompletoController;
 use App\Http\Controllers\EspecialidadController;
+use App\Models\HemogramaCompleto;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,11 +42,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/tiposeguro', TipoSeguroController::class)->names('tiposeguro');
 
 
-    Route::get('tipoanalisis',[TipoAnalisis2Controller::class, 'index'])->name('tipoanalisis.index');
-    Route::post('tipoanalisis', [TipoAnalisis2Controller::class, 'store'])->name('tipoanalisis.store');
-    Route::get('tipoanalisis/{tipoanalisis}', [TipoAnalisis2Controller::class, 'edit'])->name('tipoanalisis.edit');
-    Route::put('tipoanalisis/{tipoanalisis}', [TipoAnalisis2Controller::class, 'update'])->name('tipoanalisis.update');
-    Route::delete('tipoanalisis/{tipoanalisis}', [TipoAnalisis2Controller::class, 'destroy'])->name('tipoanalisis.destroy');
+    Route::get('tipoanalisis',[TipoAnalisisController::class, 'index'])->name('tipoanalisis.index');
+    Route::post('tipoanalisis', [TipoAnalisisController::class, 'store'])->name('tipoanalisis.store');
+    Route::get('tipoanalisis/{tipoanalisis}', [TipoAnalisisController::class, 'edit'])->name('tipoanalisis.edit');
+    Route::put('tipoanalisis/{tipoanalisis}', [TipoAnalisisController::class, 'update'])->name('tipoanalisis.update');
+    Route::delete('tipoanalisis/{tipoanalisis}', [TipoAnalisisController::class, 'destroy'])->name('tipoanalisis.destroy');
     //Rutas Usuario
     Route::resource('/users', UserController::class)->names('users');
     //Rutas Roles
@@ -54,6 +59,22 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     //ruta bioquimicos
     //Rutas Pacientes
     Route::resource('/bioquimicos', BioquimicoController::class)->names('bioquimicos');
+
+    //analisis
+
+    // Route::resource('/analisis', AnalisisController::class)->names('analisis');
+    Route::get('analisis',[AnalisisController::class, 'index'])->name('analisis.index');
+    Route::post('analisis', [AnalisisController::class, 'store'])->name('analisis.store');
+    Route::get('/analisis/{id}/hemograma', [AnalisisController::class, 'hemograma'])->name('analisis.hemograma');
+    Route::post('/analisis/hemograma', [AnalisisController::class, 'hemogramaStore'])->name('analisis.hemogramastore');
+    Route::put('/analisis/hemograma/{id}', [AnalisisController::class, 'hemogramaUpdate'])->name('analisis.hemogramaupdate');
+    Route::get('/analisis/{id}/hormona', [AnalisisController::class, 'hormona'])->name('analisis.hormona');
+
+
+    //orden
+    Route::resource('/orden', OrdenController::class)->names('orden');
+
+    // Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
 
 });
 
