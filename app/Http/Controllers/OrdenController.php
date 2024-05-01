@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orden;
+use App\Models\TipoAnalisis;
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -19,7 +20,8 @@ class OrdenController extends Controller
             ['label' => 'Acciones', 'no-export' => true],
         ];
         $orden = orden::all();
-        return view('orden.index', compact('orden','heads'));
+        $tipoanalisis=TipoAnalisis::all();
+        return view('orden.index', compact('orden','tipoanalisis','heads'));
 
 
     }

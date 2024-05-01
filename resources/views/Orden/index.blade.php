@@ -18,16 +18,24 @@
 
         <x-adminlte-modal id="modalpromocion" title="Registrar Orden" size="lg" theme="dark" v-centered static-backdrop scrollable>
             <form action="" method="POST">
-                        @method('POST')
-                        @csrf
-                                <x-adminlte-input name="idTipoAnalisis" type="number" label="Tipo Analisis" />
-                                <x-adminlte-input name="idSolicitud" type="number" label="Id Solicitud" />
-                                <x-adminlte-button  class="float-left mt-3" type="submit" label="Aceptar" theme="dark" />
-                                <x-adminlte-button  class="btn btn-primary float-right mt-3" theme="light" label="Cancelar" data-dismiss="modal" />
-                                <x-slot name="footerSlot" >
-                                </x-slot>
+                @method('POST')
+                @csrf
+                <div class="form-group">
+                    <label for="idTipoAnalisis">Tipo Análisis</label>
+                    <select name="idTipoAnalisis" class="form-control" id="idTipoAnalisis">
+                        @foreach($tipoanalisis as $o)
+                            <option value="{{ $o->id }}">{{ $o->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <x-adminlte-input name="idSolicitud" type="number" label="Id Solicitud" />
+                <x-adminlte-button class="float-left mt-3" type="submit" label="Aceptar" theme="dark" />
+                <x-adminlte-button class="btn btn-primary float-right mt-3" theme="light" label="Cancelar" data-dismiss="modal" />
+                <x-slot name="footerSlot">
+                </x-slot>
             </form>
         </x-adminlte-modal>
+
 </div>
 {{-- modal --}}
 
@@ -39,7 +47,7 @@
             @foreach ($orden as $o)
                 <tr>
                     <td>{{$o->id}}</td>
-                    <td>{{ $o->tipoanalisis->nombre}}</td>
+                    <td>{{$o->tipoanalisis->nombre}}</td>
                     <td>{{$o->idSolicitud}}</td>
                         <td width="15px">
                             <div class="d-flex">
