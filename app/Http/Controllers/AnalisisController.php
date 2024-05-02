@@ -63,6 +63,7 @@ class AnalisisController extends Controller
 
     }
 
+    //Hemogramas
     public function hemograma($id)
     {
         $analisis = Analisis::findOrFail($id);
@@ -73,7 +74,6 @@ class AnalisisController extends Controller
         $bioquimico = Bioquimico::all();
         return view('analisis.hemograma', compact('analisis', 'idOrden','bioquimico'));
     }
-
     public function hemogramastore(Request $request)
     {
         // // Validación de los datos del formulario
@@ -91,29 +91,6 @@ class AnalisisController extends Controller
         // Guardar el nuevo registro en la base de datos
         $hemograma->save();
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
-    }
-
-    public function hemogramaupdate(Request $request)
-    {
-        // Obtener el ID del análisis del formulario
-        $idAnalisis = $request->input('idAnalisis');
-
-        // Buscar el hemograma asociado al análisis
-        $hemograma = HemogramaCompleto::where('idAnalisis', $idAnalisis)->first();
-
-        // Verificar si se encontró el hemograma
-        if ($hemograma) {
-            // Si se encontró, actualizar los campos del hemograma con los valores del formulario
-            $hemograma->globulosRojos = $request->input('globulosrojo');
-            // Guardar los cambios en la base de datos
-            $hemograma->save();
-
-            // Redirigir a la página de índice con un mensaje de éxito
-            return redirect()->route('analisis.index')->with('success', '¡Se ha actualizado exitosamente!');
-        } else {
-            // Si no se encontró el hemograma, mostrar un mensaje de error
-            return redirect()->route('analisis.index')->with('error', '¡No se encontró el hemograma para actualizar!');
-        }
     }
 
 
@@ -135,7 +112,7 @@ class AnalisisController extends Controller
     public function edit(Analisis $analisis)
     {
 
-        return view('analisis.view', compact('analisis'));
+
     }
 
     /**
@@ -144,14 +121,7 @@ class AnalisisController extends Controller
     public function update(Request $request, string $id)
     {
 
-        request()->validate([
-            'descripcion' => 'required|string|max:255',
-            'descuento' => 'required|numeric',
-        ]);
-        $analisis = Analisis::findOrFail($id);
-        $analisis->update($request->all());
-        // Redirigir a la página de índice de tipos de seguro con un mensaje de éxito
-        return redirect()->route('analisis.index')->with('success', 'Analisis han sido actualizados correctamente.');
+
     }
 
 

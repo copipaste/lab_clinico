@@ -56,14 +56,7 @@
                                     <a href="{{ route('analisis.hemograma', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
                                         <i class="fa fa-lg fa-fw fa-plus"></i>
                                     </a>
-
                                 @endif
-                                <a href="{{ route('analisis.hemogramaupdate', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
-                                    <i class="fa fa-lg fa-fw fa-pencil"></i>
-                                </a>
-                                <a href="{{ route('analisis.hemogramaupdate', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
-                                    <i class="fa fa-lg fa-fw fa-eye"></i>
-                                </a>
                             @endif
 
                                 @if ( $o->orden->tipoAnalisis->nombre=="Hormona")
