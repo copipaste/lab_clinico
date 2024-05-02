@@ -67,7 +67,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('analisis', [AnalisisController::class, 'store'])->name('analisis.store');
     Route::get('/analisis/{id}/hemograma', [AnalisisController::class, 'hemograma'])->name('analisis.hemograma');
     Route::post('/analisis/hemograma', [AnalisisController::class, 'hemogramaStore'])->name('analisis.hemogramastore');
-    Route::put('/analisis/hemograma/{id}', [AnalisisController::class, 'hemogramaUpdate'])->name('analisis.hemogramaupdate');
     Route::get('/analisis/{id}/hormona', [AnalisisController::class, 'hormona'])->name('analisis.hormona');
 
     Route::get('Bitacora', [BitacoraController::class, 'index'])->name('bitacora.index');
