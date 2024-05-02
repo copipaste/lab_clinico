@@ -28,9 +28,8 @@ class HemogramaCompletoController extends Controller
      */
     public function store(Request $request)
     {
-      
 
-<<<<<<< Updated upstream
+
         // Crear un nuevo registro de hemograma completo
         $hemograma = new HemogramaCompleto();
 
@@ -47,8 +46,6 @@ class HemogramaCompletoController extends Controller
     session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('anlisis.index')->with('success', '¡Se ha registrado exitosamente!');
 
-=======
->>>>>>> Stashed changes
     }
 
     /**

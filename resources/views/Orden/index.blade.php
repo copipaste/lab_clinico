@@ -20,15 +20,52 @@
             <form action="" method="POST">
                 @method('POST')
                 @csrf
-                <div class="form-group">
-                    <label for="idTipoAnalisis">Tipo Análisis</label>
-                    <select name="idTipoAnalisis" class="form-control" id="idTipoAnalisis">
-                        @foreach($tipoanalisis as $o)
-                            <option value="{{ $o->id }}">{{ $o->nombre }}</option>
-                        @endforeach
-                    </select>
+                <div class="form-row">
+                    <div class="col mb-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">Fecha</span>
+                            </div>
+                            <input type="date" class="form-control" placeholder="" name="fecha" id="fecha"
+                                aria-describedby="inputGroupPrepend">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">Id Orden</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="" name="idOrden" id="idOrden" aria-describedby="inputGroupPrepend">
+                        </div>
+                    </div>
                 </div>
-                <x-adminlte-input name="idSolicitud" type="number" label="Id Solicitud" />
+                <div class="form-row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">Bioquimico</span>
+                            </div>
+                            <select name="idBioquimico" class="form-control" id="idBioquimico">
+                                @foreach($bioquimico as $o)
+                                    <option value="{{ $o->id }}">{{ $o->nombre }}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">Tipo Analisis</span>
+                            </div>
+                            <select name="idTipoAnalisis" class="form-control" id="idTipoAnalisis">
+                                @foreach($tipoanalisis as $o)
+                                    <option value="{{ $o->id }}">{{ $o->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <x-adminlte-button class="float-left mt-3" type="submit" label="Aceptar" theme="dark" />
                 <x-adminlte-button class="btn btn-primary float-right mt-3" theme="light" label="Cancelar" data-dismiss="modal" />
                 <x-slot name="footerSlot">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Orden;
 use App\Models\TipoAnalisis;
+use App\Models\Analisis;
+use App\Models\Bioquimico;
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -20,10 +22,9 @@ class OrdenController extends Controller
             ['label' => 'Acciones', 'no-export' => true],
         ];
         $orden = orden::all();
-        $tipoanalisis=TipoAnalisis::all();
-        return view('orden.index', compact('orden','tipoanalisis','heads'));
-
-
+        $tipoanalisis = TipoAnalisis::all();
+        $bioquimico = Bioquimico::all();
+        return view('orden.index', compact('orden', 'tipoanalisis','bioquimico', 'heads'));
     }
 
     /**
@@ -39,31 +40,33 @@ class OrdenController extends Controller
      */
     public function store(Request $request)
     {
-
-          // Validar los datos del formulario
-        //   $request->validate([
-        //     'nroOrden' => 'required|string|max:255',
-        //     'idTipoAnalisis' => 'required|exists:tipo_analisis,id',
-        //     'idSolicitud' => 'nullable|exists:solicitudes,id',
-        // ]);
-
-
-        // Crear una nueva instancia del modelo TipoSeguro
-        $orden = new Orden();
-
-        // Asignar los valores del formulario a las propiedades del modelo;
-        $orden->idTipoAnalisis = $request->idTipoAnalisis;
-        // $orden->idSolicitud = $request->idSolicitud;
-
-        // dd($request->nroOrden);
+        $idOrden = $request->idOrden;
+        if ($idOrden == null) { // Cambié = por ==
+            $orden = new Orden();
+            $orden->idTipoAnalisis = $request->idTipoAnalisis;
             $orden->save();
-            activity()
+            $idOrden = $orden->id;
+        }
+
+        // Crear un nuevo análisis para la orden (ya sea existente o recién creada)
+        $analisis = new Analisis();
+        $analisis->fecha = $request->fecha;
+        $analisis->idOrden = $idOrden; // Cambié $orden->id por $idOrden
+        $analisis->idBioquimico = $request->idBioquimico;
+        $analisis->estado = 'Pendiente';
+        $analisis->save();
+        
+
+        activity()
             ->causedBy(auth()->user())
             ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
-            ->log('Registro una orden con el nombre: ' . $orden->id);
+            ->log('Se registró un análisis para la orden con el ID: ' . $idOrden); // Cambié $orden->id por $idOrden
+
         session()->flash('success', 'Se registró exitosamente');
-        return redirect()->route('orden.index')->with('success', '¡El tipo de seguro se ha registrado exitosamente!');
+        return redirect()->route('orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
     }
+
+
 
     /**
      * Display the specified resource.

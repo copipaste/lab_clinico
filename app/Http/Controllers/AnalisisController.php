@@ -54,14 +54,11 @@ class AnalisisController extends Controller
         $analisis->estado = 'Pendiente';
         // dd($request->nroOrden);
         $analisis->save();
-<<<<<<< Updated upstream
         activity()
         ->causedBy(auth()->user())
         ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
         ->log('Registro un analisis: ' . $analisis->idOrden);
     session()->flash('success', 'Se registró exitosamente');
-=======
->>>>>>> Stashed changes
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
 
