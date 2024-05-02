@@ -65,11 +65,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route::resource('/analisis', AnalisisController::class)->names('analisis');
     Route::get('analisis',[AnalisisController::class, 'index'])->name('analisis.index');
     Route::post('analisis', [AnalisisController::class, 'store'])->name('analisis.store');
+    Route::delete('analisis/{analisis}', [AnalisisController::class, 'destroy'])->name('analisis.destroy');
     Route::get('/analisis/{id}/hemograma', [AnalisisController::class, 'hemograma'])->name('analisis.hemograma');
     Route::post('/analisis/hemograma', [AnalisisController::class, 'hemogramaStore'])->name('analisis.hemogramastore');
     Route::get('/analisis/{id}/hormona', [AnalisisController::class, 'hormona'])->name('analisis.hormona');
+<<<<<<< Updated upstream
 
     Route::get('Bitacora', [BitacoraController::class, 'index'])->name('bitacora.index');
+=======
+    Route::post('/analisis/hormona', [AnalisisController::class, 'hormonaStore'])->name('analisis.hormonastore');
+
+>>>>>>> Stashed changes
     //orden
     Route::resource('/orden', OrdenController::class)->names('orden');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Analisis;
 use App\Models\HemogramaCompleto;
 use App\Models\Bioquimico;
+use App\Models\Hormonas;
 use Illuminate\Http\Request;
 
 class AnalisisController extends Controller
@@ -20,6 +21,8 @@ class AnalisisController extends Controller
             'Fecha',
             'Orden',
             'Bioquimico',
+            'Estado',
+
             ['label' => 'Acciones', 'no-export' => true],
         ];
 
@@ -48,14 +51,17 @@ class AnalisisController extends Controller
         $analisis->fecha = $request->fecha;
         $analisis->idOrden = $request->idOrden;
         $analisis->idBioquimico = $request->idBioquimico;
-
+        $analisis->estado = 'Pendiente';
         // dd($request->nroOrden);
         $analisis->save();
+<<<<<<< Updated upstream
         activity()
         ->causedBy(auth()->user())
         ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
         ->log('Registro un analisis: ' . $analisis->idOrden);
     session()->flash('success', 'Se registró exitosamente');
+=======
+>>>>>>> Stashed changes
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
 
@@ -64,7 +70,6 @@ class AnalisisController extends Controller
      */
     public function show($id)
     {
-
     }
 
     //Hemogramas
@@ -76,7 +81,7 @@ class AnalisisController extends Controller
         // $nombrePaciente = $analisis->orden->paciente->nombre; // Asumiendo que tienes la relación definida
         // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
         $bioquimico = Bioquimico::all();
-        return view('analisis.hemograma', compact('analisis', 'idOrden','bioquimico'));
+        return view('analisis.hemograma', compact('analisis', 'idOrden', 'bioquimico'));
     }
     public function hemogramastore(Request $request)
     {
@@ -85,15 +90,16 @@ class AnalisisController extends Controller
         //     // Definir reglas de validación para cada campo
         // ]);
 
-        // Crear un nuevo registro de hemograma completo
-        $hemograma = new HemogramaCompleto();
 
-        // Asignar los valores de los campos del formulario al modelo
+        $hemograma = new HemogramaCompleto();
         $hemograma->globulosRojos = $request->input('globulosrojo');
         $hemograma->idAnalisis = $request->input('idAnalisis');
-        // dd( $hemograma->globulosRojos);
-        // Guardar el nuevo registro en la base de datos
         $hemograma->save();
+
+        $analisis = Analisis::find($request->input('idAnalisis'));
+        $analisis->estado = 'Realizado';
+        $analisis->save();
+
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
 
@@ -102,21 +108,35 @@ class AnalisisController extends Controller
     {
         $analisis = Analisis::findOrFail($id);
         // Obtener datos relacionados
-        $nroOrden = $analisis->orden->nroOrden;
+        $idOrden = $analisis->orden->nroOrden;
         // $nombrePaciente = $analisis->orden->paciente->nomwbre; // Asumiendo que tienes la relación definida
         // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
         $bioquimico = Bioquimico::all();
-        return view('analisis.hormona', compact('analisis', 'nroOrden','bioquimico'));
+        return view('analisis.hormona', compact('analisis', 'idOrden', 'bioquimico'));
     }
 
+    public function hormonastore(Request $request)
+    {
+        // // Validación de los datos del formulario
+        // $validatedData = $request->validate([
+        //     // Definir reglas de validación para cada campo
+        // ]);
 
+        $hormonas = new Hormonas();
+        $hormonas->TSH = $request->input('TSH');
+        $hormonas->idAnalisis = $request->input('idAnalisis');
+        $hormonas->save();
+        $analisis = Analisis::find($request->input('idAnalisis'));
+        $analisis->estado = 'Realizado';
+        $analisis->save();
+
+        return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
+    }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Analisis $analisis)
     {
-
-
     }
 
     /**
@@ -124,8 +144,6 @@ class AnalisisController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
-
     }
 
 

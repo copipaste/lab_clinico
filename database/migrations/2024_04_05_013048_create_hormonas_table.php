@@ -45,7 +45,6 @@ return new class extends Migration
             $table->decimal('IGFISomatomedina', 8, 2)->nullable();
             $table->decimal('IGFBP3', 8, 2)->nullable();
             $table->decimal('insulinaPostPand', 8, 2)->nullable();
-            $table->decimal('precio', 10, 2);
             $table->string('estado')->default('pendiente');
             $table->unsignedBigInteger('idAnalisis');
             $table->foreign('idAnalisis')->references('id')->on('analisis')->onDelete('cascade');

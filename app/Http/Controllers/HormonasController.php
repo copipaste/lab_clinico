@@ -28,7 +28,7 @@ class HormonasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**

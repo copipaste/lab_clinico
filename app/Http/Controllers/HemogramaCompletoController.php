@@ -28,11 +28,9 @@ class HemogramaCompletoController extends Controller
      */
     public function store(Request $request)
     {
-        // // Validación de los datos del formulario
-        // $validatedData = $request->validate([
-        //     // Definir reglas de validación para cada campo
-        // ]);
+      
 
+<<<<<<< Updated upstream
         // Crear un nuevo registro de hemograma completo
         $hemograma = new HemogramaCompleto();
 
@@ -49,6 +47,8 @@ class HemogramaCompletoController extends Controller
     session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('anlisis.index')->with('success', '¡Se ha registrado exitosamente!');
 
+=======
+>>>>>>> Stashed changes
     }
 
     /**
