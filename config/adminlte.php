@@ -346,6 +346,13 @@ return [
                     'icon' => 'fas fa-fw fa-lock',
                     'can' => 'roles.index',
                 ],
+                [
+                    'text' => 'Bitacora',
+                    'route' => 'bitacora.index',
+                    'icon' => 'fas fa-fw fa-lock',
+                   // 'can' => 'roles.index',
+                ],
+
             ],
         ],
 

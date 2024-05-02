@@ -51,7 +51,11 @@ class AnalisisController extends Controller
 
         // dd($request->nroOrden);
         $analisis->save();
-
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('Registro un analisis: ' . $analisis->idOrden);
+    session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
 

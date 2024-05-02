@@ -14,7 +14,7 @@ use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\HemogramaCompletoController;
 use App\Http\Controllers\EspecialidadController;
 use App\Models\HemogramaCompleto;
-
+use App\Http\Controllers\BitacoraController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,7 +70,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('/analisis/hemograma/{id}', [AnalisisController::class, 'hemogramaUpdate'])->name('analisis.hemogramaupdate');
     Route::get('/analisis/{id}/hormona', [AnalisisController::class, 'hormona'])->name('analisis.hormona');
 
-
+    Route::get('Bitacora', [BitacoraController::class, 'index'])->name('bitacora.index');
     //orden
     Route::resource('/orden', OrdenController::class)->names('orden');
 

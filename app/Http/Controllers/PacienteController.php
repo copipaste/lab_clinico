@@ -47,7 +47,7 @@ class PacienteController extends Controller
     public function store(Request $request)
     {
 
-         
+
         request()->validate([
             'ci' => 'required',
             'nombre' => 'required',
@@ -57,7 +57,7 @@ class PacienteController extends Controller
             'idTipoSeguro' => 'required',
             'email' => 'required',
         ]);
- 
+
         $user = User::create([
             'name' => $request->nombre,
             'email' => $request->email,
@@ -69,7 +69,7 @@ class PacienteController extends Controller
         $historial->fechaRegistro = date('Y-m-d');
         $historial->antecedentesPatologicos = 'Ninguno';
         $historial->save();
- 
+
         $paciente = new Paciente();
         $paciente->ci = $request->ci;
         $paciente->nombre = $request->nombre;
@@ -80,7 +80,11 @@ class PacienteController extends Controller
         $paciente->idHistorial = $historial->id;
         $paciente->idUser = $user->id;
         $paciente->save();
- 
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('Registro un paciente con el nombre: ' . $paciente->nombre);
+    session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('pacientes.index')->with('success', 'Paciente creado con éxito');
     }
 
@@ -99,7 +103,7 @@ class PacienteController extends Controller
     {
       $seguros = TipoSeguro::all();
 
-      return view('pacientes.edit', compact('paciente', 'seguros'));      
+      return view('pacientes.edit', compact('paciente', 'seguros'));
     }
 
     /**
@@ -114,14 +118,14 @@ class PacienteController extends Controller
             'sexo' => 'required',
             'telefono' => 'required',
             'idTipoSeguro' => 'required',
- 
+
         ]);
- 
+
         $paciente = Paciente::findOrFail($id);
- 
+
         $paciente->update($request->all());
- 
-        
+
+
         return redirect()->route('pacientes.index')->with('success', 'Paciente actualizado con éxito');
     }
 

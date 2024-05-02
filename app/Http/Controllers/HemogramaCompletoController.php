@@ -41,8 +41,14 @@ class HemogramaCompletoController extends Controller
 
         // Guardar el nuevo registro en la base de datos
         $hemograma->save();
+
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('Registro un hemograma con el nombre: ' . $hemograma->globulosRojos);
+    session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('anlisis.index')->with('success', '¡Se ha registrado exitosamente!');
-    
+
     }
 
     /**

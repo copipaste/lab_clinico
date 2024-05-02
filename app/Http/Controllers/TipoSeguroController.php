@@ -51,7 +51,11 @@ class TipoSeguroController extends Controller
 
         // Guardar el tipo de seguro en la base de datos
         $tipoSeguro->save();
-
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('Registro un tipo seguro: ' . $tipoSeguro->nombre);
+    session()->flash('success', 'Se registró exitosamente');
         // Redirigir a la página de índice de tipos de seguro con un mensaje de éxito
         return redirect()->route('tiposeguro.index')->with('success', '¡El tipo de seguro se ha registrado exitosamente!');
     }

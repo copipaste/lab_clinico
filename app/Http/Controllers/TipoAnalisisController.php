@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TipoAnalisis;
 use Illuminate\Http\Request;
-
+use App\Models\Event;
 class TipoAnalisisController extends Controller
 {
      /**
@@ -47,6 +47,13 @@ class TipoAnalisisController extends Controller
 
         // Guardar el tipo de seguro en la base de datos
         $tipoanalisis->save();
+
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('Registro un tipo analisis: ' . $tipoanalisis->nombre);
+    session()->flash('success', 'Se registró exitosamente');
+
 
         // Redirigir a la página de índice de tipos de seguro con un mensaje de éxito
         return redirect()->route('tipoanalisis.index')->with('success', '¡El tipo de seguro se ha registrado exitosamente!');

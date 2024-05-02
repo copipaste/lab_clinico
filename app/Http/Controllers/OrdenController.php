@@ -57,7 +57,11 @@ class OrdenController extends Controller
 
         // dd($request->nroOrden);
             $orden->save();
-
+            activity()
+            ->causedBy(auth()->user())
+            ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+            ->log('Registro una orden con el nombre: ' . $orden->id);
+        session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('orden.index')->with('success', '¡El tipo de seguro se ha registrado exitosamente!');
     }
 

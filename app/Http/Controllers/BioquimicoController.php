@@ -75,6 +75,12 @@ class BioquimicoController extends Controller
        $Bioquimico->idEspecialidad = $request->idEspecialidad;
        $Bioquimico->save();
 
+       activity()
+       ->causedBy(auth()->user())
+       ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+       ->log('Registro un bioquimico con el nombre: ' . $Bioquimico->nombre);
+   session()->flash('success', 'Se registró exitosamente');
+
        return redirect()->route('bioquimicos.index')->with('success', 'Bioquimico creado con éxito');
    }
 
