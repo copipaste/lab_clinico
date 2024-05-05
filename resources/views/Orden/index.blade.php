@@ -22,8 +22,8 @@
                 @method('POST')
                 @csrf
 
-                <div class="form-row">
-                    <div class="col mb-2">
+                {{-- <div class="form-row"> --}}
+                    {{-- <div class="col mb-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend">Ci</span>
@@ -81,7 +81,7 @@
                             aria-describedby="inputGroupPrepend">
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="form-row">
                     <div class="col">
                         <span>Tipo de Analisis</span>
