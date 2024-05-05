@@ -9,5 +9,5 @@ class TipoAnalisis extends Model
 {
     use HasFactory;
     protected $table = 'tipo_analisis';
-    
+    protected $fillable = ['nombre','precio','descripcion'];
 }

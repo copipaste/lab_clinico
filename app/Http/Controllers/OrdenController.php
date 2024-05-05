@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Orden;
 use App\Models\TipoAnalisis;
+use App\Models\OrdenAnalisis;
+use Illuminate\Support\Facades\DB;
 use App\Models\Analisis;
 use App\Models\Bioquimico;
 use Illuminate\Http\Request;
@@ -18,13 +20,19 @@ class OrdenController extends Controller
         $heads = [
             'Id',
             'Tipo Analisis',
+            'Fecha',
             'Id Solicitud',
             ['label' => 'Acciones', 'no-export' => true],
         ];
-        $orden = orden::all();
+        $orden = Orden::all();
+        $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
+        $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
+
+
+        // dd($orden); // Verificar los datos antes de pasarlos a la vista
         $tipoanalisis = TipoAnalisis::all();
         $bioquimico = Bioquimico::all();
-        return view('orden.index', compact('orden', 'tipoanalisis','bioquimico', 'heads'));
+        return view('orden.index', compact('ordenesConAnalisis', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
     }
 
     /**
@@ -41,30 +49,43 @@ class OrdenController extends Controller
     public function store(Request $request)
     {
         $idOrden = $request->idOrden;
-        if ($idOrden == null) { // Cambié = por ==
+        if ($idOrden == null) {
             $orden = new Orden();
-            $orden->idTipoAnalisis = $request->idTipoAnalisis;
             $orden->save();
             $idOrden = $orden->id;
         }
 
-        // Crear un nuevo análisis para la orden (ya sea existente o recién creada)
-        $analisis = new Analisis();
-        $analisis->fecha = $request->fecha;
-        $analisis->idOrden = $idOrden; // Cambié $orden->id por $idOrden
-        $analisis->idBioquimico = $request->idBioquimico;
-        $analisis->estado = 'Pendiente';
-        $analisis->save();
-        
+        // Registrar la relación en la tabla intermedia orden_analisis
+        $tipoAnalisisIds = $request->input('tipoAnalisisIds'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario
+        foreach ($tipoAnalisisIds as $tipoAnalisisId) {
+            // Insertar en la tabla intermedia
+            DB::table('orden_analisis')->insert([
+                'orden_id' => $idOrden,
+                'tipo_analisis_id' => $tipoAnalisisId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
 
+            // Obtener el nombre del tipo de análisis utilizando el ID
+            $tipoAnalisis = TipoAnalisis::find($tipoAnalisisId);
+
+            // Crear un nuevo análisis para la orden
+            $analisis = new Analisis();
+            $analisis->idBioquimico = $request->idBioquimico;
+            $analisis->estado = 'Pendiente';
+            $analisis->descripcion =  $tipoAnalisis->nombre; // Acceder al nombre del tipo de análisis
+            $analisis->idOrden = $idOrden;
+            $analisis->save();
+        }
         activity()
             ->causedBy(auth()->user())
-            ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
-            ->log('Se registró un análisis para la orden con el ID: ' . $idOrden); // Cambié $orden->id por $idOrden
+            ->withProperties(request()->ip())
+            ->log('Se registró un análisis para la orden con el ID: ' . $idOrden);
 
         session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
     }
+
 
 
 

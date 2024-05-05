@@ -78,7 +78,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend">T3</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="" aria-describedby="inputGroupPrepend">
+                    <input type="text" class="form-control"  name="T3" id="T3" placeholder="" aria-describedby="inputGroupPrepend">
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend">T4</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="" aria-describedby="inputGroupPrepend">
+                    <input type="text" class="form-control"  name="T4" id="T4" placeholder="" aria-describedby="inputGroupPrepend">
                 </div>
             </div>
             <div class="col">
@@ -96,7 +96,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend">TSHNeonatal</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="" aria-describedby="inputGroupPrepend">
+                    <input type="text" class="form-control"  name="TSHNeonatal" id="TSHNeonatal" placeholder="" aria-describedby="inputGroupPrepend">
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend">T4Libre</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="" aria-describedby="inputGroupPrepend">
+                    <input type="text" class="form-control"  name="T4Libre" id="T4Libre" placeholder="" aria-describedby="inputGroupPrepend">
                 </div>
             </div>
             <div class="col">

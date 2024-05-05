@@ -12,10 +12,11 @@ class Orden extends Model
     protected $table = 'ordenes';
     protected $fillable = ['nroOrden', 'idTipoAnalisis', 'idSolicitud'];
 
-    public function tipoanalisis()
+    public function OrdenAnalisis()
     {
-        return $this->belongsTo(TipoAnalisis::class, 'idTipoAnalisis');
+        return $this->hasMany(OrdenAnalisis::class, 'orden_id');
     }
+    
 
 }
 

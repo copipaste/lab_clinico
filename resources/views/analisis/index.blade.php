@@ -13,12 +13,20 @@
     {{-- modal --}}
     <div class="form-group align-items-end">
         {{-- ---Custom modal-- --}}
-        <x-adminlte-button label="Registrar" class="bg-white" title="Registrar" data-toggle="modal"
+        <x-adminlte-button label="Registrar" class="bg-white mb-2" title="Registrar" data-toggle="modal"
             data-target="#modalpromocion" />
-        <x-adminlte-button label="Hemogramas" class="bg-white" title="Registrar" data-toggle="modal"
-            data-target="#modalpromocion" />
-        <x-adminlte-button label="Hormonas" class="bg-white" title="Registrar" data-toggle="modal"
-            data-target="#modalpromocion" />
+
+            <div class="input-group mb-1">
+                <select class="custom-select" onchange="window.location.href = this.value;">
+                    <option selected disabled>Selecciona un tipo de análisis...</option>
+                    <option value="{{ route('hormona.index') }}">Hormonas</option>
+                    <option value="{{ route('orden.index') }}">Hemogramas</option>
+                    <!-- Agrega más opciones según sea necesario -->
+                </select>
+                <div class="input-group-append">
+                    <label class="input-group-text" for="inputGroupSelect02">Tipo de Análisis</label>
+                </div>
+            </div>
 
 
         <x-adminlte-modal id="modalpromocion" title="Registrar" size="lg" theme="dark" v-centered static-backdrop
@@ -44,49 +52,37 @@
         <div class="card-body">
             <x-adminlte-datatable id="table1" :heads="$heads" striped head-theme="white" with-buttons>
                 @foreach ($analisis as $o)
+                    @php
+                        $hemogramaExistente = App\Models\HemogramaCompleto::where('idAnalisis', $o->id)->exists();
+                    @endphp
                     <tr>
-
-                        <td>{{ $o->id }}</td>
-
-                        <td>{{ $o->orden->tipoAnalisis->nombre }}</td>
-                        <td>{{ $o->fecha }}</td>
                         <td>{{ $o->idOrden }}</td>
-                        <td>{{ $o->Bioquimico->nombre }}</td>
+                        <td>{{ $o->id }}</td>
+                        <td>{{ $o->descripcion }}</td>
+                        <td>{{ $o->bioquimico->nombre }}</td>
                         <td>{{ $o->estado }}</td>
-                        <td width="15px">
-                            <div class="d-flex">
-                                @if ($o->orden->tipoAnalisis->nombre == 'Hemograma')
-                                    @php
-                                        $hemogramaExistente = App\Models\HemogramaCompleto::where(
-                                            'idAnalisis',
-                                            $o->id,
-                                        )->exists();
-                                    @endphp
+                        {{-- <td>{{ $o->orden->tipoAnalisis->nombre }}</td> --}}
 
+                        <td width="15px">
+
+                            <div class="d-flex">
+
+                                @if ($o->descripcion == 'Hemograma')
                                     @if (!$hemogramaExistente)
                                         <a href="{{ route('analisis.hemograma', $o->id) }}"
-                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @endif
                                 @endif
-
-                                @if ($o->orden->tipoAnalisis->nombre == 'Hormona')
-                                    @php
-                                        $hemogramaExistente = App\Models\Hormonas::where(
-                                            'idAnalisis',
-                                            $o->id,
-                                        )->exists();
-                                    @endphp
-
+                                @if ($o->descripcion == 'Hormona')
                                     @if (!$hemogramaExistente)
                                         <a href="{{ route('analisis.hormona', $o->id) }}"
-                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @endif
                                 @endif
-
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
                                     data-toggle="modal" data-target="#modalCustom{{ $o->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>
@@ -98,7 +94,7 @@
                             theme="warning" icon="fa-solid fa-triangle-exclamation" v-centered static-backdrop scrollable>
                             <div style="height: 50px;">¿Está seguro de eliminar el seguro?</div>
                             <x-slot name="footerSlot">
-                                <form action="{{route('analisis.destroy', $o->id)}}" method="POST">
+                                <form action="{{ route('analisis.destroy', $o->id) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <x-adminlte-button class="btn-flat" type="submit" label="Aceptar" theme="dark" />

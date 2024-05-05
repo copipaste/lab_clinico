@@ -16,18 +16,16 @@ class AnalisisController extends Controller
     public function index()
     {
         $heads = [
-            'Id',
-            'Analisis',
-            'Fecha',
             'Orden',
+            'Id',
+            'Descripcion',
             'Bioquimico',
             'Estado',
-
             ['label' => 'Acciones', 'no-export' => true],
         ];
 
         $analisis = Analisis::all();
-        return view('Analisis.index', compact('analisis', 'heads'));
+        return view('analisis.index', compact('analisis', 'heads'));
     }
 
 
@@ -44,22 +42,7 @@ class AnalisisController extends Controller
      */
     public function store(Request $request)
     {
-        // Crear una nueva instancia del modelo TipoSeguro
-        $analisis = new Analisis();
 
-        // Asignar los valores del formulario a las propiedades del modelo
-        $analisis->fecha = $request->fecha;
-        $analisis->idOrden = $request->idOrden;
-        $analisis->idBioquimico = $request->idBioquimico;
-        $analisis->estado = 'Pendiente';
-        // dd($request->nroOrden);
-        $analisis->save();
-        activity()
-        ->causedBy(auth()->user())
-        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
-        ->log('Registro un analisis: ' . $analisis->idOrden);
-    session()->flash('success', 'Se registró exitosamente');
-        return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
 
     /**

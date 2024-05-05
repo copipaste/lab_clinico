@@ -12,7 +12,14 @@ class HormonasController extends Controller
      */
     public function index()
     {
-        //
+        $heads = [
+            'Id',
+            'Bioquimico',
+            'Fecha',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $hormonas = Hormonas::all();
+        return view('hormona.index', compact('hormonas', 'heads'));
     }
 
     /**
@@ -28,7 +35,7 @@ class HormonasController extends Controller
      */
     public function store(Request $request)
     {
-       
+
     }
 
     /**

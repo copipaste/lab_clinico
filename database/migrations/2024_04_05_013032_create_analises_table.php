@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('analisis', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
-            $table->string('estado')->nullable();
+            $table->string('descripcion')->nullable();
             $table->foreignId('idOrden')->constrained('ordenes');
+            $table->string('estado')->nullable();
             $table->foreignId('idBioquimico')->constrained('bioquimicos');
             $table->timestamps();
         });
