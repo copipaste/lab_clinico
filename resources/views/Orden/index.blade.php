@@ -13,8 +13,9 @@
     {{-- modal --}}
     <div class="form-group align-items-end">
         {{-- ---Custom modal-- --}}
-        <x-adminlte-button label="Registrar" class="bg-white" title="Registrar" data-toggle="modal"
-            data-target="#modalpromocion" />
+        {{-- <x-adminlte-button label="Registrar" class="bg-white" title="Registrar" data-toggle="modal"
+            data-target="#modalpromocion" /> --}}
+            <a href="{{ route('orden.create') }}" class="btn btn-adminlte bg-white text-dark border mb-1" title="Registrar">Registrar</a>
 
         <x-adminlte-modal id="modalpromocion" title="Registrar Orden" size="lg" theme="dark" v-centered static-backdrop
             scrollable>
@@ -100,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    {{-- <div class="col">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend">Bioquimico</span>
@@ -111,7 +112,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group-prepend">

@@ -24,7 +24,10 @@ class Bioquimico extends Model
     {
         return $this->belongsTo(User::class, 'idUser', 'id');
     }
-
+    public function analisis()
+    {
+        return $this->hasMany(Analisis::class, 'idBioquimico');
+    }
 
 
     // public function historial()

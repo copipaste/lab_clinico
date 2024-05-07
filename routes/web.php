@@ -13,9 +13,9 @@ use App\Http\Controllers\AnalisisController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\HemogramaCompletoController;
 use App\Http\Controllers\EspecialidadController;
-use App\Models\HemogramaCompleto;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HormonasController;
+use App\Models\HemogramaCompleto;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +81,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
     //hormona
     Route::resource('/hormona', HormonasController::class)->names('hormona');
+    Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
 });
 
 Route::get('/landingpage', function () {

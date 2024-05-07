@@ -12,7 +12,14 @@ class HemogramaCompletoController extends Controller
      */
     public function index()
     {
-        //
+        $heads = [
+            'Id',
+            'Bioquimico',
+            'Fecha',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $hemograma = HemogramaCompleto::all();
+        return view('hemograma.index', compact('hemograma', 'heads'));
     }
 
     /**
@@ -61,8 +68,9 @@ class HemogramaCompletoController extends Controller
      */
     public function edit(HemogramaCompleto $hemogramaCompleto)
     {
-        //
+        return view('hemograma.edit', compact('hemogramaCompleto'));
     }
+
 
     /**
      * Update the specified resource in storage.

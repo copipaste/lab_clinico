@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('descripcion')->nullable();
             $table->foreignId('idOrden')->constrained('ordenes');
             $table->string('estado')->nullable();
-            $table->foreignId('idBioquimico')->constrained('bioquimicos');
+            $table->foreignId('idBioquimico')->nullable()->constrained('bioquimicos');
             $table->timestamps();
         });
     }

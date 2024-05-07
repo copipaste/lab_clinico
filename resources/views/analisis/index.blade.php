@@ -15,18 +15,10 @@
         {{-- ---Custom modal-- --}}
         <x-adminlte-button label="Registrar" class="bg-white mb-2" title="Registrar" data-toggle="modal"
             data-target="#modalpromocion" />
+            <a href="{{ route('hormona.index') }}" class="btn btn-adminlte ml-4 bg-white text-dark border mb-2" title="Registrar">Hormonas</a>
+            <a href="{{ route('hemograma.index') }}" class="btn btn-adminlte bg-white text-dark border mb-2" title="Registrar">Hemogramas</a>
 
-            <div class="input-group mb-1">
-                <select class="custom-select" onchange="window.location.href = this.value;">
-                    <option selected disabled>Selecciona un tipo de análisis...</option>
-                    <option value="{{ route('hormona.index') }}">Hormonas</option>
-                    <option value="{{ route('orden.index') }}">Hemogramas</option>
-                    <!-- Agrega más opciones según sea necesario -->
-                </select>
-                <div class="input-group-append">
-                    <label class="input-group-text" for="inputGroupSelect02">Tipo de Análisis</label>
-                </div>
-            </div>
+
 
 
         <x-adminlte-modal id="modalpromocion" title="Registrar" size="lg" theme="dark" v-centered static-backdrop
@@ -59,7 +51,7 @@
                         <td>{{ $o->idOrden }}</td>
                         <td>{{ $o->id }}</td>
                         <td>{{ $o->descripcion }}</td>
-                        <td>{{ $o->bioquimico->nombre }}</td>
+                        {{-- <td>{{ $o->bioquimico->nombre }}</td> --}}
                         <td>{{ $o->estado }}</td>
                         {{-- <td>{{ $o->orden->tipoAnalisis->nombre }}</td> --}}
 

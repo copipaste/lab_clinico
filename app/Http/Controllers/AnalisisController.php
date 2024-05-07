@@ -6,6 +6,7 @@ use App\Models\Analisis;
 use App\Models\HemogramaCompleto;
 use App\Models\Bioquimico;
 use App\Models\Hormonas;
+use App\Models\TipoAnalisis;
 use Illuminate\Http\Request;
 
 class AnalisisController extends Controller
@@ -19,13 +20,13 @@ class AnalisisController extends Controller
             'Orden',
             'Id',
             'Descripcion',
-            'Bioquimico',
             'Estado',
             ['label' => 'Acciones', 'no-export' => true],
         ];
 
         $analisis = Analisis::all();
-        return view('analisis.index', compact('analisis', 'heads'));
+        $tipoanalisis = TipoAnalisis::all();
+        return view('analisis.index', compact('analisis','tipoanalisis', 'heads'));
     }
 
 
@@ -77,6 +78,7 @@ class AnalisisController extends Controller
         $hemograma->save();
 
         $analisis = Analisis::find($request->input('idAnalisis'));
+        $analisis->idBioquimico = $request->input('idbioquimico');
         $analisis->estado = 'Realizado';
         $analisis->save();
 

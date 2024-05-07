@@ -4,35 +4,9 @@
 
 @stop
 @section('content')
-    <form action="{{ route('analisis.hemogramastore') }}" method="POST" class="needs-validation" novalidate>
+    <form action="" method="POST" class="needs-validation" novalidate>
         @csrf
-        <input type="hidden" name="idAnalisis" value="{{ $analisis->id }}">
-        <label for="validationCustom01">Nro de Analisis: {{ $analisis->id }}</label>
-        <div class="form-row">
-            <div class="col-md-4">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">Nro Orden</span>
-                    </div>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
-                        value="{{ $idOrden }}" readonly>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">Bioqumico</span>
-                    </div>
-                    <select class="custom-select" id="idbioquimico" name="idbioquimico">
-                        <option selected disabled>Seleccione...</option>
-                        @foreach ($bioquimico as $b)
-                        <option value="{{$b->id}}">{{$b->nombre}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-        </div>
+        <label for="validationCustom01">Nro de Hemograma: {{ $hemogramaCompleto->id }}</label>
 
 
         <label class="mt-2">Hemograma</label>
