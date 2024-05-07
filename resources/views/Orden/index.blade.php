@@ -112,6 +112,18 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">Paciente</span>
+                            </div>
+                            <select name="idPaciente" class="form-control" id="idPaciente">
+                                @foreach ($paciente as $o)
+                                    <option value="{{ $o->id }}">{{ $o->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <x-adminlte-button class="float-left mt-3" type="submit" label="Aceptar" theme="dark" />
                 <x-adminlte-button class="btn btn-primary float-right mt-3" theme="light" label="Cancelar"
@@ -147,7 +159,9 @@
                             </ul>
                         </td>
                         <td>{{ $o->created_at }}</td>
-                        <td>{{ $o->idSolicitud }}</td>
+
+                        <td>{{ $o->idPaciente }}</td>
+
                         <td width="15px">
                             <div class="d-flex">
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"

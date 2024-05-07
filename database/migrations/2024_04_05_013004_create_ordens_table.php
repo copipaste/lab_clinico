@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nroOrden')->nullable();
             $table->foreignId('idSolicitud')->nullable()->constrained('solicitudes');
+            $table->foreignId('idPaciente')->nullable()->constrained('pacientes');
+
             $table->timestamps();
         });
     }

@@ -8,6 +8,8 @@ use App\Models\OrdenAnalisis;
 use Illuminate\Support\Facades\DB;
 use App\Models\Analisis;
 use App\Models\Bioquimico;
+use App\Models\Paciente;
+
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -21,7 +23,9 @@ class OrdenController extends Controller
             'Id',
             'Tipo Analisis',
             'Fecha',
-            'Id Solicitud',
+            'Paciente',
+
+
             ['label' => 'Acciones', 'no-export' => true],
         ];
         $orden = Orden::all();
@@ -32,7 +36,9 @@ class OrdenController extends Controller
         // dd($orden); // Verificar los datos antes de pasarlos a la vista
         $tipoanalisis = TipoAnalisis::all();
         $bioquimico = Bioquimico::all();
-        return view('orden.index', compact('ordenesConAnalisis', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
+        $paciente = Paciente::all();
+
+        return view('orden.index', compact('ordenesConAnalisis','paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
     }
 
     /**
@@ -51,6 +57,7 @@ class OrdenController extends Controller
         $idOrden = $request->idOrden;
         if ($idOrden == null) {
             $orden = new Orden();
+            $orden->idPaciente=$request->idPaciente;
             $orden->save();
             $idOrden = $orden->id;
         }
