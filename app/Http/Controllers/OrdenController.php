@@ -22,6 +22,7 @@ class OrdenController extends Controller
     {
         $heads = [
             'Id',
+            'Nro Orden',
             'Tipo Analisis',
             'Fecha',
             'Paciente',
@@ -70,12 +71,13 @@ class OrdenController extends Controller
         $paciente->idTipoSeguro = $request->tiposeguro;
         $paciente->save();
         $idpaciente = $paciente->id;
-
         $orden = new Orden();
+        $orden->nroOrden = $request->nroOrden;
         $orden->idPaciente = $idpaciente;
         $orden->save();
-
         $idOrden = $orden->id;
+
+
         $tipoAnalisisIds = $request->input('tipoAnalisisIds'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario
         foreach ($tipoAnalisisIds as $tipoAnalisisId) {
             // Insertar en la tabla intermedia

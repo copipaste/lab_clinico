@@ -67,13 +67,23 @@
             <div class="col-md-4">
                 <div class="input-group">
                     <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend">Nro Orden</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="" name="nroOrden" id="nroOrden"
+                        aria-describedby="inputGroupPrepend readonly">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend">Fecha Nacimiento</span>
                     </div>
                     <input type="date" class="form-control" placeholder="" name="fechanacimiento" id="fechanacimiento"
                         aria-describedby="inputGroupPrepend readonly">
                 </div>
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-4">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend">Tipo de Seguro</span>

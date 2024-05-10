@@ -15,8 +15,10 @@
         {{-- ---Custom modal-- --}}
         <x-adminlte-button label="Registrar" class="bg-white mb-2" title="Registrar" data-toggle="modal"
             data-target="#modalpromocion" />
-            <a href="{{ route('hormona.index') }}" class="btn btn-adminlte ml-4 bg-white text-dark border mb-2" title="Registrar">Hormonas</a>
-            <a href="{{ route('hemograma.index') }}" class="btn btn-adminlte bg-white text-dark border mb-2" title="Registrar">Hemogramas</a>
+        <a href="{{ route('hormona.index') }}" class="btn btn-adminlte ml-4 bg-white text-dark border mb-2"
+            title="Registrar">Hormonas</a>
+        <a href="{{ route('hemograma.index') }}" class="btn btn-adminlte bg-white text-dark border mb-2"
+            title="Registrar">Hemogramas</a>
 
 
 
@@ -66,6 +68,10 @@
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @endif
+                                    <a href="{{ route('hemograma.index') }}"
+                                        class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
+                                        <i class="fa fa-lg fa-fw fas fa-eye"></i>
+                                    </a>
                                 @endif
                                 @if ($o->descripcion == 'Hormona')
                                     @if (!$hemogramaExistente)
@@ -74,6 +80,10 @@
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @endif
+                                    <a href="{{ route('hormona.index') }}"
+                                        class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
+                                        <i class="fa fa-lg fa-fw fas fa-eye"></i>
+                                    </a>
                                 @endif
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
                                     data-toggle="modal" data-target="#modalCustom{{ $o->id }}">

@@ -14,8 +14,4 @@ class HemogramaCompleto extends Model
         return $this->belongsTo(Analisis::class, 'idAnalisis');
     }
 
-    public function bioquimico()
-    {
-        return $this->analisis->bioquimico;
-    }
 }

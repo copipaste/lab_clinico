@@ -148,6 +148,7 @@
                     @endphp
                     <tr>
                         <td>{{ $o->id }}</td>
+                        <td>{{ $o->nroOrden }}</td>
                         <td>
                             <ul>
                                 @foreach ($datosOrdenAnalisis as $ordenAnalisis)

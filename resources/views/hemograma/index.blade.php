@@ -13,7 +13,7 @@
                 <tr>
 
                         <td>{{ $h->id }}</td>
-                        <td>{{ $h->analisis->bioquimico->nombre }}</td>
+                        <td>{{ $h->bioquimico }}</td>
 
                         <td>{{ $h->created_at }}</td>
                         <td width="15px">
