@@ -21,19 +21,38 @@
             <div class="col-md-6">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">Bioqumico</span>
+                        <span class="input-group-text" id="inputGroupPrepend">Bioquímico</span>
                     </div>
-                    <select class="custom-select" id="idbioquimico" name="idbioquimico">
+                    <select class="custom-select" id="idbioquimico" name="idbioquimico" required>
                         <option selected disabled>Seleccione...</option>
                         @foreach ($bioquimico as $b)
-                        <option value="{{$b->id}}">{{$b->nombre}}</option>
+                            <option value="{{$b->id}}">{{$b->nombre}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
 
         </div>
-
+        <div class="form-row mt-2">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend">Paciente</span>
+                    </div>
+                    <input type="text" class="form-control" id="validationCustomUsername" placeholder="Paciente"
+                        aria-describedby="inputGroupPrepend" value="{{$nombrepaciente}}" readonly>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend">Fecha</span>
+                    </div>
+                    <input type="date" class="form-control" id="validationCustom04" placeholder="State"
+                        value="{{ date('Y-m-d') }}" required>
+                </div>
+            </div>
+        </div>
 
         <label class="mt-2">Hemograma</label>
         <div class="form-row">

@@ -14,9 +14,18 @@
             @foreach($hormonas as $h)
                 <tr>
 
-                        <td>{{ $h->id }}</td>
-                        <td>{{ $h->bioquimico }}</td>
-                        <td>{{ $h->fecha }}</td>
+                    <td>{{ $h->analisis->orden->nroOrden}}</td>
+                    <td>{{ $h->id }}</td>
+                    <td>
+                        @if ($h->analisis->bioquimico)
+                            {{ $h->analisis->bioquimico->nombre }}
+                        @else
+                            No se registró bioquímico
+                        @endif
+                    </td>
+
+                    <td>{{ $h->analisis->orden->paciente->nombre }}</td>
+                    <td>{{ $h->created_at }}</td>
                         <td width="15px">
                             <div class="d-flex">
 

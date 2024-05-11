@@ -15,12 +15,6 @@
         {{-- ---Custom modal-- --}}
         <x-adminlte-button label="Registrar" class="bg-white mb-2" title="Registrar" data-toggle="modal"
             data-target="#modalpromocion" />
-        <a href="{{ route('hormona.index') }}" class="btn btn-adminlte ml-4 bg-white text-dark border mb-2"
-            title="Registrar">Hormonas</a>
-        <a href="{{ route('hemograma.index') }}" class="btn btn-adminlte bg-white text-dark border mb-2"
-            title="Registrar">Hemogramas</a>
-
-
 
 
         <x-adminlte-modal id="modalpromocion" title="Registrar" size="lg" theme="dark" v-centered static-backdrop
@@ -48,11 +42,13 @@
                 @foreach ($analisis as $o)
                     @php
                         $hemogramaExistente = App\Models\HemogramaCompleto::where('idAnalisis', $o->id)->exists();
+                        $hormonaExistente = App\Models\Hormonas::where('idAnalisis', $o->id)->exists();
                     @endphp
                     <tr>
-                        <td>{{ $o->idOrden }}</td>
+                        <td>{{ $o->orden->nroOrden }}</td>
                         <td>{{ $o->id }}</td>
                         <td>{{ $o->descripcion }}</td>
+                        <td>{{ $o->orden->paciente->nombre }}</td>
                         {{-- <td>{{ $o->bioquimico->nombre }}</td> --}}
                         <td>{{ $o->estado }}</td>
                         {{-- <td>{{ $o->orden->tipoAnalisis->nombre }}</td> --}}
@@ -67,24 +63,27 @@
                                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
+                                    @else
+                                        <a href="{{ route('hemograma.index') }}"
+                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
+                                            <i class="fa fa-lg fa-fw fas fa-eye"></i>
+                                        </a>
                                     @endif
-                                    <a href="{{ route('hemograma.index') }}"
-                                        class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
-                                        <i class="fa fa-lg fa-fw fas fa-eye"></i>
-                                    </a>
                                 @endif
                                 @if ($o->descripcion == 'Hormona')
-                                    @if (!$hemogramaExistente)
+                                    @if (!$hormonaExistente)
                                         <a href="{{ route('analisis.hormona', $o->id) }}"
                                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
+                                    @else
+                                        <a href="{{ route('hormona.index') }}"
+                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
+                                            <i class="fa fa-lg fa-fw fas fa-eye"></i>
+                                        </a>
                                     @endif
-                                    <a href="{{ route('hormona.index') }}"
-                                        class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
-                                        <i class="fa fa-lg fa-fw fas fa-eye"></i>
-                                    </a>
                                 @endif
+
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
                                     data-toggle="modal" data-target="#modalCustom{{ $o->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>
@@ -107,7 +106,7 @@
                         </x-adminlte-modal>
 
                     </tr>
-                    {{-- <x-adminlte-input id="nombreanalisis_debug" name="nombreanalisis_debug" type="text" value="{{ $o->orden->tipoAnalisis->nombre }}"/> --}}
+
                 @endforeach
 
             </x-adminlte-datatable>
@@ -135,6 +134,12 @@
                 showConfirmButton: false,
                 timer: 3000
             });
+            // // Configuración de DataTables
+            // $('#tuTabla').DataTable({
+            //     "search": {
+            //         "search": "1"
+            //     }
+            // });
             @if (session('success'))
                 Toast.fire({
                     icon: 'success',

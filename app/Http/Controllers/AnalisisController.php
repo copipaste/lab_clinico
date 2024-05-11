@@ -20,6 +20,7 @@ class AnalisisController extends Controller
             'Orden',
             'Id',
             'Descripcion',
+            'Paciente',
             'Estado',
             ['label' => 'Acciones', 'no-export' => true],
         ];
@@ -58,11 +59,10 @@ class AnalisisController extends Controller
     {
         $analisis = Analisis::findOrFail($id);
         // Obtener datos relacionados
-        $idOrden = $analisis->orden->id;
-        // $nombrePaciente = $analisis->orden->paciente->nombre; // Asumiendo que tienes la relación definida
-        // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
+        $idOrden = $analisis->orden->nroOrden;
+        $nombrepaciente = $analisis->orden->paciente->nombre;
         $bioquimico = Bioquimico::all();
-        return view('analisis.hemograma', compact('analisis', 'idOrden', 'bioquimico'));
+        return view('analisis.hemograma', compact('analisis', 'idOrden', 'bioquimico','nombrepaciente'));
     }
     public function hemogramastore(Request $request)
     {
@@ -89,12 +89,12 @@ class AnalisisController extends Controller
     public function hormona($id)
     {
         $analisis = Analisis::findOrFail($id);
-        // Obtener datos relacionados
         $idOrden = $analisis->orden->nroOrden;
+        $nombrepaciente = $analisis->orden->paciente->nombre;
         // $nombrePaciente = $analisis->orden->paciente->nomwbre; // Asumiendo que tienes la relación definida
         // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
         $bioquimico = Bioquimico::all();
-        return view('analisis.hormona', compact('analisis', 'idOrden', 'bioquimico'));
+        return view('analisis.hormona', compact('analisis', 'idOrden', 'bioquimico','nombrepaciente'));
     }
 
     public function hormonastore(Request $request)
@@ -110,6 +110,7 @@ class AnalisisController extends Controller
         $hormonas->save();
         $analisis = Analisis::find($request->input('idAnalisis'));
         $analisis->estado = 'Realizado';
+        $analisis->idBioquimico = $request->input('idbioquimico');
         $analisis->save();
 
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');

@@ -18,6 +18,9 @@ class Analisis extends Model
     {
         return $this->belongsTo(Bioquimico::class, 'idBioquimico');
     }
-
+    public function paciente()
+    {
+        return $this->belongsTo(Paciente::class, 'idPaciente');
+    }
 
 }

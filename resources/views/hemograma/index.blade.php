@@ -12,8 +12,16 @@
             @foreach($hemograma as $h)
                 <tr>
 
+                        <td>{{ $h->analisis->orden->nroOrden }}</td>
                         <td>{{ $h->id }}</td>
-                        <td>{{ $h->bioquimico }}</td>
+                        <td>
+                            @if ($h->analisis->bioquimico)
+                                {{ $h->analisis->bioquimico->nombre }}
+                            @else
+                                No se registró bioquímico
+                            @endif
+                        </td>
+                        <td>{{ $h->analisis->orden->paciente->nombre }}</td>
 
                         <td>{{ $h->created_at }}</td>
                         <td width="15px">
@@ -22,6 +30,12 @@
                                 {{-- esto es para el de editar membresía --}}
                                 <a href="{{route('hemograma.edit', $h->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </a>
+                                {{-- <a href="{{route('hemograma.edit', $h->id) }}" class="btn btn-xs btn-default text-black mx-1 shadow" title="Imprimir">
+                                    <i class="fas fa-lg fa-fw fa-print"></i>
+                                </a> --}}
+                                <a href="{{route('hemograma.edit', $h->id) }}" class="btn btn-xs btn-default text-danger mx-1 shadow" title="PDF">
+                                    <i class="fas fa-lg fa-fw fa-file-pdf"></i>
                                 </a>
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR" data-toggle="modal" data-target="#modalCustom{{ $h->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>

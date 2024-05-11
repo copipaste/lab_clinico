@@ -13,8 +13,10 @@ class HemogramaCompletoController extends Controller
     public function index()
     {
         $heads = [
+            'Orden',
             'Id',
             'Bioquimico',
+            'Paciente',
             'Fecha',
             ['label' => 'Acciones', 'no-export' => true],
         ];

@@ -18,22 +18,17 @@
                         value="{{ $idOrden }}" readonly>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">Bioqumico</span>
+                        <span class="input-group-text" id="inputGroupPrepend">Bioquímico</span>
                     </div>
-                    <input type="text" class="form-control" id="validationCustomUsername" placeholder="Bioquimico"
-                        aria-describedby="inputGroupPrepend" value="{{ $analisis->bioquimico->nombre }}" readonly>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">Seguro</span>
-                    </div>
-                    <input type="text" class="form-control" id="validationCustomUsername" placeholder="Seguro"
-                        aria-describedby="inputGroupPrepend" required>
+                    <select class="custom-select" id="idbioquimico" name="idbioquimico" required>
+                        <option selected disabled>Seleccione...</option>
+                        @foreach ($bioquimico as $b)
+                            <option value="{{$b->id}}">{{$b->nombre}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
@@ -44,7 +39,7 @@
                         <span class="input-group-text" id="inputGroupPrepend">Paciente</span>
                     </div>
                     <input type="text" class="form-control" id="validationCustomUsername" placeholder="Paciente"
-                        aria-describedby="inputGroupPrepend" required>
+                        aria-describedby="inputGroupPrepend" value="{{$nombrepaciente}}" readonly>
                 </div>
             </div>
             <div class="col-md-3">
@@ -56,7 +51,6 @@
                         value="{{ date('Y-m-d') }}" required>
                 </div>
             </div>
-
         </div>
 
         <label class="mt-2">Hemograma</label>

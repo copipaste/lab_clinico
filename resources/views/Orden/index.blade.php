@@ -162,7 +162,7 @@
                         </td>
                         <td>{{ $o->created_at }}</td>
 
-                        <td>{{ $o->idPaciente }}</td>
+                        <td>{{ $o->Paciente->nombre}}</td>
 
                         <td width="15px">
                             <div class="d-flex">

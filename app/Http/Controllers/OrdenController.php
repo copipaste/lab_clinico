@@ -71,11 +71,15 @@ class OrdenController extends Controller
         $paciente->idTipoSeguro = $request->tiposeguro;
         $paciente->save();
         $idpaciente = $paciente->id;
+
         $orden = new Orden();
-        $orden->nroOrden = $request->nroOrden;
         $orden->idPaciente = $idpaciente;
         $orden->save();
+        // Después de guardar la orden, obtén el ID asignado
         $idOrden = $orden->id;
+        // Asigna el número de orden con 'OR' concatenado con el ID
+        $orden->nroOrden = 'OR' . $idOrden;
+        $orden->save();
 
 
         $tipoAnalisisIds = $request->input('tipoAnalisisIds'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario
