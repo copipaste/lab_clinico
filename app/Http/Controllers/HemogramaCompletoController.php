@@ -61,11 +61,23 @@ class HemogramaCompletoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(HemogramaCompleto $hemogramaCompleto)
+    public function show(HemogramaCompleto $HemogramaCompleto )
     {
-        //
-    }
 
+    }
+    public function show2(string $id)
+    {
+        $heads = [
+            'Orden',
+            'Id',
+            'Bioquimico',
+            'Paciente',
+            'Fecha',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $hemograma = HemogramaCompleto::all();
+        return view('hemograma.index', compact('hemograma', 'heads','id'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

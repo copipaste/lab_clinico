@@ -45,9 +45,21 @@ class HormonasController extends Controller
      */
     public function show(Hormonas $hormonas)
     {
-        //
-    }
 
+    }
+    public function show2(string $id)
+    {
+        $heads = [
+            'Orden',
+            'Id',
+            'Bioquimico',
+            'Paciente',
+            'Fecha',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $hormonas = Hormonas::all();
+        return view('hormona.index', compact('hormonas', 'heads','id'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

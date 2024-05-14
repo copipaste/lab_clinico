@@ -64,7 +64,7 @@
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @else
-                                        <a href="{{ route('hemograma.index') }}"
+                                        <a href="{{ route('hemograma.show2',$o->id) }}"
                                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
                                             <i class="fa fa-lg fa-fw fas fa-eye"></i>
                                         </a>
@@ -77,21 +77,21 @@
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @else
-                                        <a href="{{ route('hormona.index') }}"
+                                        <a href="{{ route('hormona.show2',$o->id) }}"
                                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
                                             <i class="fa fa-lg fa-fw fas fa-eye"></i>
                                         </a>
                                     @endif
                                 @endif
 
-                                <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
+                                {{-- <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
                                     data-toggle="modal" data-target="#modalCustom{{ $o->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>
-                                </button>
+                                </button> --}}
                             </div>
                         </td>
 
-                        <x-adminlte-modal id="modalCustom{{ $o->id }}" title="Eliminar" size="sm"
+                        {{-- <x-adminlte-modal id="modalCustom{{ $o->id }}" title="Eliminar" size="sm"
                             theme="warning" icon="fa-solid fa-triangle-exclamation" v-centered static-backdrop scrollable>
                             <div style="height: 50px;">¿Está seguro de eliminar el seguro?</div>
                             <x-slot name="footerSlot">
@@ -103,7 +103,7 @@
 
                                 <x-adminlte-button theme="light" label="Cancelar" data-dismiss="modal" />
                             </x-slot>
-                        </x-adminlte-modal>
+                        </x-adminlte-modal> --}}
 
                     </tr>
 
