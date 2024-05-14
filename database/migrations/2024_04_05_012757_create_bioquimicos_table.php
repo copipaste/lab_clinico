@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('fechaNacimiento');
             $table->string('sexo');
             $table->string('telefono');
-            $table->foreignId('idEspecialidad')->constrained('especialidades');
+            $table->foreignId('idEspecialidad')->constrained('especialidades')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

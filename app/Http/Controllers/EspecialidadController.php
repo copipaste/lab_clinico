@@ -12,7 +12,13 @@ class EspecialidadController extends Controller
      */
     public function index()
     {
-        //
+        $heads = [
+            'Id',
+            'Nombre',
+            'Descripcion'
+        ];
+        $especialidades = Especialidad::all();
+        return view('VistaEspecialidad.index', compact('heads','especialidades'));
     }
 
     /**
@@ -28,7 +34,12 @@ class EspecialidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required'
+        ]);
+        Especialidad::create(request()->all());
+        return redirect()->route('especialidad.index');
     }
 
     /**
@@ -42,24 +53,33 @@ class EspecialidadController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Especialidad $especialidad)
+    public function edit(string $id)
     {
-        //
+        $especialidad = Especialidad::find($id);
+        return view('VistaEspecialidad.edit', compact('especialidad'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Especialidad $especialidad)
+    public function update(Request $request, string $id)
     {
-        //
+        request()->validate([
+            'nombre' => 'required',
+            'descripcion' => 'required'
+        ]);
+        $especialidad = Especialidad::findOrfail($id);
+        $especialidad->update(request()->all());
+        return redirect()->route('especialidad.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Especialidad $especialidad)
+    public function destroy(string $id)
     {
-        //
+        $especialidad = Especialidad::findOrfail($id);
+        $especialidad->delete();
+        return redirect()->route('especialidad.index');
     }
 }

@@ -8,6 +8,8 @@ use App\Http\Controllers\TipoAnalisisController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
+use App\Http\Controllers\RecepcionistaController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\BioquimicoController;
 use App\Http\Controllers\AnalisisController;
 use App\Http\Controllers\OrdenController;
@@ -16,6 +18,7 @@ use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HormonasController;
 use App\Models\HemogramaCompleto;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +61,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     //Rutas Historiales
     Route::resource('/historiales', HistorialController::class)->names('historiales');
 
+
     //ruta bioquimicos
     //Rutas Pacientes
     Route::resource('/bioquimicos', BioquimicoController::class)->names('bioquimicos');
@@ -86,9 +90,27 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
 });
 
-Route::get('/landingpage', function () {
-    return view('landingpage');
+
+    /* ------------------------------------- VISTA ESPECIALIDADES ----------------------------------------------------------- */
+Route::resource('/VistaEspecialidades', EspecialidadController::class)->names('especialidad');
+/* ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ------------------------------------- VISTA ESPECIALIDADES ---------------------------------------------------------- */
+Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('recepcionistas');
+/* ---------------------------------------------------------------------------------------------------------------------- */
+
+
 });
+
+
+// rutas landing page
+Route::get('/landingpage',[LandingPageController::class, 'index'])->name('LandingPage.index');
+Route::get('/landingpage/solicitud',[LandingPageController::class, 'solicitud'])->name('LandingPage.solicitud');
+Route::get('/landingpage/comentarios',[LandingPageController::class, 'comentarios'])->name('LandingPage.comentarios');
+Route::get('landingpage/aboutUs', [LandingPageController::class, 'aboutUs'])->name('LandingPage.aboutUs');
+Route::get('landingpage/contactUs', [LandingPageController::class, 'contactUs'])->name('LandingPage.contactUs');
+Route::delete('/landingpage/comentarios/{comentario}', [LandingPageController::class, 'destroy'])->name('LandingPage.comentarios.destroy');
+Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])->name('LandingPage.comentarios.store');
 
 
 
