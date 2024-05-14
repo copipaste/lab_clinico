@@ -64,7 +64,7 @@
                         <td>{{ $paciente->fechaNacimiento }}</td>
                         <td>{{ $paciente->sexo }}</td>
                         <td>{{ $paciente->telefono }}</td>
-                        <td>{{ $paciente->tipoSeguro->descripcion }}</td>
+                        <td>{{ $paciente->tipoSeguro->descripcion ?? 'Sin seguro' }}</td>
                         <td width="15px">
                             <div class="d-flex">
 

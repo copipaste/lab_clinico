@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('sexo');
             $table->string('telefono');
             $table->string('correo')->nullable();
-            $table->foreignId('idTipoSeguro')->constrained('tipo_seguros');
+            $table->foreignId('idTipoSeguro')->nullable()->constrained('tipo_seguros');
             $table->foreignId('idHistorial')->nullable()->constrained('historiales');
             $table->foreignId('idUser')->nullable()->constrained('users');
             $table->timestamps();

@@ -326,7 +326,7 @@ return [
         [
             'text' => 'Usuarios',
             'icon' => 'fas fa-fw fa-users',
-            // 'can' => 'users.package',
+            'can' => 'users.package',
             'submenu' => [
                 [
                     'text' => 'Gestionar Usuarios',
@@ -350,7 +350,7 @@ return [
                     'text' => 'Bitacora',
                     'route' => 'bitacora.index',
                     'icon' => 'fas fa-fw fa-lock',
-                   // 'can' => 'roles.index',
+                     'can' => 'bitacora.index',
                 ],
 
             ],
@@ -360,7 +360,7 @@ return [
         [
             'text' => 'Historial de pacientes',
             'icon' => 'fas fa-fw fa-users',
-            // 'can' => 'history.package',
+            'can' => 'history.package',
             'submenu' => [
                 [
                     'text' => 'Gestionar Pacientes',
@@ -389,17 +389,19 @@ return [
         [
             'text' => 'Análisis',
             'icon' => 'fas fa-fw fa-users',
-            // 'can' => 'analysis.package',
+            'can' => 'analysis.package',
             'submenu' => [
                 [
                     'text' => 'Orden',
                     'url' => '/orden',
                     'icon' => 'fas fa-fw fa-flask',
+                    'can' => 'ordenes.index',
                 ],
                 [
                     'text' => 'Analisis',
                     'url' => '/analisis',
                     'icon' => 'fas fa-fw fa-flask',
+                    'can' => 'analisis.index',
                 ],
                 [
                     'text' => 'Tipos de Analisis',

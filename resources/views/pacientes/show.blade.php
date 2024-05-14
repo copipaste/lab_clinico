@@ -14,7 +14,7 @@
             <p><strong>Sexo:</strong> {{ $paciente->sexo }}</p>
             <p><strong>Telefono:</strong> {{ $paciente->telefono }}</p>
             <p><strong>Correo Electronico:</strong> {{ $paciente->user->email }}</p>
-            <p><strong>Tipo de Seguro:</strong> {{ $paciente->tipoSeguro->descripcion }}</p>
+            <p><strong>Tipo de Seguro:</strong> {{ $paciente->tipoSeguro->descripcion ?? 'Sin seguro' }}</p>
         </div>
     </div>
 

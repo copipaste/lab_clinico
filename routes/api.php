@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login',[AuthController::class,'login']);
+Route::post('/existsci',[AuthController::class,'existsci']);
+Route::post('/existsemail',[AuthController::class,'existsemail']);
+Route::post('/register',[AuthController::class,'register']);
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::get('/user', [AuthController::class, 'index']);
