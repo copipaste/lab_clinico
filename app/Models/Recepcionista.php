@@ -17,8 +17,7 @@ class Recepcionista extends Model
         'fechaNacimiento',
         'sexo',
         'telefono',
-        'direccion',
-        'idUsuario',
+        'direccion'
     ];
 
     public function user()
