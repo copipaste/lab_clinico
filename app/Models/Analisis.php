@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Analisis extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'idBioquimico',
+    ];
     protected $table = 'analisis';
 
     public function orden()

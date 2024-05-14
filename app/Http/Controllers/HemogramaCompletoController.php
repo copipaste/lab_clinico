@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Analisis;
+use App\Models\Bioquimico;
 use App\Models\HemogramaCompleto;
 use Illuminate\Http\Request;
 
@@ -49,38 +51,69 @@ class HemogramaCompletoController extends Controller
         $hemograma->save();
 
         activity()
-        ->causedBy(auth()->user())
-        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
-        ->log('Registro un hemograma con el nombre: ' . $hemograma->globulosRojos);
-    session()->flash('success', 'Se registró exitosamente');
+            ->causedBy(auth()->user())
+            ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+            ->log('Registro un hemograma con el nombre: ' . $hemograma->globulosRojos);
+        session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('anlisis.index')->with('success', '¡Se ha registrado exitosamente!');
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(HemogramaCompleto $hemogramaCompleto)
+    public function show(HemogramaCompleto $HemogramaCompleto )
     {
-        //
-    }
 
+    }
+    public function show2(string $id)
+    {
+        $heads = [
+            'Orden',
+            'Id',
+            'Bioquimico',
+            'Paciente',
+            'Fecha',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $hemograma = HemogramaCompleto::all();
+        return view('hemograma.index', compact('hemograma', 'heads','id'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(HemogramaCompleto $hemogramaCompleto)
+    public function edit(HemogramaCompleto $hemograma)
     {
-        return view('hemograma.edit', compact('hemogramaCompleto'));
+        $bioquimico= Bioquimico::all();
+        return view('hemograma.edit', compact('hemograma','bioquimico'));
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HemogramaCompleto $hemogramaCompleto)
+    public function update(Request $request, string $id)
     {
-        //
+        $hemograma = HemogramaCompleto::findOrFail($id);
+
+        // Actualizar los glóbulos rojos del hemograma
+        $hemograma->update([
+            'globulosRojos' => $request->globulosrojos
+        ]);
+
+        // Obtener el análisis asociado al hemograma
+        $analisis = $hemograma->analisis;
+
+        // Actualizar el bioquímico del análisis
+        $analisis->update([
+            'idBioquimico' => $request->idbioquimico
+        ]);
+
+        return redirect()->route('hemograma.index')->with('success', 'Los datos han sido actualizados correctamente.');
     }
+
+
+
+
 
     /**
      * Remove the specified resource from storage.

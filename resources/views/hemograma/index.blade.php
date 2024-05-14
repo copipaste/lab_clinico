@@ -10,7 +10,8 @@
     <div class="card-body">
         <x-adminlte-datatable id="table1" :heads="$heads" striped head-theme="white" with-buttons>
             @foreach($hemograma as $h)
-                <tr>
+            @if ($h->idAnalisis == $id)
+            <tr>
 
                         <td>{{ $h->analisis->orden->nroOrden }}</td>
                         <td>{{ $h->id }}</td>
@@ -57,6 +58,7 @@
                         </x-adminlte-modal>
 
                 </tr>
+                @endif
             @endforeach
 
         </x-adminlte-datatable>
