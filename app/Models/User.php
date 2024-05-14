@@ -60,4 +60,12 @@ class User extends Authenticatable
 
         return auth()->user()->name;
     }
+
+
+    public function Comentarios()
+    {
+        return $this->hasMany(Comentario::class, 'id', 'user_id');
+    }
+
+
 }

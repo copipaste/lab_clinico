@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\RecepcionistaController;
+use App\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,9 +68,15 @@ Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('
 
 });
 
-Route::get('/landingpage', function () {
-    return view('landingpage');
-});
+
+// rutas landing page
+Route::get('/landingpage',[LandingPageController::class, 'index'])->name('LandingPage.index');
+Route::get('/landingpage/solicitud',[LandingPageController::class, 'solicitud'])->name('LandingPage.solicitud');
+Route::get('/landingpage/comentarios',[LandingPageController::class, 'comentarios'])->name('LandingPage.comentarios');
+Route::get('landingpage/aboutUs', [LandingPageController::class, 'aboutUs'])->name('LandingPage.aboutUs');
+Route::get('landingpage/contactUs', [LandingPageController::class, 'contactUs'])->name('LandingPage.contactUs');
+Route::delete('/landingpage/comentarios/{comentario}', [LandingPageController::class, 'destroy'])->name('LandingPage.comentarios.destroy');
+Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])->name('LandingPage.comentarios.store');
 
 
 

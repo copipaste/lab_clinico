@@ -7,12 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
-  {{-- <link rel="stylesheet" href="build/tailwind.css"> --}}
-  {{-- @vite('resources/css/app.css')  --}}
+  <!-- <link rel="stylesheet" href="build/tailwind.css">  -->
 
-  <title>DentalPro</title>
+  {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+  @vite('resources/css/app.css')
+ 
+
+  <title>Clinica</title>
 
   <style>
+    
     #menu-toggle:checked+#menu {
       display: block;
     }
@@ -106,7 +110,7 @@
                     d="M12,2C7.589,2,4,5.589,4,9.995C3.971,16.44,11.696,21.784,12,22c0,0,8.029-5.56,8-12C20,5.589,16.411,2,12,2z M12,14 c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S14.21,14,12,14z" />
                 </svg>
 
-                <span class="ml-2">1985 Kerry Way, Whittier, CA, USA</span>
+                <span class="ml-2">Av alto san pedro calle belen #28</span>
               </div>
             </li>
             <li class="ml-6">
@@ -116,7 +120,7 @@
                     d="M14.594,13.994l-1.66,1.66c-0.577-0.109-1.734-0.471-2.926-1.66c-1.193-1.193-1.553-2.354-1.661-2.926l1.661-1.66 l0.701-0.701L5.295,3.293L4.594,3.994l-1,1C3.42,5.168,3.316,5.398,3.303,5.643c-0.015,0.25-0.302,6.172,4.291,10.766 C11.6,20.414,16.618,20.707,18,20.707c0.202,0,0.326-0.006,0.358-0.008c0.245-0.014,0.476-0.117,0.649-0.291l1-1l0.697-0.697 l-5.414-5.414L14.594,13.994z" />
                 </svg>
 
-                <span class="ml-2">+1 562-789-1935</span>
+                <span class="ml-2">+591 70960799</span>
               </div>
             </li>
           </ul>
@@ -170,8 +174,8 @@
 
       <div class="flex flex-wrap items-center justify-between py-6">
         <div class="w-1/2 md:w-auto">
-          <a href="index.html" class="text-white font-bold text-2xl">
-            DentalPro
+          <a href="{{route('LandingPage.index')}}" class="text-white font-bold text-2xl">
+            Centro de Analisis Clinicos
           </a>
         </div>
 
@@ -187,20 +191,25 @@
           <nav
             class="w-full bg-white md:bg-transparent rounded shadow-lg px-6 py-4 mt-4 text-center md:p-0 md:mt-0 md:shadow-none">
             <ul class="md:flex items-center">
-              <li><a class="py-2 inline-block md:text-white md:hidden lg:block font-semibold" href="#">About Us</a></li>
-              <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold"
-                  href="#">Treatments</a></li>
-              <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold"
-                  href="#">Testimonials</a></li>
-              <li class="md:ml-4 md:hidden lg:block"><a class="py-2 inline-block md:text-white md:px-2 font-semibold"
-                  href="#">Blog</a></li>
-              <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href="#">Contact
-                  Us</a></li>
-              <li class="md:ml-6 mt-3 md:mt-0">
-                <a class="inline-block font-semibold px-4 py-2 text-white bg-blue-600 md:bg-transparent md:text-white border border-white rounded"
-                  href="book-appointment.html">Book
-                  Appointment</a>
-              </li>
+              <li><a class="py-2 inline-block md:text-white md:hidden lg:block font-semibold" href="{{route('LandingPage.aboutUs')}}">Sobre nosotros</a></li>
+              <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href="#">Analisis</a></li>
+              <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href="{{route('LandingPage.comentarios')}}">Comentarios</a></li>
+              <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href="{{route('LandingPage.contactUs')}}">Contactanos </a></li>
+              @if (Auth::check())
+
+
+              <li class="md:ml-4">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="py-2 inline-block md:text-white md:px-2 font-semibold">Cerrar Sesión</button>
+                </form>
+            </li>
+              @else
+              <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href={{route('login')}}>Iniciar Sesion
+                  </a></li>
+              @endif
+              <li class="md:ml-6 mt-3 md:mt-0"> <a class="inline-block font-semibold px-4 py-2 text-white bg-blue-600 md:bg-transparent md:text-white border border-white rounded" href={{route('LandingPage.solicitud')}}>Registrar Analisis</a></li>
+
             </ul>
           </nav>
         </div>
@@ -210,24 +219,16 @@
 
     <!-- start hero -->
     <div class="bg-gray-100">
-      <section class="cover bg-blue-teal-gradient relative bg-blue-600 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 overflow-hidden py-48 flex
-      items-center min-h-screen">
-        <div class="h-full absolute top-0 left-0 z-0">
-          <img src="images/cover-bg.jpg" alt="" class="w-full h-full object-cover opacity-20">
+      <section class="cover bg-blue-teal-gradient relative bg-blue-600 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 overflow-hidden py-48 flexitems-center min-h-screen">
+        <div class="h-full w-full absolute top-0 left-0 z-0">
+          <img src="images/lab-bg.jpg" alt="" class="w-full h-full object-cover opacity-20">
         </div>
 
         <div class="lg:w-3/4 xl:w-2/4 relative z-10 h-100 lg:mt-16">
           <div>
-            <h1 class="text-white text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">A better life starts with a
-              beautiful
-              smile.</h1>
-            <p class="text-blue-100 text-xl md:text-2xl leading-snug mt-4">Welcome to the Dentist Office of Dr. Thomas
-              Dooley,
-              where
-              trust
-              and comfort are priorities.</p>
-            <a href="#" class="px-8 py-4 bg-teal-500 text-white rounded inline-block mt-8 font-semibold">Book
-              Appointment</a>
+            <h1 class="text-white text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">Comienza tu viaje hacia una salud completa con resultados precisos.</h1>
+    
+            <a href="#" class="px-8 py-4 bg-teal-500 text-white rounded inline-block mt-8 font-semibold">Solicitar Analisis</a>
           </div>
         </div>
       </section>
@@ -236,7 +237,7 @@
 
     <!-- start about -->
     <section class="relative px-4 py-16 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 lg:py-32">
-      <div class="flex flex-col lg:flex-row lg:-mx-8">
+      {{-- <div class="flex flex-col lg:flex-row lg:-mx-8">
         <div class="w-full lg:w-1/2 lg:px-8">
           <h2 class="text-3xl leading-tight font-bold mt-4">Welcome to the Dentist Office of Dr. Thomas Dooley</h2>
           <p class="text-lg mt-4 font-semibold">Excellence in Dentistry in the Heart of NY</p>
@@ -271,45 +272,65 @@
             </div>
           </div>
         </div>
-      </div>
-
+      </div> --}}
+      <h2 class="text-3xl leading-tight font-bold mt-4 text-center">Catalogo de Analisis:</h2>
       <div class="md:flex md:flex-wrap mt-24 text-center md:-mx-4">
         <div class="md:w-1/2 md:px-4 lg:w-1/4">
           <div class="bg-white rounded-lg border border-gray-300 p-8">
-            <img src="images/teeth-whitening.svg" alt="" class="h-20 mx-auto">
+            <img src="images/analysis.png" alt="" class="h-20 mx-auto">
 
-            <h4 class="text-xl font-bold mt-4">Teeth Whitening</h4>
-            <p class="mt-1">Let us show you how our experience.</p>
+            <h4 class="text-xl font-bold mt-4">Hemograma Completo</h4>
+            {{-- <p class="mt-1">Let us show you how our experience.</p> --}}
             <a href="#" class="block mt-4">Read More</a>
           </div>
         </div>
 
         <div class="md:w-1/2 md:px-4 mt-4 md:mt-0 lg:w-1/4">
           <div class="bg-white rounded-lg border border-gray-300 p-8">
-            <img src="images/oral-surgery.svg" alt="" class="h-20 mx-auto">
+            <img src="images/analysis.png" alt="" class="h-20 mx-auto">
 
-            <h4 class="text-xl font-bold mt-4">Oral Surgery</h4>
-            <p class="mt-1">Let us show you how our experience.</p>
+            <h4 class="text-xl font-bold mt-4">Hormonas</h4>
+            {{-- <p class="mt-1">Let us show you how our experience.</p> --}}
             <a href="#" class="block mt-4">Read More</a>
           </div>
         </div>
 
         <div class="md:w-1/2 md:px-4 mt-4 md:mt-8 lg:mt-0 lg:w-1/4">
           <div class="bg-white rounded-lg border border-gray-300 p-8">
-            <img src="images/painless-dentistry.svg" alt="" class="h-20 mx-auto">
+            <img src="images/analysis.png" alt="" class="h-20 mx-auto">
 
-            <h4 class="text-xl font-bold mt-4">Painless Dentistry</h4>
-            <p class="mt-1">Let us show you how our experience.</p>
+            <h4 class="text-xl font-bold mt-4">Quimica Sanguinea</h4>
+            {{-- <p class="mt-1">Let us show you how our experience.</p> --}}
             <a href="#" class="block mt-4">Read More</a>
           </div>
         </div>
 
         <div class="md:w-1/2 md:px-4 mt-4 md:mt-8 lg:mt-0 lg:w-1/4">
           <div class="bg-white rounded-lg border border-gray-300 p-8">
-            <img src="images/periodontics.svg" alt="" class="h-20 mx-auto">
+            <img src="images/analysis.png" alt="" class="h-20 mx-auto">
 
-            <h4 class="text-xl font-bold mt-4">Periodontics</h4>
-            <p class="mt-1">Let us show you how our experience.</p>
+            <h4 class="text-xl font-bold mt-4">Parasitologia Completa</h4>
+            {{-- <p class="mt-1">Let us show you how our experience.</p> --}}
+            <a href="#" class="block mt-4">Read More</a>
+          </div>
+        </div>
+
+        <div class="md:w-1/2 md:px-4 mt-4 md:mt-8 lg:mt-8 lg:w-1/4">
+          <div class="bg-white rounded-lg border border-gray-300 p-8">
+            <img src="images/analysis.png" alt="" class="h-20 mx-auto">
+
+            <h4 class="text-xl font-bold mt-4">Parasitologia Completa</h4>
+            {{-- <p class="mt-1">Let us show you how our experience.</p> --}}
+            <a href="#" class="block mt-4">Read More</a>
+          </div>
+        </div>
+
+        <div class="md:w-1/2 md:px-4 mt-4 md:mt-8 lg:mt-8 lg:w-1/4">
+          <div class="bg-white rounded-lg border border-gray-300 p-8">
+            <img src="images/analysis.png" alt="" class="h-20 mx-auto">
+
+            <h4 class="text-xl font-bold mt-4">Parasitologia Completa</h4>
+            {{-- <p class="mt-1">Let us show you how our experience.</p> --}}
             <a href="#" class="block mt-4">Read More</a>
           </div>
         </div>
@@ -317,35 +338,14 @@
     </section>
     <!-- end about -->
 
-    <!-- start testimonials -->
-    <section class="relative bg-gray-100 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-16 lg:py-32">
-      <div class="flex flex-col lg:flex-row lg:-mx-8">
-        <div class="w-full lg:w-1/2 lg:px-8">
-          <h2 class="text-3xl leading-tight font-bold mt-4">Why choose the Mesothelioma Center?</h2>
-          <p class="mt-2 leading-relaxed">Aenean ut tellus tellus. Suspendisse potenti. Nullam tincidunt lacus tellus,
-            sed aliquam est vehicula a. Pellentesque consectetur condimentum nulla, eleifend condimentum purus vehicula
-            in. Donec convallis sollicitudin facilisis. Integer nisl ligula, accumsan non tincidunt ac, imperdiet in
-            enim. Donec efficitur ullamcorper metus, eu venenatis nunc. Nam eget neque tempus, mollis sem a, faucibus
-            mi.</p>
-        </div>
-
-        <div class="w-full md:max-w-md md:mx-auto lg:w-1/2 lg:px-8 mt-12 mt:md-0">
-          <div class="bg-gray-400 w-full h-72 rounded-lg"></div>
-
-          <p class="italic text-sm mt-2 text-center">Aenean ante nisi, gravida non mattis semper.</p>
-        </div>
-      </div>
-    </section>
-    <!-- end testimonials -->
 
     <!-- start blog -->
     <section class="relative bg-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-32">
       <div class="">
-        <h2 class="text-3xl leading-tight font-bold">Health Blog</h2>
-        <p class="text-gray-600 mt-2 md:max-w-lg">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-          turpis egestas.</p>
+        <h2 class="text-3xl leading-tight font-bold">Comentarios</h2>
+        <p class="text-gray-600 mt-2 md:max-w-lg">Comentarios realizados por clientes de la clinica.</p>
 
-        <a href="#" title="" class="inline-block text-teal-500 font-semibold mt-6 mt:md-0">View All Posts</a>
+        <a href="#" title="" class="inline-block text-teal-500 font-semibold mt-6 mt:md-0">Ver todos los comentarios</a>
       </div>
 
       <div class="md:flex mt-12 md:-mx-4">
@@ -399,11 +399,9 @@
     <section
       class="relative bg-blue-teal-gradient px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 text-center md:text-left">
       <div class="md:flex md:items-center md:justify-center">
-        <h2 class="text-xl font-bold text-white">Get in touch with us today! <br class="block md:hidden">Call us on: +1
-          562-789-1935</h2>
+        <h2 class="text-xl font-bold text-white">Realiza tu reserva! <br class="block md:hidden"></h2>
         <a href="#"
-          class="px-8 py-4 bg-white text-blue-600 rounded inline-block font-semibold md:ml-8 mt-4 md:mt-0">Book
-          Appointment</a>
+          class="px-8 py-4 bg-white text-blue-600 rounded inline-block font-semibold md:ml-8 mt-4 md:mt-0">Reservar</a>
       </div>
     </section>
     <!-- end cta -->
@@ -412,7 +410,7 @@
     <footer class="relative bg-gray-900 text-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24">
       <div class="flex flex-col md:flex-row">
         <div class="w-full lg:w-2/6 lg:mx-4 lg:pr-8">
-          <h3 class="font-bold text-2xl">DentalPro</h3>
+          <h3 class="font-bold text-2xl">Analisis</h3>
           <p class="text-gray-400">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.</p>
 
           <form class="flex items-center mt-6">
@@ -433,16 +431,19 @@
         </div>
 
         <div class="w-full lg:w-1/6 mt-8 lg:mt-0 lg:mx-4">
-          <h5 class="uppercase tracking-wider font-semibold text-gray-500">Treatments</h5>
+          <h5 class="uppercase tracking-wider font-semibold text-gray-500">Analisis</h5>
           <ul class="mt-4">
-            <li class="mt-2"><a href="#" title="" class="opacity-75 hover:opacity-100">General Dentistry</a></li>
-            <li class="mt-2"><a href="#" title="" class="opacity-75 hover:opacity-100">Cosmetic Dentistry</a></li>
-            <li class="mt-2"><a href="#" title="" class="opacity-75 hover:opacity-100">Oral Health</a></li>
+            <li class="mt-2"><a href="#" title="" class="opacity-75 hover:opacity-100">Hemograma Completo</a></li>
+            <li class="mt-2"><a href="#" title="" class="opacity-75 hover:opacity-100">Hormonas</a></li>
+            <li class="mt-2"><a href="#" title="" class="opacity-75 hover:opacity-100">Quimica Completa</a></li>
+            <li class="mt-2"><a href="#" title="" class="opacity-75 hover:opacity-100">Parasitologia Completa</a></li>
+            <li class="mt-2"><a href="#" title="" class="opacity-75 hover:opacity-100">Orina Completa</a></li>
+            <li class="mt-2"><a href="#" title="" class="opacity-75 hover:opacity-100">Reaccion de Widal</a></li>
           </ul>
         </div>
 
         <div class="w-full lg:w-2/6 mt-8 lg:mt-0 lg:mx-4 lg:pr-8">
-          <h5 class="uppercase tracking-wider font-semibold text-gray-500">Contact Details</h5>
+          <h5 class="uppercase tracking-wider font-semibold text-gray-500">Detalles de Contacto</h5>
           <ul class="mt-4">
             <li>
               <a href="#" title="" class="block flex items-center opacity-75 hover:opacity-100">
@@ -468,8 +469,8 @@
                     <path d="M13 7L11 7 11 13 17 13 17 11 13 11z" /></svg>
                 </span>
                 <span class="ml-3">
-                  Mon - Fri: 9:00 - 19:00<br>
-                  Closed on Weekends
+                  Lun - Vie: 9:00 - 19:00<br>
+                  Cerrado los domingos
                 </span>
               </a>
             </li>
@@ -483,7 +484,7 @@
                   </svg>
                 </span>
                 <span class="ml-3">
-                  +1 562-789-1935
+                  +591 70960799
                 </span>
               </a>
             </li>
@@ -497,7 +498,7 @@
                   </svg>
                 </span>
                 <span class="ml-3">
-                  dentalpro@example.com
+                  analisis@gmail.com
                 </span>
               </a>
             </li>
@@ -544,7 +545,7 @@
             </li>
           </ul>
 
-          <p class="text-sm text-gray-400 mt-12">© 2018 ProDentists. <br class="hidden lg:block">All Rights Reserved.
+          <p class="text-sm text-gray-400 mt-12">© 2024 Analisis. <br class="hidden lg:block">All Rights Reserved.
           </p>
         </div>
       </div>

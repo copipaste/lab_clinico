@@ -427,6 +427,13 @@ return [
             'icon' => 'fas fa-book-medical',
             // 'can' => 'historiales.index',
         ],
+        [
+            'text' => 'Pagina Principal',
+            'route' => 'LandingPage.index',
+            'icon' => 'fas fa-book-medical',
+            // 'can' => 'historiales.index',
+        ],
+
     ],
 
     /*
