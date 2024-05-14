@@ -4,7 +4,9 @@
 
 @section('content_header')
     <h1>Dashboard</h1>
+    
     {{--!para añadir estilos de tailwindcss a mi vista --}}  
+
     {{-- @vite('resources/css/app.css') --}}
 @stop
 

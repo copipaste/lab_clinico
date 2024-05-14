@@ -20,7 +20,7 @@
                             <input type="number" class="form-control" id="descuento" name="descuento" value="{{ $tiposeguro->descuento }}">
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                        <a href="{{ route('tiposeguro.index') }}" class="btn btn-secondary">Cancelar</a>
+                        <a href="#" class="btn btn-secondary">Cancelar</a>
                     </form>
                 </div>
             </div>

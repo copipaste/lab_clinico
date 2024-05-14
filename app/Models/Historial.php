@@ -12,6 +12,7 @@ class Historial extends Model
     use HasFactory;
 
     protected $table = 'historiales';
+    protected $fillable = ['nroHistoria', 'fechaRegistro','antecedentesPatologicos'];
 
  
 
@@ -22,7 +23,7 @@ class Historial extends Model
 
     public function paciente()
     {
-        return $this->belongsTo(Paciente::class, 'idHistorial', 'id');
+        return $this->hasOne(Paciente::class, 'idHistorial', 'id');
     }
 
     public function registros()

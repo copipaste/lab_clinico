@@ -28,6 +28,7 @@ class UserController extends Controller
         $users = User::with('roles')->get();
         $roles = Role::pluck('name', 'id');
         return view('users.index', compact('users', 'roles', 'heads'));
+
     }
 
     /**
@@ -145,7 +146,11 @@ class UserController extends Controller
                     ])->assignRole($request->role);
                     break;
             }
-
+            activity()
+            ->causedBy(auth()->user())
+            ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+            ->log('Registro un usuario: ' . $user->name);
+        session()->flash('success', 'Se registró exitosamente');
             // Redireccionar o devolver una respuesta según corresponda
             return redirect()->route('users.index')->with('success', 'Usuario creado con éxito.');
         } catch (\Illuminate\Database\QueryException $e) {

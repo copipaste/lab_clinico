@@ -45,7 +45,11 @@ class RoleController extends Controller
 
         // Asignar permisos al rol
         $rol->permissions()->sync($request->permisos);
-
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('Registro un rol: ' . $rol->name);
+    session()->flash('success', 'Se registró exitosamente');
         // Redireccionar o devolver una respuesta JSON según tus necesidades
         return redirect()->route('roles.index')->with('success', 'Rol creado exitosamente');
     }
@@ -100,7 +104,11 @@ class RoleController extends Controller
 
         // Eliminar el rol
         $role->delete();
-
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('elimino un rol: ' . $role->name);
+    session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('roles.index')->with('success', 'Rol eliminado exitosamente');
     }
 }

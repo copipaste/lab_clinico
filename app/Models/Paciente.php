@@ -36,7 +36,7 @@ class Paciente extends Model
     // }
     public function historial()
     {
-        return $this->hasOne(Historial::class, 'id', 'idHistorial');
+        return $this->belongsTo(Historial::class, 'idHistorial', 'id');
     }
 
     public function tipoSeguro()

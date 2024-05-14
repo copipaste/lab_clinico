@@ -5,8 +5,8 @@
     {{-- @vite('resources/css/app.css') --}}
 @stop
 
- 
 
+a
 @section('content')
 
 <div class="card">
@@ -33,17 +33,17 @@
                             </div>
                         </td>
                         <x-adminlte-modal id="modalCustom{{$historial->id }}" title="Mostrar" theme="warning" v-centered static-backdrop scrollable>
-        
+
                             <x-adminlte-textarea name="taDisabled" rows=10 disabled>
                             {{ $historial->notas }}
                             </x-adminlte-textarea>
-                            <x-slot name="footerSlot">                  
+                            <x-slot name="footerSlot">
                                 <x-adminlte-button theme="light" label="Cerrar" data-dismiss="modal" />
                             </x-slot>
                         </x-adminlte-modal>
                 </tr>
             @endforeach
-         
+
         </x-adminlte-datatable>
 
     </div>
@@ -54,7 +54,7 @@
 @section('plugins.Datatables', true)
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/fontawesome-free-6.5.2-web/css/all.min.css')}}">
-    
+
 @stop
 
 @section('js')

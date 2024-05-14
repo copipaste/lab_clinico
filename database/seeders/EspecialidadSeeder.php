@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+
 use App\Models\Especialidad;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
 
 class EspecialidadSeeder extends Seeder
 {
@@ -42,6 +44,7 @@ class EspecialidadSeeder extends Seeder
         Especialidad::create([
             'nombre' => 'Microbiología Clínica',
             'descripcion' => 'Se enfoca en el diagnóstico de infecciones causadas por microorganismos. La prueba de la reacción de Widal es una técnica específica utilizada para diagnosticar la fiebre tifoidea y otras enfermedades bacterianas transmitidas por alimentos y agua.'
+
         ]);
     }
 }

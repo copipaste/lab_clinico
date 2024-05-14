@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('ordenes', function (Blueprint $table) {
             $table->id();
-            $table->string('nroOrden');
-            $table->foreignId('idTipoAnalisis')->constrained('tipo_analisis');
-            $table->foreignId('idSolicitud')->constrained('solicitudes');
+            $table->foreignId('idNotaVenta')->nullable()->constrained('nota_ventas');
+            $table->string('nroOrden')->nullable();
+            $table->foreignId('idPaciente')->nullable()->constrained('pacientes');
             $table->timestamps();
         });
     }

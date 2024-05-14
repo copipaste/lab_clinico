@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('analisis', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
-            $table->foreignId('idOrden')->constrained('ordenes');
-            $table->foreignId('idBioquimico')->constrained('bioquimicos');
+            $table->string('descripcion')->nullable();
+            $table->foreignId('idOrden')->constrained('ordenes')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('estado')->nullable();
+            $table->foreignId('idBioquimico')->nullable()->constrained('bioquimicos');
             $table->timestamps();
         });
     }

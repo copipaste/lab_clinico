@@ -51,6 +51,11 @@ class LoginController extends Controller
      */
     public function redirectTo()
     {
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('inicio sesion');
+    session()->flash('success', 'Se registró exitosamente');
         return $this->redirectToLogout;
     }
 }

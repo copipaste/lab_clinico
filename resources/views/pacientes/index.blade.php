@@ -4,7 +4,7 @@
     <h1 class="m-0 text-dark">Pacientes</h1>
 @stop
 
- 
+
 
 @section('content')
 
@@ -20,10 +20,10 @@
         <x-adminlte-button label="Registrar nuevo paciente" class="bg-white" title="Registrar nuevo paciente"
         data-toggle="modal" data-target="#modalpromocion" />
 
-        <x-adminlte-modal id="modalpromocion" title="Registrar paciente" size="lg" theme="dark" v-centered static-backdrop scrollable>    
+        <x-adminlte-modal id="modalpromocion" title="Registrar paciente" size="lg" theme="dark" v-centered static-backdrop scrollable>
             <form action="{{ route('pacientes.store') }}" method="POST">
                         @method('POST')
-                        @csrf  
+                        @csrf
                                 <x-adminlte-input name="ci" type="text" label="carnet de identidad" />
                                 <x-adminlte-input name="nombre" type="text" label="Nombre del paciente" />
                                 <x-adminlte-input name="fechaNacimiento" type="date" label="fecha nacimiento"/>
@@ -38,15 +38,15 @@
                                     @foreach ($seguros as $seguro)
                                     <option value="{{$seguro->id}}">{{$seguro->descripcion}}</option>
                                     @endforeach
-                                    
+
                                 </x-adminlte-select>
                                 <x-adminlte-input name="email" type="email" label="correo electronico"/>
-                                <x-adminlte-button  class="float-left mt-3" type="submit" label="Aceptar" theme="dark" />   
+                                <x-adminlte-button  class="float-left mt-3" type="submit" label="Aceptar" theme="dark" />
                                 <x-adminlte-button  class="btn btn-primary float-right mt-3" theme="light" label="Cancelar" data-dismiss="modal" />
-                                
-    
+
+
                                 <x-slot name="footerSlot" >
-                                </x-slot>                   
+                                </x-slot>
             </form>
         </x-adminlte-modal>
 </div>
@@ -56,19 +56,15 @@
 
 <div class="card">
     <div class="card-body">
-
         <x-adminlte-datatable id="table1" :heads="$heads" striped head-theme="white" with-buttons>
-
-
             @foreach($pacientes as $paciente)
                 <tr>
-
                         <td>{{ $paciente->ci }}</td>
                         <td>{{ $paciente->nombre }}</td>
                         <td>{{ $paciente->fechaNacimiento }}</td>
                         <td>{{ $paciente->sexo }}</td>
                         <td>{{ $paciente->telefono }}</td>
-                        <td>{{ $paciente->tipoSeguro->descripcion }}</td>
+                        <td>{{ $paciente->tipoSeguro->descripcion ?? 'Sin seguro' }}</td>
                         <td width="15px">
                             <div class="d-flex">
 
@@ -86,11 +82,11 @@
                                 <a href="{{-- route('promocion.show', $promocion) --}}" class="btn btn-xs btn-default text-info mx-1 shadow" title="HISTORIAL CLINICO">
                                     <i class="fa-solid fa-file-medical"></i>
                                 </a>
-                                
+
 
                             </div>
                         </td>
-                       
+
                         <x-adminlte-modal id="modalCustom{{ $paciente->id }}" title="Eliminar" size="sm" theme="warning" icon="fa-solid fa-triangle-exclamation" v-centered static-backdrop scrollable>
                             <div style="height: 50px;">¿Está seguro de eliminar el paciente?</div>
                             <x-slot name="footerSlot">
@@ -102,10 +98,10 @@
                                 <x-adminlte-button theme="light" label="Cancelar" data-dismiss="modal" />
                             </x-slot>
                         </x-adminlte-modal>
-                 
+
                 </tr>
             @endforeach
-         
+
         </x-adminlte-datatable>
 
     </div>
@@ -116,7 +112,7 @@
 @section('plugins.Datatables', true)
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/fontawesome-free-6.5.2-web/css/all.min.css')}}">
-    
+
 @stop
 
 @section('js')
@@ -137,14 +133,14 @@
                 title: '{{ session('success') }}'
             });
             @endif
-             
+
             @if (session('deleted'))
             Toast.fire({
                 icon: 'info',
                 title: '{{ session('deleted') }}'
             });
             @endif
-            
+
             // $('.swalDefaultError').click(function() {
             // Toast.fire({
             //     icon: 'error',
