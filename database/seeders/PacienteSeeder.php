@@ -40,7 +40,6 @@ class PacienteSeeder extends Seeder
             'email' => 'TaniaValdez@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
-       
         $user5 = User::create([
             'name' => 'Dr. Juan Perez',
             'email' => 'JuanPerez@gmail.com',
@@ -55,7 +54,7 @@ class PacienteSeeder extends Seeder
             'fechaRegistro' => '2021-01-01',
             'antecedentesPatologicos' => 'ninguno',
         ]);
-
+        
         $historial2 = Historial::create([
             'nroHistoria' => 'H-2',
             'fechaRegistro' => '2021-02-02',
@@ -155,7 +154,7 @@ class PacienteSeeder extends Seeder
 
 
         Registro::create([
-
+            
             'tipo_analisis' => 'QUIMICA SANGUINEA',
             'fecha' => '2021-01-01',
             'doctor' => 'Dr. Juan Perez',
@@ -168,7 +167,7 @@ class PacienteSeeder extends Seeder
         ]);
 
         Registro::create([
-
+            
             'tipo_analisis' => 'HEMOGRAMA COMPLETO',
             'fecha' => '2021-02-02',
             'doctor' => 'Dr. Juan Perez',
@@ -181,7 +180,7 @@ class PacienteSeeder extends Seeder
         ]);
 
         Registro::create([
-
+            
             'tipo_analisis' => 'QUIMICA SANGUINEA',
             'fecha' => '2021-03-03',
             'doctor' => 'Dr. Juan Perez',
@@ -194,7 +193,7 @@ class PacienteSeeder extends Seeder
         ]);
 
         Registro::create([
-
+            
             'tipo_analisis' => 'HEMOGRAMA COMPLETO',
             'fecha' => '2021-04-04',
             'doctor' => 'Dr. Juan Perez',

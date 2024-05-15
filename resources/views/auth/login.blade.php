@@ -77,13 +77,8 @@
                                 <label for="remember">Recordar</label>
                             </div>
                             <div class="row">
-
                                 <input type="submit" value="Ingresar" class="btn">
-
-                                <a href="{{ route('register') }}" class="btn">Registrar</a>
-
                             </div>
-
                         </form>
                     </div>
 

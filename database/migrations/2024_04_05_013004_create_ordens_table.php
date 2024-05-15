@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('idNotaVenta')->nullable()->constrained('nota_ventas');
             $table->string('nroOrden')->nullable();
-            $table->string('estado')->default('en proceso');
             $table->foreignId('idPaciente')->nullable()->constrained('pacientes');
-
             $table->timestamps();
         });
     }
