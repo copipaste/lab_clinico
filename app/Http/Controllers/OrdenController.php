@@ -67,6 +67,8 @@ class OrdenController extends Controller
      */
     public function store(Request $request)
     {   $user = Auth::user();
+        $paciente = Paciente::where('idUser', $user->id)->first();
+        if(!$paciente){
         $paciente = new Paciente();
         $paciente->ci = $request->ci;
         $paciente->nombre = $request->paciente;
@@ -87,6 +89,16 @@ class OrdenController extends Controller
         // Asigna el número de orden con 'OR' concatenado con el ID
         $orden->nroOrden = 'OR' . $idOrden;
         $orden->save();
+        }else{
+            $orden = new Orden();
+            $orden->idPaciente = $paciente->id;
+            $orden->save();
+            // Después de guardar la orden, obtén el ID asignado
+            $idOrden = $orden->id;
+            // Asigna el número de orden con 'OR' concatenado con el ID
+            $orden->nroOrden = 'OR' . $idOrden;
+            $orden->save();
+        }
 
 
         $tipoAnalisisIds = $request->input('tipoAnalisisIds'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario
