@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Orden;
 use App\Models\TipoAnalisis;
@@ -10,6 +11,8 @@ use App\Models\Analisis;
 use App\Models\Bioquimico;
 use App\Models\Paciente;
 use App\Models\TipoSeguro;
+use App\Models\User;
+
 
 use Illuminate\Http\Request;
 
@@ -26,7 +29,7 @@ class OrdenController extends Controller
             'Tipo Analisis',
             'Fecha',
             'Paciente',
-
+            'Estado',
 
             ['label' => 'Acciones', 'no-export' => true],
         ];
@@ -39,28 +42,31 @@ class OrdenController extends Controller
         $tipoanalisis = TipoAnalisis::all();
         $bioquimico = Bioquimico::all();
         $paciente = Paciente::all();
-
-        return view('orden.index', compact('ordenesConAnalisis', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
+        $user = Auth::user();
+        return view('orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   $user = Auth::user();
+        $seguros = TipoSeguro::all();
+        $paciente = Paciente::where('idUser', $user->id)->first();
+        $seguropaciente = TipoSeguro::find($paciente->idTipoSeguro);
         $orden = Orden::all();
         $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
         $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
-        $seguros = TipoSeguro::all();
-        return view('orden.create', compact('seguros', 'tipoanalisis', 'orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
+
+        return view('orden.create', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   $user = Auth::user();
         $paciente = new Paciente();
         $paciente->ci = $request->ci;
         $paciente->nombre = $request->paciente;
@@ -69,6 +75,7 @@ class OrdenController extends Controller
         $paciente->telefono = $request->celular;
         $paciente->fechaNacimiento = $request->fechanacimiento;
         $paciente->idTipoSeguro = $request->tiposeguro;
+        $paciente->idUser = $user->id;
         $paciente->save();
         $idpaciente = $paciente->id;
 
