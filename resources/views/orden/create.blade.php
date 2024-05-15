@@ -1,7 +1,10 @@
 @extends('adminlte::page')
 
 @section('content_header')
-
+@php
+  use App\Models\Paciente;
+  $Tpaciente=Paciente::All();
+@endphp
 @stop
 @section('content')
 @if (!$paciente)
@@ -9,6 +12,21 @@
     <form action="{{ route('orden.store') }}" method="POST" class="needs-validation" novalidate>
         @csrf
         <label for="validationCustom01">Analisis Clinico | Orden</label>
+        <div class="form-row">
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend">Paciente</span>
+                </div>
+                <select class="custom-select" id="pacientes" name="pacientes">
+                    <option value="nada">Seleccione...</option>
+                    @foreach ($Tpaciente as $pacientes)
+                    <option value="{{$pacientes->id}}">{{$pacientes->nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        </div>
         <div class="form-row">
             <div class="col-md-4">
                 <div class="input-group">
