@@ -214,4 +214,18 @@ session()->flash('success', 'Se registró exitosamente');
 
     return response()->json(['message' => 'Registro de cierre de navegador exitoso'], 200);
 }
+
+public function logWindowClose(Request $request)
+{
+    // Obtener el usuario autenticado
+    $user = Auth::user();
+
+    // Registrar el cierre de ventana en el registro de actividad
+    activity()
+        ->causedBy($user)
+        ->withProperties(['ip' => $request->ip()])
+        ->log('Cerró una ventana del navegador');
+
+    return response()->json(['message' => 'Registro de cierre de ventana exitoso'], 200);
+}
 }

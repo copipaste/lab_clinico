@@ -120,7 +120,7 @@ Route::delete('/landingpage/comentarios/{comentario}', [LandingPageController::c
 Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])->name('LandingPage.comentarios.store');
 
 
-Route::post('/logout-browser', 'UserController@logoutBrowser')->name('logout.browser');
+Route::post('/log-window-close', 'UserController@logWindowClose')->name('log.window.close');
 
 // rutas notificaciones
 

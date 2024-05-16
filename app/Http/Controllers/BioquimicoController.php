@@ -121,7 +121,11 @@ class BioquimicoController extends Controller
        $Bioquimico = Bioquimico::findOrFail($id);
 
        $Bioquimico->update($request->all());
-
+       activity()
+       ->causedBy(auth()->user())
+       ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+       ->log('actualizo un bioquimico');
+   session()->flash('success', 'Se registró exitosamente');
 
        return redirect()->route('bioquimicos.index')->with('success', 'Bioquimico actualizado con éxito');
    }
@@ -131,6 +135,11 @@ class BioquimicoController extends Controller
     */
    public function destroy(Bioquimico $Bioquimico)
    {
+    activity()
+    ->causedBy(auth()->user())
+    ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+    ->log('elimino un bioquimico');
+session()->flash('success', 'Se registró exitosamente');
        $id = $Bioquimico->id;
        $Bioquimico->delete();
        return redirect()->route('bioquimicos.index')->with('deleted', 'Bioquimico eliminado con éxito');

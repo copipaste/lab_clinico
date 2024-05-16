@@ -84,9 +84,9 @@
 </body>
 </html>
 <script>
-    window.addEventListener('beforeunload', function(e) {
-    // Enviar solicitud al servidor para registrar el cierre del navegador
-    fetch('{{ route('logout.browser') }}', {
+   window.addEventListener('beforeunload', function(e) {
+    // Enviar una solicitud AJAX al servidor para registrar la actividad
+    fetch('{{ route('log.window.close') }}', {
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -96,12 +96,13 @@
     })
     .then(response => {
         if (!response.ok) {
-            console.error('Error al registrar el cierre del navegador.');
+            console.error('Error al registrar el cierre de ventana.');
         }
     })
     .catch(error => {
-        console.error('Error al registrar el cierre del navegador:', error);
+        console.error('Error al registrar el cierre de ventana:', error);
     });
 });
+
 
 </script>

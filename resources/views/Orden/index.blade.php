@@ -174,7 +174,9 @@
                                 </button>
                             </div>
                             @endcan
-                            
+                            <a href="{{route('orden.edit', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </a>
                         </td>
 
                         <x-adminlte-modal id="modalCustom{{ $o->id }}" title="Eliminar" size="sm"

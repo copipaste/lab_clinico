@@ -12,7 +12,6 @@ use App\Models\Bioquimico;
 use App\Models\Paciente;
 use App\Models\TipoSeguro;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 
 use Illuminate\Http\Request;
@@ -80,12 +79,10 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
      */
     public function store(Request $request)
     {
-
         if($request->pacientes=="nada"){
         $user = Auth::user();
         $paciente = Paciente::where('idUser', $user->id)->first();
         if(!$paciente){
-
         $paciente = new Paciente();
         $paciente->ci = $request->ci;
         $paciente->nombre = $request->paciente;
@@ -94,15 +91,13 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $paciente->telefono = $request->celular;
         $paciente->fechaNacimiento = $request->fechanacimiento;
         $paciente->idTipoSeguro = $request->tiposeguro;
-
         $usern = new User();
         $usern->name=$request->paciente;
-        $usern->email=$request->correo;
-        $usern->password=$request->ci;
-        $usern->save();
-        $usern->assignRole('Paciente');
+$usern->email=$request->correo;
+$usern->password=$request->ci;
+$usern->save();
+$usern->assignRole('Paciente');
         $paciente->idUser = $usern->id;
-
         $paciente->save();
         $idpaciente = $paciente->id;
 
@@ -218,15 +213,89 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
      */
     public function edit(Orden $orden)
     {
-        //
+        $user = Auth::user();
+        $seguros = TipoSeguro::all();
+
+        $paciente = Paciente::where('idUser', $user->id)->first();
+        if($paciente){
+        $seguropaciente = TipoSeguro::find($paciente->idTipoSeguro);
+        }else{
+            $seguropaciente = TipoSeguro::all();
+
+        }
+        $orden = Orden::where('id', $orden->id)->first();
+        $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
+        $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
+        $tipoanalisis = TipoAnalisis::all();
+
+        return view('orden.edit', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Orden $orden)
+    public function update(Request $request, string $id)
     {
-        //
+        if($request->pacientes=="nada"){
+            $user = Auth::user();
+            $paciente = Paciente::where('idUser', $user->id)->first();
+            if(!$paciente){
+            $paciente = new Paciente();
+            $paciente->ci = $request->ci;
+            $paciente->nombre = $request->paciente;
+            $paciente->sexo = $request->sexo;
+            $paciente->correo = $request->correo;
+            $paciente->telefono = $request->celular;
+            $paciente->fechaNacimiento = $request->fechanacimiento;
+            $paciente->idTipoSeguro = $request->tiposeguro;
+            $usern = new User();
+            $usern->name=$request->paciente;
+    $usern->email=$request->correo;
+    $usern->password=$request->ci;
+    $usern->save();
+    $usern->assignRole('Paciente');
+            $paciente->idUser = $usern->id;
+            $paciente->save();
+            $idpaciente = $paciente->id;
+
+
+            }else{
+
+            }
+        }else{
+
+        }
+
+
+            $tipoAnalisisIds = $request->input('tipoAnalisisIds'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario
+            foreach ($tipoAnalisisIds as $tipoAnalisisId) {
+                // Insertar en la tabla intermedia
+                DB::table('orden_analisis')->insert([
+                    'orden_id' => $id,
+                    'tipo_analisis_id' => $tipoAnalisisId,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                // Obtener el nombre del tipo de análisis utilizando el ID
+                $tipoAnalisis = TipoAnalisis::find($tipoAnalisisId);
+
+                // Crear un nuevo análisis para la orden
+                $analisis = new Analisis();
+                $analisis->estado = 'Pendiente';
+                $analisis->descripcion =  $tipoAnalisis->nombre; // Acceder al nombre del tipo de análisis
+                $analisis->idOrden = $id;
+                $analisis->save();
+            }
+            activity()
+                ->causedBy(auth()->user())
+                ->withProperties(request()->ip())
+                ->log('Se ACTUALIZO un análisis para la orden con el ID: ' . $id);
+
+            session()->flash('success', 'Se registró exitosamente');
+            return redirect()->route('orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
+
     }
 
     /**

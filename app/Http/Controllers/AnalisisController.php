@@ -98,8 +98,12 @@ class AnalisisController extends Controller
         $analisis->save();
 
         $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id); // esta linea de codigo tengo que meter para crear la notificacion al paciente
-        
 
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('agrego un hemograma');
+    session()->flash('success', 'Se registró exitosamente');
 
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
@@ -148,7 +152,11 @@ class AnalisisController extends Controller
         $analisis->save();
 
         $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id);  // esta linea de codigo tengo que meter para crear la notificacion al paciente
-
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('agrego una hormona');
+    session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
     /**
@@ -171,6 +179,11 @@ class AnalisisController extends Controller
      */
     public function destroy(Analisis $analisis)
     {
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('elimino un analisis');
+    session()->flash('success', 'Se registró exitosamente');
         $analisis->delete();
         return redirect()->route('analisis.index')->with('success', 'Eliminado correctamente');
     }
