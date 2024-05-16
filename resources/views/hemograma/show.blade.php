@@ -101,5 +101,66 @@
             <div class=""><strong>de: </strong>33-35 gr/dl</div>
         </div>
     </div>
-
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class=""><strong>VSG:</strong> {{ $hemograma->VSG }} hora</div>
+        </div>
+        <div class="col-md-6">
+            <div class=""><strong></strong>mm</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class=""><strong>Recuento de plaquetas:</strong> {{ $hemograma->recuento }}</div>
+        </div>
+        <div class="col-md-6">
+            <div class=""><strong></strong>140.000 - 350.000 mm3</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="mt-1 text-primary"><strong>Serie Blanca</strong></div>
+        </div>
+        <div class="col-md-6">
+            <div class="mt-2 text-danger"><strong></strong></div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class=""><strong>Globulos Blancos:</strong> {{ $hemograma->globulosBlancos }}</div>
+        </div>
+        <div class="col-md-6">
+            <div class=""><strong></strong>5.000 - 10.000 mm3</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class=""><strong>Segmentados:</strong> {{ $hemograma->segmentados }}</div>
+        </div>
+        <div class="col-md-6">
+            <div class=""><strong></strong>55 - 65 %</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class=""><strong>Linfocitos:</strong> {{ $hemograma->linfocitos }}</div>
+        </div>
+        <div class="col-md-6">
+            <div class=""><strong></strong>25 - 35 %</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class=""><strong>Eosinofilos:</strong> {{ $hemograma->eosinofilos }}</div>
+        </div>
+        <div class="col-md-6">
+            <div class=""><strong></strong>2 - 5 %</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class=""><strong>Grupo Sanguineo:</strong> {{ $hemograma->grupoSanguineo}}</div>
+        </div>
+      
+    </div>
 @endsection
