@@ -102,7 +102,6 @@ Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('
 /* ---------------------------------------------------------------------------------------------------------------------- */
 
 
- 
 
 
 // rutas landing page

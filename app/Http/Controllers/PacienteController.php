@@ -82,6 +82,7 @@ class PacienteController extends Controller
         $paciente->idHistorial = $historial->id;
         $paciente->idUser = $user->id;
         $paciente->save();
+        
         activity()
         ->causedBy(auth()->user())
         ->withProperties(request()->ip()) // Obtener la dirección IP del usuario

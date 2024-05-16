@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Orden;
 use App\Models\TipoAnalisis;
@@ -13,6 +14,7 @@ use App\Models\TipoSeguro;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
+
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -22,40 +24,55 @@ class OrdenController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $paciente = Paciente::where('idUser', $user->id)->first();
         $heads = [
             'Id',
             'Nro Orden',
             'Tipo Analisis',
             'Fecha',
             'Paciente',
-
+            'Estado',
 
             ['label' => 'Acciones', 'no-export' => true],
         ];
-        $orden = Orden::all();
-        $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
-        $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
 
-
+        if($paciente){
+$orden=Orden::where('idPaciente',$paciente->id)->get();
+$ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
+$datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
+        }else{
+            $orden = Orden::all();
+            $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
+            $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
+        }
         // dd($orden); // Verificar los datos antes de pasarlos a la vista
         $tipoanalisis = TipoAnalisis::all();
         $bioquimico = Bioquimico::all();
         $paciente = Paciente::all();
-
-        return view('orden.index', compact('ordenesConAnalisis', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
+        return view('orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   $user = Auth::user();
+        $seguros = TipoSeguro::all();
+
+        $paciente = Paciente::where('idUser', $user->id)->first();
+        if($paciente){
+        $seguropaciente = TipoSeguro::find($paciente->idTipoSeguro);
+        }else{
+            $seguropaciente = TipoSeguro::all();
+
+        }
         $orden = Orden::all();
         $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
         $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
-        $seguros = TipoSeguro::all();
-        return view('orden.create', compact('seguros', 'tipoanalisis', 'orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
+
+        return view('orden.create', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
     }
 
     /**
@@ -64,13 +81,10 @@ class OrdenController extends Controller
     public function store(Request $request)
     {
 
-                //! codigo prueba
-                $user = new User();
-                $user->name = $request->paciente;
-                $user->email = $request->correo;
-                $user->password = Hash::make('password');
-                $user->save();
-                //! codigo prueba
+        if($request->pacientes=="nada"){
+        $user = Auth::user();
+        $paciente = Paciente::where('idUser', $user->id)->first();
+        if(!$paciente){
 
         $paciente = new Paciente();
         $paciente->ci = $request->ci;
@@ -80,7 +94,15 @@ class OrdenController extends Controller
         $paciente->telefono = $request->celular;
         $paciente->fechaNacimiento = $request->fechanacimiento;
         $paciente->idTipoSeguro = $request->tiposeguro;
-        $paciente->idUser = $user->id;   //! codigo prueba
+
+        $usern = new User();
+        $usern->name=$request->paciente;
+        $usern->email=$request->correo;
+        $usern->password=$request->ci;
+        $usern->save();
+        $usern->assignRole('Paciente');
+        $paciente->idUser = $usern->id;
+
         $paciente->save();
         $idpaciente = $paciente->id;
 
@@ -92,6 +114,26 @@ class OrdenController extends Controller
         // Asigna el número de orden con 'OR' concatenado con el ID
         $orden->nroOrden = 'OR' . $idOrden;
         $orden->save();
+        }else{
+            $orden = new Orden();
+            $orden->idPaciente = $paciente->id;
+            $orden->save();
+            // Después de guardar la orden, obtén el ID asignado
+            $idOrden = $orden->id;
+            // Asigna el número de orden con 'OR' concatenado con el ID
+            $orden->nroOrden = 'OR' . $idOrden;
+            $orden->save();
+        }
+    }else{
+        $orden = new Orden();
+        $orden->idPaciente = $request->pacientes;
+        $orden->save();
+        // Después de guardar la orden, obtén el ID asignado
+        $idOrden = $orden->id;
+        // Asigna el número de orden con 'OR' concatenado con el ID
+        $orden->nroOrden = 'OR' . $idOrden;
+        $orden->save();
+    }
 
 
         $tipoAnalisisIds = $request->input('tipoAnalisisIds'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario

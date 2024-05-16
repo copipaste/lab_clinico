@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orden_analisis', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('orden_id')->constrained('ordenes')->onDelete('cascade');
             $table->foreignId('tipo_analisis_id')->constrained('tipo_analisis')->onDelete('cascade');
             $table->timestamps();
+            // Definir clave única compuesta para evitar duplicados
+            $table->unique(['orden_id', 'tipo_analisis_id']);
         });
     }
 
