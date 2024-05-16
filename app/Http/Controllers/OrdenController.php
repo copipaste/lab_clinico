@@ -10,6 +10,8 @@ use App\Models\Analisis;
 use App\Models\Bioquimico;
 use App\Models\Paciente;
 use App\Models\TipoSeguro;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 
@@ -61,6 +63,15 @@ class OrdenController extends Controller
      */
     public function store(Request $request)
     {
+
+                //! codigo prueba
+                $user = new User();
+                $user->name = $request->paciente;
+                $user->email = $request->correo;
+                $user->password = Hash::make('password');
+                $user->save();
+                //! codigo prueba
+
         $paciente = new Paciente();
         $paciente->ci = $request->ci;
         $paciente->nombre = $request->paciente;
@@ -69,6 +80,7 @@ class OrdenController extends Controller
         $paciente->telefono = $request->celular;
         $paciente->fechaNacimiento = $request->fechanacimiento;
         $paciente->idTipoSeguro = $request->tiposeguro;
+        $paciente->idUser = $user->id;   //! codigo prueba
         $paciente->save();
         $idpaciente = $paciente->id;
 
