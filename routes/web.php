@@ -17,6 +17,7 @@ use App\Http\Controllers\HemogramaCompletoController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HormonasController;
+use App\Http\Controllers\StripeController;
 use App\Models\HemogramaCompleto;
 
 
@@ -100,7 +101,7 @@ Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('
 /* ---------------------------------------------------------------------------------------------------------------------- */
 
 
-});
+
 
 
 // rutas landing page
@@ -112,6 +113,12 @@ Route::get('landingpage/contactUs', [LandingPageController::class, 'contactUs'])
 Route::delete('/landingpage/comentarios/{comentario}', [LandingPageController::class, 'destroy'])->name('LandingPage.comentarios.destroy');
 Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])->name('LandingPage.comentarios.store');
 
+/* ------------------------------------- VISTA CHECKOUT ----------------------------------------------------------------- */
+Route::get('/checkout', [StripeController::class, 'checkout'])->name('checkout');
+Route::post('/session', [StripeController::class, 'session'])->name('session');
+Route::get('/success', [StripeController::class, 'success'])->name('success');
 
+Route::get('cancel', [StripeController::class, 'cancel'])->name('cancel');
+/* ---------------------------------------------------------------------------------------------------------------------- */
 
 
