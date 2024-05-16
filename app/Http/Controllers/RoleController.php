@@ -87,7 +87,11 @@ class RoleController extends Controller
 
         // Asignar permisos al rol
         $role->permissions()->sync($request->permisos);
-
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('ACTUALIZO un rol: ' . $role->name);
+    session()->flash('success', 'Se registró exitosamente');
         // Redireccionar al usuario a la vista de detalles del rol actualizado
         return redirect()->route('roles.show', $role)->with('success', 'Rol actualizado exitosamente');
     }

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Bioquimico;
 use App\Models\Hormonas;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Notificacion;
 
 class HormonasController extends Controller
 {
@@ -43,9 +45,23 @@ class HormonasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Hormonas $hormonas)
+    public function show(Hormonas $hormona)
     {
+        $bioquimico= Bioquimico::all();
 
+        //! codigo jhoel
+        $user = User::find(auth()->user()->id);
+        if( $user->hasRole('Paciente') ){
+            $notificacion = Notificacion::where('analisisId', $hormona->idAnalisis)->first();
+            if($user->paciente->id == $notificacion->pacienteId){
+                $notificacion->read = 1;
+                $notificacion->save();
+            }
+        }
+         //! codigo jhoel
+
+
+        return view('hormona.show', compact('hormona','bioquimico'));
     }
     public function show2(string $id)
     {
@@ -63,9 +79,10 @@ class HormonasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Hormonas $hormonas)
+    public function edit(Hormonas $hormona)
     {
-        //
+        $bioquimico= Bioquimico::all();
+        return view('hormona.edit', compact('hormona','bioquimico'));
     }
 
     /**

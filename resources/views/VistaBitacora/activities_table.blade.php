@@ -1,4 +1,24 @@
-<table class="min-w-full bg-white">
+<x-adminlte-datatable id="table1" :heads="$heads" striped head-theme="white" with-buttons>
+
+  
+    @foreach ($activities as $a)
+        <tr>
+            <td>{{ $a->id }}</td>
+            <td>{{ $a->properties }}</td>
+
+            <td> @if($a->causer)
+                {{ $a->causer->name }}
+            @else
+                Usuario no disponible
+            @endif</td>
+            <td>{{ $a->description }}</td>
+            <td>{{ $a->created_at }}</td>
+
+
+    @endforeach
+
+</x-adminlte-datatable>
+{{-- <table class="min-w-full bg-white">
     <thead>
         <tr>
             <th class="py-2 px-4 border-b">Id</th>
@@ -26,4 +46,4 @@
             </tr>
         @endforeach
     </tbody>
-</table>
+</table> --}}

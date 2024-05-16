@@ -9,8 +9,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
   <!-- <link rel="stylesheet" href="build/tailwind.css">  -->
 
-  {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
-  @vite('resources/css/app.css')
+  <script src="https://cdn.tailwindcss.com"></script>
+  {{-- @vite('resources/css/app.css') --}}
  
 
   <title>Clinica</title>
@@ -203,12 +203,13 @@
                     @csrf
                     <button type="submit" class="py-2 inline-block md:text-white md:px-2 font-semibold">Cerrar Sesión</button>
                 </form>
-            </li>
+              </li>
+              <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href="{{route('home')}}">Dashboard</a></li>
               @else
               <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href={{route('login')}}>Iniciar Sesion
                   </a></li>
               @endif
-              <li class="md:ml-6 mt-3 md:mt-0"> <a class="inline-block font-semibold px-4 py-2 text-white bg-blue-600 md:bg-transparent md:text-white border border-white rounded" href={{route('LandingPage.solicitud')}}>Registrar Analisis</a></li>
+              <li class="md:ml-6 mt-3 md:mt-0"> <a class="inline-block font-semibold px-4 py-2 text-white bg-blue-600 md:bg-transparent md:text-white border border-white rounded" href={{route('login')}}>Registrar Analisis</a></li>
 
             </ul>
           </nav>
@@ -345,11 +346,12 @@
         <h2 class="text-3xl leading-tight font-bold">Comentarios</h2>
         <p class="text-gray-600 mt-2 md:max-w-lg">Comentarios realizados por clientes de la clinica.</p>
 
-        <a href="#" title="" class="inline-block text-teal-500 font-semibold mt-6 mt:md-0">Ver todos los comentarios</a>
+        <a href="{{route('LandingPage.comentarios')}}" title="" class="inline-block text-teal-500 font-semibold mt-6 mt:md-0">Ver todos los comentarios</a>
       </div>
 
       <div class="md:flex mt-12 md:-mx-4">
-        <div class="md:px-4 md:w-1/2 xl:w-1/4">
+        
+        {{-- <div class="md:px-4 md:w-1/2 xl:w-1/4">
           <div class="bg-white rounded border border-gray-300">
             <div class="w-full h-48 overflow-hidden bg-gray-300"></div>
             <div class="p-4">
@@ -368,29 +370,33 @@
               </div>
             </div>
           </div>
-        </div>
-
+        </div> --}}
+      @foreach ($Comentarios as $comentario)
         <div class="md:px-4 md:w-1/2 xl:w-1/4 mt-4 md:mt-0">
           <div class="bg-white rounded border border-gray-300 ">
-            <div class="w-full h-48 overflow-hidden bg-gray-300"></div>
+             
             <div class="p-4">
               <div class="flex items-center text-sm">
-                <span class="text-teal-500 font-semibold">Business</span>
-                <span class="ml-4 text-gray-600">29 Nov, 2019</span>
+                <span class="text-teal-500 font-semibold">fecha</span>
+                <span class="ml-4 text-gray-600">{{ $comentario->created_at->format('Y-m-d') }}</span>
+
               </div>
-              <p class="text-lg font-semibold leading-tight mt-4">Card Title</p>
-              <p class="text-gray-600 mt-1">This card has supporting text below as a natural lead-in to additional
-                content.
-              </p>
+              <p class="text-lg font-semibold leading-tight mt-4">Cliente</p>
+              <p class="text-gray-600 mt-1">{{Str::limit($comentario->body, 100)}} </p>
               <div class="flex items-center mt-4">
-                <div class="w-8 h-8 rounded-full overflow-hidden bg-gray-300"></div>
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                  <img src="images/user2.png" alt="" class="w-full h-full object-cover">
+                </div>
                 <div class="ml-4">
-                  <p class="text-gray-600">By <span class="text-gray-900 font-semibold">Abby Sims</span></p>
+                  <p class="text-gray-600">Por <span class="text-gray-900 font-semibold">{{$comentario->user->name}}</span></p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      @endforeach
+
+
       </div>
     </section>
     <!-- end blog -->

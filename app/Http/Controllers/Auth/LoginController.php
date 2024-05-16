@@ -58,4 +58,6 @@ class LoginController extends Controller
     session()->flash('success', 'Se registró exitosamente');
         return $this->redirectToLogout;
     }
+
+
 }

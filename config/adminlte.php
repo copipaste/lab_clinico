@@ -298,9 +298,9 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
+            'type' => 'sidebar-menu-search',
+            'text' => 'search',             // Placeholder for the underlying input.
+            'id' => 'sidebarMenuSearch'     // ID attribute for the underlying input (optional).
         ],
         // [
         //     'text' => 'Ingresar',
@@ -321,6 +321,13 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         */
+
+        //------- REGISTRAR ANÁLISIS ------------
+        [
+            'text' => 'Registrar Análisis',
+            'route' => 'checkout',
+            'icon' => 'fas fa-file-medical',
+        ],
 
         // PAQUETE USUARIOS
         [
@@ -350,7 +357,7 @@ return [
                     'text' => 'Bitacora',
                     'route' => 'bitacora.index',
                     'icon' => 'fas fa-fw fa-lock',
-                     'can' => 'bitacora.index',
+                    'can' => 'bitacora.index',
                 ],
 
             ],
@@ -396,6 +403,7 @@ return [
                     'url' => '/orden',
                     'icon' => 'fas fa-fw fa-flask',
                     'can' => 'orden.index'
+
 
                 ],
                 [
@@ -454,6 +462,29 @@ return [
             // 'can' => 'historiales.index',
         ],
 
+
+        
+        [
+            'type' => 'navbar-notification',
+            'id' => 'my-notification',                // An ID attribute (required).
+            'icon' => 'fas fa-bell',                  // A font awesome icon (required).
+            'icon_color' => 'warning',                // The initial icon color (optional).
+            'label' => 0,                             // The initial label for the badge (optional).
+            'label_color' => 'danger',                // The initial badge color (optional).
+            'url' => 'notifications/show',            // The url to access all notifications/elements (required).
+            'topnav_right' => true,                   // Or "topnav => true" to place on the left (required).
+            'dropdown_mode' => true,                  // Enables the dropdown mode (optional).
+            'dropdown_flabel' => 'All notifications', // The label for the dropdown footer link (optional).
+            'update_cfg' => [
+                'url' => 'notifications/get',         // The url to periodically fetch new data (optional).
+                'period' => 5,                       // The update period for get new data (in seconds, optional).
+            ],
+        ],
+        [
+            'type' => 'darkmode-widget',
+            'topnav_right' => true,     // Or "topnav => true" to place on the left.
+        ]
+        
 
 
 
@@ -535,12 +566,12 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js',
                 ],
             ],
         ],

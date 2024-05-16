@@ -35,9 +35,12 @@ return new class extends Migration
             $table->integer('blastos')->nullable();
             $table->string('grupoSanguineo')->nullable();
             $table->string('factorRh')->nullable();
-            $table->decimal('precio', 10, 2)->nullable();
+            $table->string('VDRL')->nullable();
+            $table->string('baciloscopia')->nullable();
+            $table->string('coproparasitologico')->nullable();
             $table->string('estado')->default('pendiente');
-            $table->string('descripcion')->nullable();
+            $table->string('metodo')->nullable();
+            $table->string('resultado')->nullable();
             $table->unsignedBigInteger('idAnalisis');
             $table->foreign('idAnalisis')->references('id')->on('analisis')->onDelete('cascade');
             $table->timestamps();
