@@ -26,14 +26,16 @@
                 <div class="flex items-center space-x-2 mb-4">
                     <div class="w-1/2">
                         <label for="start_date" class="text-gray-600 font-semibold text-sm">Fecha de inicio:</label>
-                        <input type="date" id="start_date" name="start_date"
+                        <input type="date" id="start_date" name="start_date" value="{{ $start_date }}"
                             class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
                     </div>
                     <div class="w-1/2">
                         <label for="end_date" class="text-gray-600 font-semibold text-sm">Fecha de fin:</label>
-                        <input type="date" id="end_date" name="end_date"
+                        <input type="date" id="end_date" name="end_date" value="{{ $end_date }}"
                             class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
                     </div>
+
+
 
                 </div>
                 <div class="modal-footer">
