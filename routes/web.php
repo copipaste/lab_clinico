@@ -110,7 +110,7 @@ Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('
 
 
 
-// rutas landing page
+/* ------------------------------------- VISTA LANDINGPAGE ---------------------------------------------------------- */
 Route::get('/landingpage',[LandingPageController::class, 'index'])->name('LandingPage.index');
 Route::get('/landingpage/solicitud',[LandingPageController::class, 'solicitud'])->name('LandingPage.solicitud');
 Route::get('/landingpage/comentarios',[LandingPageController::class, 'comentarios'])->name('LandingPage.comentarios');
@@ -122,6 +122,6 @@ Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])
 
 Route::post('/logout-browser', 'UserController@logoutBrowser')->name('logout.browser');
 
-// rutas notificaciones
-
+ 
+/* ------------------------------------- VISTA NOTIFICACIONES ---------------------------------------------------------- */
 Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
