@@ -86,10 +86,13 @@ class AnalisisController extends Controller
         $hemograma->monocitos = $request->input('monocitos');
         $hemograma->eosinofilos = $request->input('eosinofilos');
         $hemograma->basofilos = $request->input('basofilos');
-        $hemograma->blastos = $request->input('blastos');
         $hemograma->grupoSanguineo = $request->input('gruposanguineo');
         $hemograma->factorRh = $request->input('factorrh');
-        $hemograma->descripcion = $request->input('descripcion');
+        $hemograma->VDRL = $request->input('VDRL');
+        $hemograma->baciloscopia = $request->input('baciloscopia');
+        $hemograma->coproparasitologico = $request->input('coproparasitologico');
+        $hemograma->metodo = $request->input('metodo');
+        $hemograma->resultado = $request->input('resultado');
         $hemograma->idAnalisis = $request->input('idAnalisis');
         $hemograma->save();
         $analisis = Analisis::find($request->input('idAnalisis'));
@@ -98,7 +101,7 @@ class AnalisisController extends Controller
         $analisis->save();
 
         $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id); // esta linea de codigo tengo que meter para crear la notificacion al paciente
-        
+
 
 
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');

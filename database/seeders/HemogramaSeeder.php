@@ -36,7 +36,6 @@ class HemogramaSeeder extends Seeder
         $hemograma->monocitos = 8;
         $hemograma->eosinofilos = 2;
         $hemograma->basofilos = 0;
-        $hemograma->blastos = 0;
         $hemograma->grupoSanguineo = 'A';
         $hemograma->factorRh = '+';
         $hemograma->VDRL = 'NO REACTOR';

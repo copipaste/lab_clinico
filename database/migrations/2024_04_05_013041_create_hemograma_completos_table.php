@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('CHCM')->nullable();
             $table->integer('VSG')->nullable();
             $table->integer('plaquetas')->nullable();
+            $table->integer('recuento')->nullable();
             $table->integer('globulosBlancos')->nullable();
             $table->integer('promielocitos')->nullable();
             $table->integer('mielocitos')->nullable();

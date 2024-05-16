@@ -94,8 +94,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/hormona', HormonasController::class)->names('hormona');
     Route::get('hemogramaCompleto/{id}',[HemogramaCompletoController::class, 'show2'])->name('hemograma.show2');
     Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
-
-
 });
 
 
