@@ -395,7 +395,8 @@ return [
                     'text' => 'Orden',
                     'url' => '/orden',
                     'icon' => 'fas fa-fw fa-flask',
-                    'can' => 'ordenes.index',
+                    'can' => 'orden.index'
+
                 ],
                 [
                     'text' => 'Analisis',
