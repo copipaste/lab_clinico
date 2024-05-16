@@ -61,9 +61,10 @@ class HemogramaCompletoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(HemogramaCompleto $HemogramaCompleto )
+    public function show(HemogramaCompleto $hemograma)
     {
-
+        $bioquimico= Bioquimico::all();
+        return view('hemograma.show', compact('hemograma','bioquimico'));
     }
     public function show2(string $id)
     {

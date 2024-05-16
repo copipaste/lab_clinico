@@ -32,9 +32,9 @@
                                 <a href="{{route('hemograma.edit', $h->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </a>
-                                {{-- <a href="{{route('hemograma.edit', $h->id) }}" class="btn btn-xs btn-default text-black mx-1 shadow" title="Imprimir">
-                                    <i class="fas fa-lg fa-fw fa-print"></i>
-                                </a> --}}
+                                <a href="{{route('hemograma.show', $h->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                    <i class="fa fa-lg fa-fw fas fa-eye"></i>
+                                </a>
                                 <a href="{{route('hemograma.edit', $h->id) }}" class="btn btn-xs btn-default text-danger mx-1 shadow" title="PDF">
                                     <i class="fas fa-lg fa-fw fa-file-pdf"></i>
                                 </a>
