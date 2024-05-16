@@ -21,29 +21,29 @@ class PacienteSeeder extends Seeder
     {
 
         $user1 = User::create([
-            'name' => 'Jhoel Debray',
-            'email' => 'JhoelDebray@gmail.com',
+            'name' => 'Jhoel Debray 1',
+            'email' => 'paciente1@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
         $user2 = User::create([
-            'name' => 'Manuel medrano',
-            'email' => 'ManuelMedrano@gmail.com',
+            'name' => 'Manuel medrano 2',
+            'email' => 'paciente2@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
         $user3 = User::create([
-            'name' => 'Carla Zapata',
-            'email' => 'CarlaZapata@gmail.com',
+            'name' => 'Carla Zapata 3',
+            'email' => 'paciente3@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
         $user4 = User::create([
-            'name' => 'Tania Valdez',
-            'email' => 'TaniaValdez@gmail.com',
+            'name' => 'Tania Valdez 4',
+            'email' => 'paciente4@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
        
         $user5 = User::create([
-            'name' => 'Dr. Juan Perez',
-            'email' => 'JuanPerez@gmail.com',
+            'name' => 'Dr. Juan Perez 1',
+            'email' => 'bioquimico1@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Bioquimico');
 
@@ -94,7 +94,7 @@ class PacienteSeeder extends Seeder
 
         Paciente::create([
             'ci' => '123456',
-            'nombre' => 'Carlos Perez',
+            'nombre' => 'Jhoel Debray 1',
             'fechaNacimiento' => '1990-01-01',
             'sexo' => 'MASCULINO',
             'telefono' => '70016993',
@@ -105,7 +105,7 @@ class PacienteSeeder extends Seeder
 
         Paciente::create([
             'ci' => '654321',
-            'nombre' => 'Manuel medrano',
+            'nombre' => 'Manuel medrano 2',
             'fechaNacimiento' => '1990-01-02',
             'sexo' => 'MASCULINO',
             'telefono' => '60960799',
@@ -117,7 +117,7 @@ class PacienteSeeder extends Seeder
 
         Paciente::create([
             'ci' => '123426',
-            'nombre' => 'Carla Zapata',
+            'nombre' => 'Carla Zapata 3',
             'fechaNacimiento' => '1990-01-01',
             'sexo' => 'FEMENINO',
             'telefono' => '70016993',
@@ -128,7 +128,7 @@ class PacienteSeeder extends Seeder
 
         Paciente::create([
             'ci' => '654321',
-            'nombre' => 'Tania Valdez',
+            'nombre' => 'Tania Valdez 4',
             'fechaNacimiento' => '1990-01-02',
             'sexo' => 'FEMENINO',
             'telefono' => '60960799',
@@ -146,7 +146,7 @@ class PacienteSeeder extends Seeder
         $bioquimico = Bioquimico::create([
             'ci' => '123456',
             'direccion' => 'av. 6 de agosto',
-            'nombre' => 'Juan Perez',
+            'nombre' => 'Juan Perez 1',
             'fechaNacimiento' => '1990-01-01',
             'sexo' => 'MASCULINO',
             'telefono' => '70016993',

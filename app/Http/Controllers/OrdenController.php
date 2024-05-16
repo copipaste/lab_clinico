@@ -98,7 +98,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $usern = new User();
         $usern->name=$request->paciente;
         $usern->email=$request->correo;
-        $usern->password=$request->ci;
+        $usern->password=Hash::make('password');
         $usern->save();
         $usern->assignRole('Paciente');
         $paciente->idUser = $usern->id;

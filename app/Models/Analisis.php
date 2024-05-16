@@ -26,4 +26,15 @@ class Analisis extends Model
         return $this->belongsTo(Paciente::class, 'idPaciente');
     }
 
+    public function hemogramaCompleto()
+    {
+        return $this->hasOne(HemogramaCompleto::class, 'idAnalisis');
+    }
+
+    public function Hormonas()
+    {
+        return $this->hasOne(Hormonas::class, 'idAnalisis');
+    }
+
+
 }
