@@ -90,8 +90,9 @@ class HemogramaCompletoController extends Controller
             'Fecha',
             ['label' => 'Acciones', 'no-export' => true],
         ];
-        $hemograma = HemogramaCompleto::all();
-        return view('hemograma.index', compact('hemograma', 'heads','id'));
+        $hemograma = HemogramaCompleto::where('idAnalisis', $id)->get();
+
+        return view('hemograma.index', compact('hemograma', 'heads', 'id'));
     }
     /**
      * Show the form for editing the specified resource.
