@@ -16,13 +16,13 @@
     {{-- Dropdown Menu --}}
     @if($enableDropdownMode)
 
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right">  {{--! un cambio  dropdown-menu-lg --}}
 
             {{-- Custom dropdown content provided by external source --}}
             <div class="adminlte-dropdown-content"></div>
 
             {{-- Dropdown divider --}}
-            <div class="dropdown-divider"></div>
+            <div class="dropdown-divider mt-2"></div> {{--! un cambio  mt-2 --}}
 
             {{-- Dropdown footer with link --}}
             <a href="{{ $attributes->get('href') }}" class="dropdown-item dropdown-footer">

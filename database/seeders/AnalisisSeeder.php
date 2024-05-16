@@ -34,7 +34,7 @@ class AnalisisSeeder extends Seeder
         $paciente->sexo = 'Masculino';
         $paciente->correo = 'paciente@gmail.com';
         $paciente->telefono = '123456789';
-        $paciente->fechaNacimiento = '1990-01-01';
+        $paciente->fechaNacimiento = '2006-01-01';
         $paciente->idTipoSeguro = 1; // Asigna el ID del tipo de seguro correspondiente
         $paciente->idUser = $user6->id;
         $paciente->save();

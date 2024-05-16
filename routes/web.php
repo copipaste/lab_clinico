@@ -18,6 +18,8 @@ use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HormonasController;
 use App\Models\HemogramaCompleto;
+use App\Http\Controllers\NotificationsController;
+
 
 
 /*
@@ -88,10 +90,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
     //hormona
-    Route::get('hormona/{id}',[HormonasController::class, 'show2'])->name('hormona.show2');
+    Route::get('hormonaCompleto/{id}',[HormonasController::class, 'show2'])->name('hormona.show2');
     Route::resource('/hormona', HormonasController::class)->names('hormona');
-    Route::get('hemograma/{id}',[HemogramaCompletoController::class, 'show2'])->name('hemograma.show2');
+    Route::get('hemogramaCompleto/{id}',[HemogramaCompletoController::class, 'show2'])->name('hemograma.show2');
     Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
+
+
 });
 
 
@@ -102,7 +106,6 @@ Route::resource('/VistaEspecialidades', EspecialidadController::class)->names('e
 /* ------------------------------------- VISTA ESPECIALIDADES ---------------------------------------------------------- */
 Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('recepcionistas');
 /* ---------------------------------------------------------------------------------------------------------------------- */
-
 
 
 
@@ -119,4 +122,6 @@ Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])
 
 Route::post('/logout-browser', 'UserController@logoutBrowser')->name('logout.browser');
 
+// rutas notificaciones
 
+Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');

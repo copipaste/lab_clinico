@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EspecialidadSeeder::class);
         $this->call(AnalisisSeeder::class);
         $this->call(HemogramaSeeder::class);
-        $this->call(OrdenSeeder::class);
+        //$this->call(OrdenSeeder::class);
 
 
 

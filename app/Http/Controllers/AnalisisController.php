@@ -6,6 +6,7 @@ use App\Models\Analisis;
 use App\Models\HemogramaCompleto;
 use App\Models\Bioquimico;
 use App\Models\Hormonas;
+use App\Models\Notificacion;
 use App\Models\TipoAnalisis;
 use Illuminate\Http\Request;
 
@@ -93,10 +94,27 @@ class AnalisisController extends Controller
         $hemograma->save();
         $analisis = Analisis::find($request->input('idAnalisis'));
         $analisis->idBioquimico = $request->input('idbioquimico');
-        $analisis->estado = 'Realizado';
+        $analisis->estado = 'Realizado';                             // -->>>> cambia el estado cuando el bioquimico realiza el analisis
         $analisis->save();
+
+        $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id); // esta linea de codigo tengo que meter para crear la notificacion al paciente
+        
+
+
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
+
+
+
+    public function crearNotificacion($pacienteId, $analisisId)
+    {
+        $notificacion = new Notificacion();
+        $notificacion->pacienteId = $pacienteId;
+        $notificacion->read = false;
+        $notificacion->analisisId = $analisisId;
+        $notificacion->save();
+    }
+
 
 
     public function hormona($id)
@@ -107,6 +125,9 @@ class AnalisisController extends Controller
         // $nombrePaciente = $analisis->orden->paciente->nomwbre; // Asumiendo que tienes la relación definida
         // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
         $bioquimico = Bioquimico::all();
+
+        $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id);  // esta linea de codigo tengo que meter para crear la notificacion al paciente
+
         return view('analisis.hormona', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
     }
 
@@ -125,6 +146,8 @@ class AnalisisController extends Controller
         $analisis->estado = 'Realizado';
         $analisis->idBioquimico = $request->input('idbioquimico');
         $analisis->save();
+
+        $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id);  // esta linea de codigo tengo que meter para crear la notificacion al paciente
 
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }

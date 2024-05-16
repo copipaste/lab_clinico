@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Paciente extends Model
 {
@@ -42,5 +43,10 @@ class Paciente extends Model
     public function tipoSeguro()
     {
         return $this->belongsTo(TipoSeguro::class, 'idTipoSeguro', 'id');
+    }
+
+    public function notificaciones()
+    {
+        return $this->hasMany(Notificacion::class, 'pacienteId');
     }
 }

@@ -201,7 +201,10 @@
                 @csrf
                 <button type="submit" class="py-2 inline-block md:text-white md:px-2 font-semibold">Cerrar Sesión</button>
             </form>
-        </li>
+          </li>
+
+          <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href="{{route('home')}}">Dashboard</a></li>
+
           @else
           <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href={{route('login')}}>Iniciar Sesion
               </a></li>
