@@ -89,7 +89,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
         $bioquimico = Bioquimico::all();
         $paciente = Paciente::all();
-        return view('orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
+        return view('Orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
 
 
     }
@@ -112,7 +112,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
 
-        return view('orden.create', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
+        return view('Orden.create', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
     }
 
     /**
@@ -198,7 +198,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
             ->log('Se registró un análisis para la orden con el ID: ' . $idOrden);
 
         session()->flash('success', 'Se registró exitosamente');
-        return redirect()->route('orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
+        return redirect()->route('Orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
     }
 
 
@@ -269,7 +269,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
 
-        return view('orden.edit', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
+        return view('Orden.edit', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
 
     }
 
@@ -335,7 +335,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
                 ->log('Se ACTUALIZO un análisis para la orden con el ID: ' . $id);
 
             session()->flash('success', 'Se registró exitosamente');
-            return redirect()->route('orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
+            return redirect()->route('Orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
 
     }
 
@@ -349,6 +349,6 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         ->withProperties(request()->ip())
         ->log('Se elimino un análisis para la orden con el ID: ' . $orden->id);
         $orden->delete();
-        return redirect()->route('orden.index')->with('success', 'Eliminado correctamente');
+        return redirect()->route('Orden.index')->with('success', 'Eliminado correctamente');
     }
 }
