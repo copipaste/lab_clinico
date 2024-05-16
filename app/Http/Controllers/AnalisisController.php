@@ -62,6 +62,8 @@ class AnalisisController extends Controller
         $idOrden = $analisis->orden->nroOrden;
         $nombrepaciente = $analisis->orden->paciente->nombre;
         $bioquimico = Bioquimico::all();
+
+
         return view('analisis.hemograma', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
     }
     public function hemogramastore(Request $request)
@@ -130,7 +132,6 @@ class AnalisisController extends Controller
         // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
         $bioquimico = Bioquimico::all();
 
-        $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id);  // esta linea de codigo tengo que meter para crear la notificacion al paciente
 
         return view('analisis.hormona', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
     }

@@ -52,6 +52,47 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         return view('orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
     }
 
+    public function index1(Request $request)
+    {
+        $user = Auth::user();
+        $paciente = Paciente::where('idUser', $user->id)->first();
+        $heads = [
+            'Id',
+            'Nro Orden',
+            'Tipo Analisis',
+            'Fecha',
+            'Paciente',
+            'Estado',
+
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        if ($start_date && $end_date) {
+            // Se proporcionó un rango de fechas, aplicar el filtro
+            $orden = Orden::whereDate('created_at', '>=', $start_date)
+                ->whereDate('created_at', '<=', $end_date)
+                ->get();
+        }
+
+
+        if($paciente){
+$ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
+$datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
+        }else{
+          
+            $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
+            $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
+        }
+        // dd($orden); // Verificar los datos antes de pasarlos a la vista
+        $tipoanalisis = TipoAnalisis::all();
+        $bioquimico = Bioquimico::all();
+        $paciente = Paciente::all();
+        return view('orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
+
+
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -93,10 +134,10 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $paciente->idTipoSeguro = $request->tiposeguro;
         $usern = new User();
         $usern->name=$request->paciente;
-$usern->email=$request->correo;
-$usern->password=$request->ci;
-$usern->save();
-$usern->assignRole('Paciente');
+        $usern->email=$request->correo;
+        $usern->password=bcrypt($request->ci);
+        $usern->save();
+        $usern->assignRole('Paciente');
         $paciente->idUser = $usern->id;
         $paciente->save();
         $idpaciente = $paciente->id;
@@ -252,8 +293,8 @@ $usern->assignRole('Paciente');
             $usern = new User();
             $usern->name=$request->paciente;
     $usern->email=$request->correo;
-    $usern->password=$request->ci;
-    $usern->save();
+    $usern->password=bcrypt($request->ci);
+        $usern->save();
     $usern->assignRole('Paciente');
             $paciente->idUser = $usern->id;
             $paciente->save();
