@@ -234,6 +234,10 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
      */
     public function destroy(Orden $orden)
     {
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip())
+        ->log('Se elimino un análisis para la orden con el ID: ' . $orden->id);
         $orden->delete();
         return redirect()->route('orden.index')->with('success', 'Eliminado correctamente');
     }

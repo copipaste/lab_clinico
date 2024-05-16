@@ -58,7 +58,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                    
+
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 
@@ -83,3 +83,25 @@
     </div>
 </body>
 </html>
+<script>
+    window.addEventListener('beforeunload', function(e) {
+    // Enviar solicitud al servidor para registrar el cierre del navegador
+    fetch('{{ route('logout.browser') }}', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Error al registrar el cierre del navegador.');
+        }
+    })
+    .catch(error => {
+        console.error('Error al registrar el cierre del navegador:', error);
+    });
+});
+
+</script>

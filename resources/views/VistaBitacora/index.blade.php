@@ -19,23 +19,29 @@
                 <h1 class="text-lg font-semibold mb-2">Revise</h1>
             </div>
 
-            <div class="flex items-center space-x-2 mb-4">
-                <div class="w-1/2">
-                    <label for="start_date" class="text-gray-600 font-semibold text-sm">Fecha de inicio:</label>
-                    <input type="date" id="start_date" name="start_date"
-                        class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
-                </div>
-                <div class="w-1/2">
-                    <label for="end_date" class="text-gray-600 font-semibold text-sm">Fecha de fin:</label>
-                    <input type="date" id="end_date" name="end_date"
-                        class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
-                </div>
 
-                {{-- <button onclick="imprimirBitacora()"
-                    class="bg-blue-500 shadow-lg shadow-blue-500/50 hover:bg-cyan-700 text-white font-semibold px-3 py-2 rounded-lg">
-                    Imprimir
-                </button> --}}
-            </div>
+
+            <form action="{{ route('bitacora1.index') }}" method="POST">
+                @csrf
+                <div class="flex items-center space-x-2 mb-4">
+                    <div class="w-1/2">
+                        <label for="start_date" class="text-gray-600 font-semibold text-sm">Fecha de inicio:</label>
+                        <input type="date" id="start_date" name="start_date"
+                            class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+                    </div>
+                    <div class="w-1/2">
+                        <label for="end_date" class="text-gray-600 font-semibold text-sm">Fecha de fin:</label>
+                        <input type="date" id="end_date" name="end_date"
+                            class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> --}}
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </form>
+
 
             <!-- Tabla con estilos mejorados -->
             <div id="activities_table" class="activities-table">
@@ -65,6 +71,8 @@
                 }
             });
         }
+
+
     </script>
 
 
