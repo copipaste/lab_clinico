@@ -19,8 +19,7 @@ use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HormonasController;
 use App\Models\HemogramaCompleto;
 use App\Http\Controllers\NotificationsController;
-
-
+use App\Models\Orden;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +87,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     //orden
     Route::resource('/orden', OrdenController::class)->names('orden');
     Route::post('/orden', [OrdenController::class, 'index1'])->name('orden1.index');
+    Route::post('/ordenes', [OrdenController::class, 'store'])->name('orden.store');
+
 
     // Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
     //hormona

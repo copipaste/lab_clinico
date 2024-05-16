@@ -49,7 +49,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
         $bioquimico = Bioquimico::all();
         $paciente = Paciente::all();
-        return view('Orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
+        return view('orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
     }
 
     public function index1(Request $request)
@@ -81,7 +81,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
 $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
 $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         }else{
-          
+
             $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
             $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         }
@@ -112,7 +112,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
 
-        return view('Orden.create', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
+        return view('orden.create', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
     }
 
     /**
@@ -198,7 +198,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
             ->log('Se registró un análisis para la orden con el ID: ' . $idOrden);
 
         session()->flash('success', 'Se registró exitosamente');
-        return redirect()->route('Orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
+        return redirect()->route('orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
     }
 
 
