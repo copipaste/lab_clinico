@@ -18,6 +18,8 @@ use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HormonasController;
 use App\Models\HemogramaCompleto;
+use App\Http\Controllers\NotificationsController;
+
 
 
 /*
@@ -102,7 +104,6 @@ Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('
 
 
 
-
 // rutas landing page
 Route::get('/landingpage',[LandingPageController::class, 'index'])->name('LandingPage.index');
 Route::get('/landingpage/solicitud',[LandingPageController::class, 'solicitud'])->name('LandingPage.solicitud');
@@ -114,4 +115,6 @@ Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])
 
 
 
+// rutas notificaciones
 
+Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');

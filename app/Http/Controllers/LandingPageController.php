@@ -10,7 +10,9 @@ class LandingPageController extends Controller
     
     public function index()
     {
-        return view('landingpage.index');
+        $Comentarios = Comentario::latest()->take(4)->get();
+        return view('landingpage.index', compact('Comentarios'));
+
     }
 
     public function solicitud()
