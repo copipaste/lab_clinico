@@ -7,17 +7,12 @@
 @stop
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
     <div class = "card">
         <div class = "card-body">
             <div class="modal-body">
                 <form id="paymentForm" action="{{ route('session') }}" method="POST">
                     @csrf
-                    <div class="box">
+                    <div class="box" style="height: 250px;">
                         <div class="box-header with-border">
                             <h3 class="box-title">Seleccione los Tipos de Análisis</h3>
                         </div>
@@ -43,7 +38,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Cantidad</th>
+                                        <th>ID</th>
                                         <th>Tipo de Análisis</th>
                                         <th>Precio</th>
                                         <th>Acciones</th>
@@ -79,6 +74,22 @@
 
 @section('js')
     <script>
+        // Definir la función updateTotal
+        function updateTotal() {
+            // Obtener todas las filas de la tabla
+            const rows = document.querySelectorAll('#analysisTableBody tr');
+            let total = 0;
+
+            // Calcular el total sumando los precios de cada fila
+            rows.forEach(row => {
+                const price = parseFloat(row.querySelector('td:nth-child(3)').textContent.replace('$', ''));
+                total += price;
+            });
+
+            // Mostrar el total en el input con id "total"
+            document.getElementById('total').value = '$' + total.toFixed(2);
+        }
+
         document.getElementById('addButton').addEventListener('click', function() {
             const select = document.getElementById('tipos_analisis');
             const tableBody = document.getElementById('analysisTableBody');
@@ -129,8 +140,47 @@
 
                 // Remove the selected option from the select list
                 option.remove();
-                updateTotal();
+                updateTotal(); // Llamar a updateTotal después de agregar un nuevo elemento
             });
+        });
+
+        // La eliminación de un elemento debe estar dentro de la función del botón de eliminar
+        deleteButton.addEventListener('click', function() {
+            row.remove();
+            // Add the option back to the select list
+            const newOption = document.createElement('option');
+            newOption.value = option.value;
+            newOption.textContent = option.textContent;
+            newOption.dataset.name = option.dataset.name;
+            newOption.dataset.price = option.dataset.price;
+            select.appendChild(newOption);
+            updateTotal(); // Llamar a updateTotal después de eliminar un elemento
+        });
+    </script>
+
+    {{-- PARA LAS NOTIFICACIONES --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(function() {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            @if (session('success'))
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ session('success') }}'
+                });
+            @endif
+
+            @if (session('deleted'))
+                Toast.fire({
+                    icon: 'info',
+                    title: '{{ session('deleted') }}'
+                });
+            @endif
         });
     </script>
 @stop

@@ -322,6 +322,13 @@ return [
         ],
         */
 
+        //------- REGISTRAR ANÁLISIS ------------
+        [
+            'text' => 'Registrar Análisis',
+            'route' => 'checkout',
+            'icon' => 'fas fa-file-medical',
+        ],
+
         // PAQUETE USUARIOS
         [
             'text' => 'Usuarios',
@@ -350,7 +357,7 @@ return [
                     'text' => 'Bitacora',
                     'route' => 'bitacora.index',
                     'icon' => 'fas fa-fw fa-lock',
-                     'can' => 'bitacora.index',
+                    'can' => 'bitacora.index',
                 ],
 
             ],
