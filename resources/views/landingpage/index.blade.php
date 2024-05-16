@@ -209,7 +209,7 @@
               <li class="md:ml-4"><a class="py-2 inline-block md:text-white md:px-2 font-semibold" href={{route('login')}}>Iniciar Sesion
                   </a></li>
               @endif
-              <li class="md:ml-6 mt-3 md:mt-0"> <a class="inline-block font-semibold px-4 py-2 text-white bg-blue-600 md:bg-transparent md:text-white border border-white rounded" href={{route('LandingPage.solicitud')}}>Registrar Analisis</a></li>
+              <li class="md:ml-6 mt-3 md:mt-0"> <a class="inline-block font-semibold px-4 py-2 text-white bg-blue-600 md:bg-transparent md:text-white border border-white rounded" href={{route('login')}}>Registrar Analisis</a></li>
 
             </ul>
           </nav>

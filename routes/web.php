@@ -17,6 +17,7 @@ use App\Http\Controllers\HemogramaCompletoController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HormonasController;
+use App\Http\Controllers\StripeController;
 use App\Models\HemogramaCompleto;
 use App\Http\Controllers\NotificationsController;
 use App\Models\Orden;
@@ -108,8 +109,6 @@ Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('
 /* ---------------------------------------------------------------------------------------------------------------------- */
 
 
-
-
 /* ------------------------------------- VISTA LANDINGPAGE ---------------------------------------------------------- */
 Route::get('/landingpage',[LandingPageController::class, 'index'])->name('LandingPage.index');
 Route::get('/landingpage/solicitud',[LandingPageController::class, 'solicitud'])->name('LandingPage.solicitud');
@@ -119,6 +118,14 @@ Route::get('landingpage/contactUs', [LandingPageController::class, 'contactUs'])
 Route::delete('/landingpage/comentarios/{comentario}', [LandingPageController::class, 'destroy'])->name('LandingPage.comentarios.destroy');
 Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])->name('LandingPage.comentarios.store');
 
+/* ------------------------------------- VISTA CHECKOUT ----------------------------------------------------------------- */
+Route::get('/checkout', [StripeController::class, 'checkout'])->name('checkout');
+Route::post('/session', [StripeController::class, 'session'])->name('session');
+Route::get('/success', [StripeController::class, 'success'])->name('success');
+
+
+Route::get('cancel', [StripeController::class, 'cancel'])->name('cancel');
+/* ---------------------------------------------------------------------------------------------------------------------- */
 
 Route::post('/log-window-close', 'UserController@logWindowClose')->name('log.window.close');
 
