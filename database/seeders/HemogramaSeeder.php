@@ -26,7 +26,6 @@ class HemogramaSeeder extends Seeder
         $hemograma->CHCM = 35.4;
         $hemograma->VSG = 15;
         $hemograma->plaquetas = 300000;
-        $hemograma->recuento = 7000;
         $hemograma->globulosBlancos = 6500;
         $hemograma->promielocitos = 1;
         $hemograma->mielocitos = 1;
@@ -40,9 +39,14 @@ class HemogramaSeeder extends Seeder
         $hemograma->blastos = 0;
         $hemograma->grupoSanguineo = 'A';
         $hemograma->factorRh = '+';
-        $hemograma->descripcion = 'Descripción del hemograma';
+        $hemograma->VDRL = 'NO REACTOR';
+        $hemograma->baciloscopia = 'MUESTRA NO ADECUADA';
+        $hemograma->coproparasitologico = 'NO SE OBSERVAN PARASITOS';
+        $hemograma->metodo = 'ELISA';
+        $hemograma->resultado = 'NO REACTIVO';
         $hemograma->idAnalisis = 1; // Asigna el ID del análisis correspondiente
         $hemograma->save();
+
 
         // Actualizar el estado del análisis a "Realizado"
         $analisis = Analisis::find(1); // Suponiendo que el ID del análisis es 1
