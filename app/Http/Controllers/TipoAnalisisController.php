@@ -105,6 +105,11 @@ class TipoAnalisisController extends Controller
      */
     public function destroy(TipoAnalisis $tipoanalisis)
     {
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('elimino un tipo analisis: ' . $tipoanalisis->nombre);
+    session()->flash('success', 'Se registró exitosamente');
         $tipoanalisis->delete();
         return redirect()->route('tipoanalisis.index')->with('success', 'Eliminado correctamente');
 

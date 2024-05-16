@@ -54,7 +54,7 @@ class TipoSeguroController extends Controller
         activity()
         ->causedBy(auth()->user())
         ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
-        ->log('Registro un tipo seguro: ' . $tipoSeguro->nombre);
+        ->log('Registro un tipo seguro: ' . $tipoSeguro->descripcion);
     session()->flash('success', 'Se registró exitosamente');
         // Redirigir a la página de índice de tipos de seguro con un mensaje de éxito
         return redirect()->route('tiposeguro.index')->with('success', '¡El tipo de seguro se ha registrado exitosamente!');
@@ -88,6 +88,11 @@ class TipoSeguroController extends Controller
         ]);
         $tipoSeguro = TipoSeguro::findOrFail($id);
         $tipoSeguro->update($request->all());
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('elimino un tipo seguro: ' . $tipoSeguro->descripcion);
+    session()->flash('success', 'Se registró exitosamente');
         // Redirigir a la página de índice de tipos de seguro con un mensaje de éxito
         return redirect()->route('tiposeguro.index')->with('success', 'Los datos del tipo de seguro han sido actualizados correctamente.');
     }
@@ -98,6 +103,11 @@ class TipoSeguroController extends Controller
      */
     public function destroy(TipoSeguro $tiposeguro)
     {
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('elimino un tipo seguro: ' . $tiposeguro->descripcion);
+    session()->flash('success', 'Se registró exitosamente');
         $tiposeguro->delete();
         return redirect()->route('tiposeguro.index')->with('success', 'Eliminado correctamente');
     }

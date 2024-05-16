@@ -77,6 +77,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/analisis/{id}/hormona', [AnalisisController::class, 'hormona'])->name('analisis.hormona');
 
     Route::get('Bitacora', [BitacoraController::class, 'index'])->name('bitacora.index');
+
+    Route::post('Bitacora', [BitacoraController::class, 'index'])->name('bitacora1.index');
+
+
     Route::post('/analisis/hormona', [AnalisisController::class, 'hormonaStore'])->name('analisis.hormonastore');
 
     //orden
@@ -113,5 +117,6 @@ Route::delete('/landingpage/comentarios/{comentario}', [LandingPageController::c
 Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])->name('LandingPage.comentarios.store');
 
 
+Route::post('/logout-browser', 'UserController@logoutBrowser')->name('logout.browser');
 
 

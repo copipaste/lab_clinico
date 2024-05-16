@@ -145,6 +145,21 @@
         <div class="col-md-4">
             <div class="input-group">
                 <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend">Paciente</span>
+                </div>
+                <select class="custom-select" id="pacientes" name="pacientes">
+                    <option value="nada">Seleccione...</option>
+                    @foreach ($Tpaciente as $pacientes)
+                    <option value="{{$pacientes->id}}">{{$pacientes->nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        </div>
+    <div class="form-row">
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroupPrepend">CI</span>
                 </div>
                 <input type="number" class="form-control" placeholder="" name="ci" id="ci"
