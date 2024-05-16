@@ -38,6 +38,12 @@ class EspecialidadController extends Controller
             'nombre' => 'required',
             'descripcion' => 'required'
         ]);
+
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('creo una especialidad');
+    session()->flash('success', 'Se registró exitosamente');
         Especialidad::create(request()->all());
         return redirect()->route('especialidad.index');
     }
@@ -68,6 +74,12 @@ class EspecialidadController extends Controller
             'nombre' => 'required',
             'descripcion' => 'required'
         ]);
+
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('actualizo una especialidad');
+    session()->flash('success', 'Se registró exitosamente');
         $especialidad = Especialidad::findOrfail($id);
         $especialidad->update(request()->all());
         return redirect()->route('especialidad.index');
@@ -78,6 +90,11 @@ class EspecialidadController extends Controller
      */
     public function destroy(string $id)
     {
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('elimino una especialidad');
+    session()->flash('success', 'Se registró exitosamente');
         $especialidad = Especialidad::findOrfail($id);
         $especialidad->delete();
         return redirect()->route('especialidad.index');

@@ -14,7 +14,7 @@
             <p><strong>Fecha de Nacimiento:</strong> {{ $Bioquimico->fechaNacimiento }}</p>
             <p><strong>Sexo:</strong> {{ $Bioquimico->sexo }}</p>
             <p><strong>Telefono:</strong> {{ $Bioquimico->telefono }}</p>
-            <p><strong>Especialidad:</strong> {{ $Bioquimico->tipoSeguro->descripcion }}</p>
+         
         </div>
     </div>
 

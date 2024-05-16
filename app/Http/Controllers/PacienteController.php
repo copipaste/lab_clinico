@@ -61,8 +61,8 @@ class PacienteController extends Controller
         $user = User::create([
             'name' => $request->nombre,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+            'password' => bcrypt('password'),
+        ])->assignRole('Paciente');
 
 
 

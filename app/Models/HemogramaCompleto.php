@@ -43,5 +43,6 @@ class HemogramaCompleto extends Model
     {
         return $this->belongsTo(Analisis::class, 'idAnalisis');
     }
+    
 
 }

@@ -80,13 +80,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('Bitacora', [BitacoraController::class, 'index'])->name('bitacora.index');
 
-    Route::post('Bitacora', [BitacoraController::class, 'index'])->name('bitacora1.index');
+    Route::post('Bitacora', [BitacoraController::class, 'index1'])->name('bitacora1.index');
 
 
     Route::post('/analisis/hormona', [AnalisisController::class, 'hormonaStore'])->name('analisis.hormonastore');
 
     //orden
     Route::resource('/orden', OrdenController::class)->names('orden');
+    Route::post('/orden', [OrdenController::class, 'index1'])->name('orden1.index');
 
     // Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
     //hormona
@@ -108,7 +109,7 @@ Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('
 
 
 
-// rutas landing page
+/* ------------------------------------- VISTA LANDINGPAGE ---------------------------------------------------------- */
 Route::get('/landingpage',[LandingPageController::class, 'index'])->name('LandingPage.index');
 Route::get('/landingpage/solicitud',[LandingPageController::class, 'solicitud'])->name('LandingPage.solicitud');
 Route::get('/landingpage/comentarios',[LandingPageController::class, 'comentarios'])->name('LandingPage.comentarios');
@@ -118,8 +119,14 @@ Route::delete('/landingpage/comentarios/{comentario}', [LandingPageController::c
 Route::post('/landingpage/comentarios', [LandingPageController::class, 'store'])->name('LandingPage.comentarios.store');
 
 
-Route::post('/logout-browser', 'UserController@logoutBrowser')->name('logout.browser');
+Route::post('/log-window-close', 'UserController@logWindowClose')->name('log.window.close');
+
 
 // rutas notificaciones
 
 Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
+
+
+/* ------------------------------------- VISTA NOTIFICACIONES ---------------------------------------------------------- */
+Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
+

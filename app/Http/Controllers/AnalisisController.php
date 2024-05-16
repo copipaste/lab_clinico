@@ -62,6 +62,8 @@ class AnalisisController extends Controller
         $idOrden = $analisis->orden->nroOrden;
         $nombrepaciente = $analisis->orden->paciente->nombre;
         $bioquimico = Bioquimico::all();
+
+
         return view('analisis.hemograma', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
     }
     public function hemogramastore(Request $request)
@@ -102,7 +104,11 @@ class AnalisisController extends Controller
 
         $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id); // esta linea de codigo tengo que meter para crear la notificacion al paciente
 
-
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('agrego un hemograma');
+    session()->flash('success', 'Se registró exitosamente');
 
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
@@ -129,7 +135,6 @@ class AnalisisController extends Controller
         // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
         $bioquimico = Bioquimico::all();
 
-        $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id);  // esta linea de codigo tengo que meter para crear la notificacion al paciente
 
         return view('analisis.hormona', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
     }
@@ -151,7 +156,11 @@ class AnalisisController extends Controller
         $analisis->save();
 
         $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id);  // esta linea de codigo tengo que meter para crear la notificacion al paciente
-
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('agrego una hormona');
+    session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
     /**
@@ -174,6 +183,11 @@ class AnalisisController extends Controller
      */
     public function destroy(Analisis $analisis)
     {
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('elimino un analisis');
+    session()->flash('success', 'Se registró exitosamente');
         $analisis->delete();
         return redirect()->route('analisis.index')->with('success', 'Eliminado correctamente');
     }

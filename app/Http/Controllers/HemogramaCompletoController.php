@@ -6,6 +6,9 @@ use App\Models\Analisis;
 use App\Models\Bioquimico;
 use App\Models\HemogramaCompleto;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Notificacion;
+
 
 class HemogramaCompletoController extends Controller
 {
@@ -64,6 +67,17 @@ class HemogramaCompletoController extends Controller
     public function show(HemogramaCompleto $hemograma)
     {
         $bioquimico= Bioquimico::all();
+        //! codigo jhoel
+        $user = User::find(auth()->user()->id);
+        if( $user->hasRole('Paciente') ){
+            $notificacion = Notificacion::where('analisisId', $hemograma->idAnalisis)->first();
+            if($user->paciente->id == $notificacion->pacienteId){
+                $notificacion->read = 1;
+                $notificacion->save();
+            }
+        }
+         //! codigo jhoel
+
         return view('hemograma.show', compact('hemograma','bioquimico'));
     }
     public function show2(string $id)
