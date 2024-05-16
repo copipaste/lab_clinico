@@ -447,19 +447,19 @@ return [
             'text' => 'Especialidades',
             'route' => 'especialidad.index',
             'icon' => 'fas fa-book-medical',
-            // 'can' => 'historiales.index',
+            'can' => 'especialidad.index',
         ],
         [
             'text' => 'Recepcionistas',
             'route' => 'recepcionistas.index',
             'icon' => 'fas fa-book-medical',
-            // 'can' => 'historiales.index',
+            'can' => 'recepcionistas.index',
         ],
         [
             'text' => 'Pagina Principal',
             'route' => 'LandingPage.index',
             'icon' => 'fas fa-book-medical',
-            // 'can' => 'historiales.index',
+            'can' => 'landingpage.index',
         ],
 
 
