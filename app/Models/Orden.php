@@ -15,12 +15,12 @@ class Orden extends Model
     {
         return $this->belongsTo(Paciente::class, 'idPaciente');
     }
-    /*
+
     public function OrdenAnalisis()
     {
         return $this->hasMany(OrdenAnalisis::class, 'orden_id');
     }
-    */
+   
     public function tipoanalisis()
     {
         return $this->belongsToMany(TipoAnalisis::class, 'orden_analisis','orden_id','tipo_analisis_id');

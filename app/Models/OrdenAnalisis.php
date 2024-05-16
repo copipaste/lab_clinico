@@ -11,12 +11,12 @@ class ordenAnalisis extends Model
     protected $table = 'orden_analisis';
     protected $fillable = ['orden_id', 'tipo_analisis_id'];
 
-    /*
+
     public function tipoAnalisis()
     {
         return $this->belongsTo(TipoAnalisis::class, 'tipo_analisis_id');
     }
-    */
+   
 
 }
 
