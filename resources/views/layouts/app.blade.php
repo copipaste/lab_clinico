@@ -58,7 +58,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                    
+
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 
@@ -83,3 +83,26 @@
     </div>
 </body>
 </html>
+<script>
+   window.addEventListener('beforeunload', function(e) {
+    // Enviar una solicitud AJAX al servidor para registrar la actividad
+    fetch('{{ route('log.window.close') }}', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Error al registrar el cierre de ventana.');
+        }
+    })
+    .catch(error => {
+        console.error('Error al registrar el cierre de ventana:', error);
+    });
+});
+
+
+</script>

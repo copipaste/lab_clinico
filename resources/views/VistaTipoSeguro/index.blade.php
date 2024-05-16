@@ -47,9 +47,10 @@
                             <div class="d-flex">
 
                                 {{-- esto es para el de editar membresía --}}
-                                <a href="{{route('tiposeguro.edit', $t->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </a>
+                              {{-- esto es para el de editar membresía --}}
+                              <a href="{{route('tiposeguro.edit', $t->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </a>
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR" data-toggle="modal" data-target="#modalCustom{{ $t->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>
                                 </button>

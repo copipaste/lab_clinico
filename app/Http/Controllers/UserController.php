@@ -10,7 +10,8 @@ use App\Models\TipoSeguro;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
     /**
@@ -196,4 +197,35 @@ class UserController extends Controller
     {
         //
     }
+
+    public function logoutBrowser(Request $request)
+{
+    // Obtener el usuario autenticado
+    $user = Auth::user();
+
+    // Registrar el cierre del navegador en el registro de actividad
+  //  Log::info('El usuario ' . $user->name . ' ha cerrado el navegador.');
+    activity()
+    ->causedBy(auth()->user())
+    ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+    ->log('cerro el navegador');
+session()->flash('success', 'Se registró exitosamente');
+    // Puedes hacer otras acciones aquí si lo deseas
+
+    return response()->json(['message' => 'Registro de cierre de navegador exitoso'], 200);
+}
+
+public function logWindowClose(Request $request)
+{
+    // Obtener el usuario autenticado
+    $user = Auth::user();
+
+    // Registrar el cierre de ventana en el registro de actividad
+    activity()
+        ->causedBy($user)
+        ->withProperties(['ip' => $request->ip()])
+        ->log('Cerró una ventana del navegador');
+
+    return response()->json(['message' => 'Registro de cierre de ventana exitoso'], 200);
+}
 }

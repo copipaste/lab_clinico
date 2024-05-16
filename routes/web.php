@@ -19,7 +19,8 @@ use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HormonasController;
 use App\Http\Controllers\StripeController;
 use App\Models\HemogramaCompleto;
-
+use App\Http\Controllers\NotificationsController;
+use App\Models\Orden;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,16 +79,23 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/analisis/{id}/hormona', [AnalisisController::class, 'hormona'])->name('analisis.hormona');
 
     Route::get('Bitacora', [BitacoraController::class, 'index'])->name('bitacora.index');
+
+    Route::post('Bitacora', [BitacoraController::class, 'index1'])->name('bitacora1.index');
+
+
     Route::post('/analisis/hormona', [AnalisisController::class, 'hormonaStore'])->name('analisis.hormonastore');
 
     //orden
     Route::resource('/orden', OrdenController::class)->names('orden');
+    Route::post('/orden', [OrdenController::class, 'index1'])->name('orden1.index');
+    Route::post('/ordenes', [OrdenController::class, 'store'])->name('orden.store');
+
 
     // Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
     //hormona
-    Route::get('hormona/{id}',[HormonasController::class, 'show2'])->name('hormona.show2');
+    Route::get('hormonaCompleto/{id}',[HormonasController::class, 'show2'])->name('hormona.show2');
     Route::resource('/hormona', HormonasController::class)->names('hormona');
-    Route::get('hemograma/{id}',[HemogramaCompletoController::class, 'show2'])->name('hemograma.show2');
+    Route::get('hemogramaCompleto/{id}',[HemogramaCompletoController::class, 'show2'])->name('hemograma.show2');
     Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
 });
 
@@ -101,10 +109,7 @@ Route::resource('/VistaRecepcionistas', RecepcionistaController::class)->names('
 /* ---------------------------------------------------------------------------------------------------------------------- */
 
 
-
-
-
-// rutas landing page
+/* ------------------------------------- VISTA LANDINGPAGE ---------------------------------------------------------- */
 Route::get('/landingpage',[LandingPageController::class, 'index'])->name('LandingPage.index');
 Route::get('/landingpage/solicitud',[LandingPageController::class, 'solicitud'])->name('LandingPage.solicitud');
 Route::get('/landingpage/comentarios',[LandingPageController::class, 'comentarios'])->name('LandingPage.comentarios');
@@ -118,7 +123,18 @@ Route::get('/checkout', [StripeController::class, 'checkout'])->name('checkout')
 Route::post('/session', [StripeController::class, 'session'])->name('session');
 Route::get('/success', [StripeController::class, 'success'])->name('success');
 
+
 Route::get('cancel', [StripeController::class, 'cancel'])->name('cancel');
 /* ---------------------------------------------------------------------------------------------------------------------- */
 
+Route::post('/log-window-close', 'UserController@logWindowClose')->name('log.window.close');
+
+
+// rutas notificaciones
+
+Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
+
+
+/* ------------------------------------- VISTA NOTIFICACIONES ---------------------------------------------------------- */
+Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
 

@@ -43,4 +43,6 @@ class Bioquimico extends Model
     {
         return $this->belongsTo(Especialidad::class, 'idEspecialidad', 'id');
     }
+
+  
 }

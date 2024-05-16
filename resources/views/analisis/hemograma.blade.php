@@ -24,7 +24,6 @@
                         <span class="input-group-text" id="inputGroupPrepend">Bioquímico</span>
                     </div>
                     <select class="custom-select" id="idbioquimico" name="idbioquimico" required>
-                        <option selected disabled>Seleccione...</option>
                         @foreach ($bioquimico as $b)
                             <option value="{{$b->id}}">{{$b->nombre}}</option>
                         @endforeach
@@ -171,7 +170,7 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">VSG 1 a h</span>
+                        <span class="input-group-text" id="inputGroupPrepend">VSG</span>
                     </div>
                     <input type="text" class="form-control" placeholder=""  name="VSG" id="VSG" aria-describedby="inputGroupPrepend">
                 </div>
@@ -209,7 +208,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrepend">Recuento</span>
                     </div>
-                    <input type="text" class="form-control" placeholder=""  name="recuento" id="recuento" aria-describedby="inputGroupPrepend">
+                    <input type="text" class="form-control"  name="recuento" id="recuento" aria-describedby="inputGroupPrepend">
                 </div>
             </div>
             <div class="col">
@@ -218,30 +217,6 @@
                         <span class="input-group-text" id="inputGroupPrepend">Eosinofilos</span>
                     </div>
                     <input type="text" class="form-control" placeholder=""  name="eosinofilos" id="eosinofilos" aria-describedby="inputGroupPrepend">
-                </div>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col">
-                <div class="input-group">
-
-
-                </div>
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">Blastos</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder=""  name="blastos" id="blastos" aria-describedby="inputGroupPrepend">
-                </div>
-            </div>
-        </div>
-        <label class="mt-2">Descripcion</label>
-        <div class="form-row">
-            <div class="col">
-                <div class="input-group">
-                    <textarea class="form-control"  name="descripcion" id="descripcion" placeholder=""></textarea>
                 </div>
             </div>
         </div>
@@ -263,20 +238,53 @@
                 </div>
             </div>
         </div>
-
-
-
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                    Agree to terms and conditions
-                </label>
-                <div class="invalid-feedback">
-                    You must agree before submitting.
+        <div class="form-row mt-2">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend">V.D.R.L.</span>
+                    </div>
+                    <input type="text" class="form-control"  name="VDRL" id="VDRL" placeholder="" aria-describedby="inputGroupPrepend">
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend">BACILOSCOPIA</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder=""  name="baciloscopia" id="baciloscopia" aria-describedby="inputGroupPrepend">
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">Submit form</button>
+        <label class="mt-2">COPROPARASITOLOGICO</label>
+        <div class="form-row">
+            <div class="col">
+                <div class="input-group">
+                    <textarea class="form-control" name="coproparasitologico" id="coproparasitologico">NO SE OBSERVAN PARASITOS</textarea>
+                </div>
+            </div>
+        </div>
+
+        <label class="mt-2">DIAGNOSTICO DE LA ENFERMEDAD DE CHAGAS</label>
+        <div class="form-row mt-1">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend">Metodo</span>
+                    </div>
+                    <input type="text" class="form-control"  name="metodo" id="metodo" placeholder="" aria-describedby="inputGroupPrepend" value="ELISA">
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend">Resultado</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder=""  name="resultado" id="resultado" aria-describedby="inputGroupPrepend" value="NO REACTIVO">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary mt-2 mb-2" type="submit">Submit form</button>
     </form>
 @endsection

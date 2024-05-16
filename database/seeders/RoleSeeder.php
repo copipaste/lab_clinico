@@ -29,15 +29,15 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'users.index'])->syncRoles([$role1]);
         //Bioquimicos
         Permission::create(['name' => 'bioquimicos.index'])->syncRoles([$role1]);
-        //Roles  
+        //Roles
         Permission::create(['name' => 'roles.index'])->syncRoles([$role1]);
-        //Bitacora  
+        //Bitacora
         Permission::create(['name' => 'bitacora.index'])->syncRoles([$role1]);
 
         //Paquete historiales
         Permission::create(['name' => 'history.package'])->syncRoles([$role1, $role2]);
 
-        //Pacientes   
+        //Pacientes
         Permission::create(['name' => 'pacientes.index'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'pacientes.create'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'pacientes.store'])->syncRoles([$role1, $role2]);
@@ -57,13 +57,15 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'tiposeguro.destroy'])->syncRoles([$role1, $role2]);
 
         //Paquete analisis
-        Permission::create(['name' => 'analysis.package'])->syncRoles([$role1,$role3]);
-         
+        Permission::create(['name' => 'analysis.package'])->syncRoles([$role1,$role3,$role4]);
+
         //orden
-        Permission::create(['name' => 'orden.index'])->syncRoles([$role1, $role3]);
+        Permission::create(['name' => 'orden.index'])->syncRoles([$role1, $role3, $role4]);
+        Permission::create(['name' => 'paciente.index'])->syncRoles([$role4]);
+
         //analisis
         Permission::create(['name' => 'analisis.index'])->syncRoles([$role1, $role3]);
-        //TipoAnalisis  
+        //TipoAnalisis
         Permission::create(['name' => 'tipoanalisis.index'])->syncRoles([$role1, $role3]);
         Permission::create(['name' => 'tipoanalisis.create'])->syncRoles([$role1, $role3]);
         Permission::create(['name' => 'tipoanalisis.store'])->syncRoles([$role1, $role3]);
@@ -79,6 +81,6 @@ class RoleSeeder extends Seeder
 
 
 
-        
+
     }
 }

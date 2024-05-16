@@ -16,7 +16,29 @@
         {{-- <x-adminlte-button label="Registrar" class="bg-white" title="Registrar" data-toggle="modal"
             data-target="#modalpromocion" /> --}}
             <a href="{{ route('orden.create') }}" class="btn btn-adminlte bg-white text-dark border mb-1" title="Registrar">Registrar</a>
+            @can('users.index')
+            <form action="{{ route('orden1.index') }}" method="POST">
+                @csrf
+                <div class="flex items-center space-x-2 mb-4">
+                    <div class="w-1/4">
+                        <label for="start_date" class="text-gray-600 font-semibold text-sm">Fecha de inicio:</label>
+                        <input type="date" id="start_date" name="start_date" class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+                    </div>
+                    <div class="w-1/4">
+                        <label for="end_date" class="text-gray-600 font-semibold text-sm">Fecha de fin:</label>
+                        <input type="date" id="end_date" name="end_date" class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+                    </div>
+                    <div class="w-1/4">
+                        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> --}}
+                    </div>
+                    <div class="w-1/4">
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </div>
+                </div>
 
+
+            </form>
+@endcan
         <x-adminlte-modal id="modalpromocion" title="Registrar Orden" size="lg" theme="dark" v-centered static-backdrop
             scrollable>
             <form action="" method="POST">
@@ -163,14 +185,20 @@
                         <td>{{ $o->created_at }}</td>
 
                         <td>{{ $o->Paciente->nombre}}</td>
+                        <td>{{ $o->estado}}</td>
 
                         <td width="15px">
+                            @can('users.index')
                             <div class="d-flex">
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
                                     data-toggle="modal" data-target="#modalCustom{{ $o->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>
                                 </button>
                             </div>
+                            @endcan
+                            <a href="{{route('orden.edit', $o->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </a>
                         </td>
 
                         <x-adminlte-modal id="modalCustom{{ $o->id }}" title="Eliminar" size="sm"

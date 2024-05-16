@@ -12,7 +12,49 @@ class BitacoraController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request){
+    public function index1(Request $request){
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        if ($start_date && $end_date) {
+            // Se proporcionó un rango de fechas, aplicar el filtro
+            $activities = Activity::whereDate('created_at', '>=', $start_date)
+                ->whereDate('created_at', '<=', $end_date)
+                ->get();
+        } else {
+            // No se proporcionó un rango de fechas, cargar todas las actividades
+            $activities = Activity::all();
+        }
+
+        if ($request->ajax()) {
+            $view = View::make('partials.activities_table', compact('activities'))->render();
+
+            return response()->json([
+                'view' => $view
+            ]);
+        }
+        $heads = [
+            'id',
+            'IP',
+            'Nombre Usuario',
+            'Actividad',
+            'Fecha',
+
+        ];
+        return view('VistaBitacora.index', compact('heads', 'activities', 'start_date', 'end_date'));
+    }
+
+
+    public function index(Request $request)
+    {
+        $heads = [
+            'id',
+            'IP',
+            'Nombre Usuario',
+            'Actividad',
+            'Fecha',
+        ];
+
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
 
@@ -34,7 +76,7 @@ class BitacoraController extends Controller
             ]);
         }
 
-        return view('VistaBitacora.index', compact('activities'));
+        return view('VistaBitacora.index', compact('heads', 'activities', 'start_date', 'end_date'));
     }
 
     /**

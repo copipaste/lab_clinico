@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Paciente;
 use App\Models\Orden;
 use App\Models\Analisis;
+use App\Models\User;
+
 use App\Models\TipoAnalisis;
 
 class AnalisisSeeder extends Seeder
@@ -18,15 +20,23 @@ class AnalisisSeeder extends Seeder
      */
     public function run()
     {
+
+        $user6 = User::create([
+            'name' => 'Paciente',
+            'email' => 'paciente@gmail.com',
+            'password' => bcrypt('12345678'),
+        ])->assignRole('Paciente');
+
         // Crear un paciente
         $paciente = new Paciente();
         $paciente->ci = '1234567';
-        $paciente->nombre = 'Nombre del paciente';
+        $paciente->nombre = 'Paciente Lucas';
         $paciente->sexo = 'Masculino';
-        $paciente->correo = 'correo@ejemplo.com';
+        $paciente->correo = 'paciente@gmail.com';
         $paciente->telefono = '123456789';
-        $paciente->fechaNacimiento = '1990-01-01';
+        $paciente->fechaNacimiento = '2006-01-01';
         $paciente->idTipoSeguro = 1; // Asigna el ID del tipo de seguro correspondiente
+        $paciente->idUser = $user6->id;
         $paciente->save();
 
         // Crear una orden para el paciente
