@@ -12,6 +12,7 @@ use App\Models\Bioquimico;
 use App\Models\Paciente;
 use App\Models\TipoSeguro;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 
 use Illuminate\Http\Request;
@@ -79,10 +80,12 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
      */
     public function store(Request $request)
     {
+
         if($request->pacientes=="nada"){
         $user = Auth::user();
         $paciente = Paciente::where('idUser', $user->id)->first();
         if(!$paciente){
+
         $paciente = new Paciente();
         $paciente->ci = $request->ci;
         $paciente->nombre = $request->paciente;
@@ -91,13 +94,15 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $paciente->telefono = $request->celular;
         $paciente->fechaNacimiento = $request->fechanacimiento;
         $paciente->idTipoSeguro = $request->tiposeguro;
+
         $usern = new User();
         $usern->name=$request->paciente;
-$usern->email=$request->correo;
-$usern->password=$request->ci;
-$usern->save();
-$usern->assignRole('Paciente');
+        $usern->email=$request->correo;
+        $usern->password=$request->ci;
+        $usern->save();
+        $usern->assignRole('Paciente');
         $paciente->idUser = $usern->id;
+
         $paciente->save();
         $idpaciente = $paciente->id;
 
