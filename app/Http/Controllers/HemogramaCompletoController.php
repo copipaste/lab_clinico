@@ -150,7 +150,7 @@ class HemogramaCompletoController extends Controller
             'idBioquimico' => $request->idbioquimico
         ]);
 
-        return redirect()->route('hemograma.index')->with('success', 'Los datos han sido actualizados correctamente.');
+        return redirect()->route('hemograma.show2', ['id' => $id])->with('success', 'Los datos han sido actualizados correctamente.');
     }
 
 
