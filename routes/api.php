@@ -27,4 +27,5 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/appointments', [AppointmentController::class, 'index']);
     Route::get('/analysis_types', [AnalysisTypeController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/registerOrder',[AppointmentController::class,'registerOrder']);
 });

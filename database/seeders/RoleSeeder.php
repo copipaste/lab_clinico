@@ -74,6 +74,15 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'tipoanalisis.destroy'])->syncRoles([$role1, $role3]);
 
 
+        //recepcionistas
+        Permission::create(['name' => 'recepcionistas.index'])->syncRoles([$role1]);
+
+        //especialidades
+        Permission::create(['name' => 'especialidad.index'])->syncRoles([$role1, $role2]);
+
+        //landingPage
+        Permission::create(['name' => 'landingpage.index'])->syncRoles([$role1, $role2, $role3, $role4]);
+
 
 
 
