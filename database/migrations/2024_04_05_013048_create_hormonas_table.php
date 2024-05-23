@@ -35,7 +35,7 @@ return new class extends Migration
             $table->decimal('DHEA', 8, 2)->nullable();
             $table->decimal('DHEAS', 8, 2)->nullable();
             $table->decimal('TPH', 8, 2)->nullable();
-            $table->decimal('17OHPPRG', 8, 2)->nullable();
+            $table->decimal('OHPPRG', 8, 2)->nullable();
             $table->decimal('antiCCP', 8, 2)->nullable();
             $table->decimal('gastrina', 8, 2)->nullable();
             $table->decimal('aldosterona', 8, 2)->nullable();
