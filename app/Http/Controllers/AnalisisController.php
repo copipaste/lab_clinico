@@ -88,10 +88,13 @@ class AnalisisController extends Controller
         $hemograma->monocitos = $request->input('monocitos');
         $hemograma->eosinofilos = $request->input('eosinofilos');
         $hemograma->basofilos = $request->input('basofilos');
-        $hemograma->blastos = $request->input('blastos');
         $hemograma->grupoSanguineo = $request->input('gruposanguineo');
         $hemograma->factorRh = $request->input('factorrh');
-        $hemograma->descripcion = $request->input('descripcion');
+        $hemograma->VDRL = $request->input('VDRL');
+        $hemograma->baciloscopia = $request->input('baciloscopia');
+        $hemograma->coproparasitologico = $request->input('coproparasitologico');
+        $hemograma->metodo = $request->input('metodo');
+        $hemograma->resultado = $request->input('resultado');
         $hemograma->idAnalisis = $request->input('idAnalisis');
         $hemograma->save();
         $analisis = Analisis::find($request->input('idAnalisis'));
@@ -138,13 +141,41 @@ class AnalisisController extends Controller
 
     public function hormonastore(Request $request)
     {
-        // // Validación de los datos del formulario
-        // $validatedData = $request->validate([
-        //     // Definir reglas de validación para cada campo
-        // ]);
 
         $hormonas = new Hormonas();
         $hormonas->TSH = $request->input('TSH');
+        $hormonas->TSH = $request->input('TSH');
+        $hormonas->T3 = $request->input('T3');
+        $hormonas->T4 = $request->input('T4');
+        $hormonas->TSHNeonatal = $request->input('TSHNeonatal');
+        $hormonas->T4Libre = $request->input('T4Libre');
+        $hormonas->progesterona = $request->input('progesterona');
+        $hormonas->prolactina = $request->input('prolactina');
+        $hormonas->estradiol = $request->input('estradiol');
+        $hormonas->cortisol8am = $request->input('cortisol8am');
+        $hormonas->cortisol16pm = $request->input('cortisol16pm');
+        $hormonas->LH = $request->input('LH');
+        $hormonas->FSH = $request->input('FSH');
+        $hormonas->testosterona = $request->input('testosterona');
+        $hormonas->testosteronaTotal = $request->input('testosteronaTotal');
+        $hormonas->testosteronaLibre = $request->input('testosteronaLibre');
+        $hormonas->HDeCrecimiento = $request->input('HDeCrecimiento');
+        $hormonas->HDeCrecimientoPostEjercicio = $request->input('HDeCrecimientoPostEjercicio');
+        $hormonas->insulina = $request->input('insulina');
+        $hormonas->AcAntiTP0 = $request->input('AcAntiTP0');
+        $hormonas->DHEA = $request->input('DHEA');
+        $hormonas->DHEAS = $request->input('DHEAS');
+        $hormonas->TPH = $request->input('TPH');
+        $hormonas->OHPPRG = $request->input('OHPPRG');
+        $hormonas->antiCCP = $request->input('antiCCP');
+        $hormonas->gastrina = $request->input('gastrina');
+        $hormonas->aldosterona = $request->input('aldosterona');
+        $hormonas->HParatiroidea = $request->input('HParatiroidea');
+        $hormonas->antAntitiroglobulinaTG = $request->input('antAntitiroglobulinaTG');
+        $hormonas->acVanilMandelico = $request->input('acVanilMandelico');
+        $hormonas->IGFISomatomedina = $request->input('IGFISomatomedina');
+        $hormonas->IGFBP3 = $request->input('IGFBP3');
+        $hormonas->insulinaPostPand = $request->input('insulinaPostPand');
         $hormonas->idAnalisis = $request->input('idAnalisis');
         $hormonas->save();
         $analisis = Analisis::find($request->input('idAnalisis'));

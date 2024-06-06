@@ -33,8 +33,15 @@ class BitacoraController extends Controller
                 'view' => $view
             ]);
         }
+        $heads = [
+            'id',
+            'IP',
+            'Nombre Usuario',
+            'Actividad',
+            'Fecha',
 
-        return view('VistaBitacora.index', compact('activities'));
+        ];
+        return view('VistaBitacora.index', compact('heads', 'activities', 'start_date', 'end_date'));
     }
 
 
@@ -46,8 +53,8 @@ class BitacoraController extends Controller
             'Nombre Usuario',
             'Actividad',
             'Fecha',
-
         ];
+
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
 
@@ -68,12 +75,10 @@ class BitacoraController extends Controller
                 'view' => $view
             ]);
         }
-        // $Bioquimicos->each(function ($Bioquimico) {
-        //     $Bioquimico->tipoSeguro = $Bioquimico->tipoSeguro->descripcion;
-        // });
-        // dd($Bioquimicos);
-        return view('VistaBitacora.index', compact('heads','activities'));
+
+        return view('VistaBitacora.index', compact('heads', 'activities', 'start_date', 'end_date'));
     }
+
     /**
      * Show the form for creating a new resource.
      */

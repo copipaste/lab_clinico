@@ -10,7 +10,7 @@ class Orden extends Model
     use HasFactory;
 
     protected $table = 'ordenes';
-    protected $fillable = ['nroOrden', 'idPaciente'];
+    protected $fillable = ['nroOrden', 'estado','idNotaVenta','idPaciente'];
     public function paciente()
     {
         return $this->belongsTo(Paciente::class, 'idPaciente');
@@ -24,6 +24,11 @@ class Orden extends Model
     public function tipoanalisis()
     {
         return $this->belongsToMany(TipoAnalisis::class, 'orden_analisis','orden_id','tipo_analisis_id');
+    }
+
+    public function notaventa()
+    {
+        return $this->belongsTo(NotaVenta::class, 'idNotaVenta', 'id');
     }
 
 

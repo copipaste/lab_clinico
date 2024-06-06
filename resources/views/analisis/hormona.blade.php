@@ -24,7 +24,6 @@
                         <span class="input-group-text" id="inputGroupPrepend">Bioquímico</span>
                     </div>
                     <select class="custom-select" id="idbioquimico" name="idbioquimico" required>
-                        <option selected disabled>Seleccione...</option>
                         @foreach ($bioquimico as $b)
                             <option value="{{$b->id}}">{{$b->nombre}}</option>
                         @endforeach
@@ -260,9 +259,9 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">17OHPPRG</span>
+                        <span class="input-group-text" id="inputGroupPrepend">OHPPRG</span>
                     </div>
-                    <input type="text" class="form-control" placeholder=""  name="170hprg" id="170hpprg" aria-describedby="inputGroupPrepend">
+                    <input type="text" class="form-control" placeholder=""  name="OHPPRG" id="OHPPRG" aria-describedby="inputGroupPrepend">
                 </div>
             </div>
             <div class="col">
