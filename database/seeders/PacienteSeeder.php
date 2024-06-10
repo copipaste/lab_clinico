@@ -19,28 +19,35 @@ class PacienteSeeder extends Seeder
      */
     public function run(): void
     {
-
+        // ID USER 2
         $user1 = User::create([
             'name' => 'Jhoel Debray 1',
             'email' => 'paciente1@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
+
+        // ID USER 3 
         $user2 = User::create([
             'name' => 'Manuel medrano 2',
             'email' => 'paciente2@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
+
+        // ID USER 4 
         $user3 = User::create([
             'name' => 'Carla Zapata 3',
             'email' => 'paciente3@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
+
+        // ID USER 5
         $user4 = User::create([
             'name' => 'Tania Valdez 4',
             'email' => 'paciente4@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
        
+        // ID USER 6
         $user5 = User::create([
             'name' => 'Dr. Juan Perez 1',
             'email' => 'bioquimico1@gmail.com',
@@ -91,7 +98,7 @@ class PacienteSeeder extends Seeder
 
 
 
-
+        // PACIENTE ID 1
         Paciente::create([
             'ci' => '123456',
             'nombre' => 'Jhoel Debray 1',
@@ -100,9 +107,10 @@ class PacienteSeeder extends Seeder
             'telefono' => '70016993',
             'idTipoSeguro' => $tiposeguro1->id,
             'idHistorial' => $historial1->id,
-            'idUser' => $user1->id,
+            'idUser' => $user1->id,     //idUser 2
         ]);
 
+        // PACIENTE ID 2
         Paciente::create([
             'ci' => '654321',
             'nombre' => 'Manuel medrano 2',
@@ -111,10 +119,10 @@ class PacienteSeeder extends Seeder
             'telefono' => '60960799',
             'idTipoSeguro' => $tiposeguro1->id,
             'idHistorial' => $historial2->id,
-            'idUser' => $user2->id,
+            'idUser' => $user2->id,     //idUser 3
         ]);
 
-
+        // PACIENTE ID 3
         Paciente::create([
             'ci' => '123426',
             'nombre' => 'Carla Zapata 3',
@@ -123,9 +131,10 @@ class PacienteSeeder extends Seeder
             'telefono' => '70016993',
             'idTipoSeguro' => $tiposeguro3->id,
             'idHistorial' => $historial3->id,
-            'idUser' => $user3->id,
+            'idUser' => $user3->id,     //idUser 4
         ]);
 
+        // PACIENTE ID 4
         Paciente::create([
             'ci' => '654321',
             'nombre' => 'Tania Valdez 4',
@@ -134,7 +143,7 @@ class PacienteSeeder extends Seeder
             'telefono' => '60960799',
             'idTipoSeguro' => $tiposeguro2->id,
             'idHistorial' => $historial4->id,
-            'idUser' => $user4->id,
+            'idUser' => $user4->id,     //idUser 5
         ]);
 
         $especialidad = Especialidad::create([
@@ -142,7 +151,7 @@ class PacienteSeeder extends Seeder
             'descripcion' => 'Bioquimica',
         ]);
 
-
+        // BIOQUÍMICO NO RELACIONADO A NINGÚN USER
         $bioquimico = Bioquimico::create([
             'ci' => '123456',
             'direccion' => 'av. 6 de agosto',

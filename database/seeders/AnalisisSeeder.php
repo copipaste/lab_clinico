@@ -20,7 +20,7 @@ class AnalisisSeeder extends Seeder
      */
     public function run()
     {
-
+        // ID 7
         $user6 = User::create([
             'name' => 'Paciente',
             'email' => 'paciente@gmail.com',
@@ -28,6 +28,7 @@ class AnalisisSeeder extends Seeder
         ])->assignRole('Paciente');
 
         // Crear un paciente
+        // PACIENTE ID 5
         $paciente = new Paciente();
         $paciente->ci = '1234567';
         $paciente->nombre = 'Paciente Lucas';
@@ -36,12 +37,13 @@ class AnalisisSeeder extends Seeder
         $paciente->telefono = '123456789';
         $paciente->fechaNacimiento = '2006-01-01';
         $paciente->idTipoSeguro = 1; // Asigna el ID del tipo de seguro correspondiente
-        $paciente->idUser = $user6->id;
+        $paciente->idUser = $user6->id;     // idUser 7
         $paciente->save();
 
         // Crear una orden para el paciente
+        //ID ORDEN 1
         $orden = new Orden();
-        $orden->idPaciente = $paciente->id;
+        $orden->idPaciente = $paciente->id;     // PACIENTE ID 5
         $orden->save();
 
         // Asignar número de orden
