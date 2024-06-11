@@ -66,6 +66,7 @@ class HemogramaCompletoController extends Controller
      */
     public function show(HemogramaCompleto $hemograma)
     {
+        //dd($hemograma);
         $bioquimico= Bioquimico::all();
         //! codigo jhoel
         $user = User::find(auth()->user()->id);

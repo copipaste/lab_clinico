@@ -124,7 +124,7 @@ class PacienteSeeder extends Seeder
 
         // PACIENTE ID 3
         Paciente::create([
-            'ci' => '123426',
+            'ci' => '334455',
             'nombre' => 'Carla Zapata 3',
             'fechaNacimiento' => '1990-01-01',
             'sexo' => 'FEMENINO',

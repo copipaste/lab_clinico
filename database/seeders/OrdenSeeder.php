@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Paciente;
 use App\Models\Orden;
 use App\Models\Analisis;
+use App\Models\NotaVenta;
 use App\Models\ordenAnalisis;
 use App\Models\TipoAnalisis;
 
@@ -21,8 +22,17 @@ class OrdenSeeder extends Seeder
     {
 
         // Crear una orden para el paciente 1 jHOEL DEBRAY
+        // Crear la nota de venta 
+        $notaventa1 = NotaVenta::create([
+            'metodoPago' => 'Paypal',
+            'precio' => 150,
+            'descuento' => 0,
+            'precioTotal' => 150,
+        ]);
+
         // ID ORDEN 2
         $orden = new Orden();
+        $orden->idNotaVenta = $notaventa1->id;
         $orden->idPaciente = 1;     //EL PACIENTE CON ID 1 ES jHOEL DEBRAY
         $orden->save();
 
@@ -58,8 +68,19 @@ class OrdenSeeder extends Seeder
         $analisis->idOrden = $orden->id;    // Orden ID 2
         $analisis->save();
 
+
+        // NUEVA ORDEN
+        // Crear la nota de venta
+        $notaventa2 = NotaVenta::create([
+            'metodoPago' => 'Paypal',
+            'precio' => 50,
+            'descuento' => 0,
+            'precioTotal' => 50,
+        ]);
+
         // ID ORDEN 3
         $orden2 = new Orden();
+        $orden2->idNotaVenta = $notaventa2->id;
         $orden2->idPaciente = 1;    // Paciente ID 1 Jhoel Debray
         $orden2->save();
 

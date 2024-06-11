@@ -11,8 +11,8 @@ class NotaVenta extends Model
     protected $table = 'nota_ventas';
     protected $fillable = ['metodoPago', 'precio', 'descuento','precioTotal'];
 
-    public function Ordenes()
+    public function orden()
     {
-        return $this->hasOne(Orden::class,  'idNotaVenta', 'id');
+        return $this->hasOne(Orden::class, 'idNotaVenta', 'id');
     }
 }

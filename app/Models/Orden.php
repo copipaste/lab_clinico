@@ -26,9 +26,16 @@ class Orden extends Model
         return $this->belongsToMany(TipoAnalisis::class, 'orden_analisis','orden_id','tipo_analisis_id');
     }
 
+    //Relación con la tabla nota venta (pertenece a uno)
     public function notaventa()
     {
         return $this->belongsTo(NotaVenta::class, 'idNotaVenta', 'id');
+    }
+
+    // Relación con la tabla Analisis (tiene muchos)
+    public function analisis()
+    {
+        return $this->hasMany(Analisis::class, 'idOrden');
     }
 
 

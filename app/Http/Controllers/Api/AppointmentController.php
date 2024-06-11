@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Analisis;
 use App\Models\CourseStudent;
+use App\Models\HemogramaCompleto;
 use App\Models\NotaVenta;
 use App\Models\Orden;
 use App\Models\ordenAnalisis;
@@ -30,25 +31,30 @@ class AppointmentController extends Controller
 */
         $user = Auth::user();
         $paciente = Paciente::where('idUser', $user->id)->first();
-        $ordenes = Orden::where('idPaciente', $paciente->id)->with('tipoanalisis')->get();
+        //$ordenes = Orden::where('idPaciente', $paciente->id)->with('tipoanalisis')->get();
+        $ordenes = Orden::where('idPaciente', $paciente->id)->with('analisis')->get();
         return $ordenes; //return all data with tiposanalisis
     }
 
     public function registerOrder(Request $request)
     {
 
-        $user = Auth::user();
-        $paciente = Paciente::where('idUser', $user->id)->first();
-        $notaventa1 = NotaVenta::create([
-            'metodoPago' => 'antes IF DATA',
-            'precio' => count($request->all()),
-            'descuento' => 0,
-            'precioTotal' => 0,
-        ]);
+        
         try {
             $datos = $request->all();
             if (count($datos) > 0) {
-
+                // Obtiene los datos del usuario autenticado
+                $user = Auth::user();
+                // relaciona el user con su paciente
+                $paciente = Paciente::where('idUser', $user->id)->first();
+                /* Registra la nota de venta de la orden
+                $notaventa1 = NotaVenta::create([
+                    'metodoPago' => 'antes IF DATA',
+                    'precio' => count($request->all()),
+                    'descuento' => 0,
+                    'precioTotal' => 0,
+                ]);
+                */
                 // Obtener los datos JSON enviados desde Flutter
                 //$jsonData = $request->input('data');
 
@@ -57,9 +63,9 @@ class AppointmentController extends Controller
 
                 $orden = new Orden();
                 $orden->idPaciente = $paciente->id;
-                $orden->estado = 'Muestra sin entregar';
-                $orden->idNotaVenta = null;
-                $orden->nroOrden = null;
+                //$orden->estado = 'Pendiente';
+                //$orden->idNotaVenta = null;
+                //$orden->nroOrden = null;
                 $orden->save();
 
                 // Después de guardar la orden, obtén el ID asignado
@@ -96,7 +102,7 @@ class AppointmentController extends Controller
                 $orden->idNotaVenta = $notaventa->id;
                 $orden->save();
             }
-            $ordenes = Orden::where('idPaciente', $paciente->id)->with('tipoanalisis')->get();
+            $ordenes = Orden::where('idPaciente', $paciente->id)->with('analisis')->get();
             return response()->json($ordenes, 201);
         } catch (\Exception $e) {
             // Registrar el error
@@ -105,5 +111,12 @@ class AppointmentController extends Controller
             // Devolver una respuesta de error
             return response()->json(['error' => 'Error en el registro de orden.'], 500);
         }
+    }
+
+    public function getallanalysis($analysisId)
+    {    
+        $hemograma = HemogramaCompleto::where('idAnalisis', $analysisId)->first();
+        //return $hemograma; // Laravel automáticamente convierte el objeto en JSON si es un modelo de Eloquent
+        return response()->json($hemograma); // Especifica claramente que la respuesta debe ser JSON
     }
 }

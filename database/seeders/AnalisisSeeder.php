@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Paciente;
 use App\Models\Orden;
 use App\Models\Analisis;
+use App\Models\Historial;
 use App\Models\User;
 
 use App\Models\TipoAnalisis;
@@ -27,16 +28,23 @@ class AnalisisSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ])->assignRole('Paciente');
 
+        $historial5 = Historial::create([
+            'nroHistoria' => 'H-5',
+            'fechaRegistro' => '2024-06-10',
+            'antecedentesPatologicos' => 'ninguno',
+        ]);
+
         // Crear un paciente
         // PACIENTE ID 5
         $paciente = new Paciente();
         $paciente->ci = '1234567';
         $paciente->nombre = 'Paciente Lucas';
-        $paciente->sexo = 'Masculino';
+        $paciente->sexo = 'MASCULINO';
         $paciente->correo = 'paciente@gmail.com';
-        $paciente->telefono = '123456789';
+        $paciente->telefono = '77889911';
         $paciente->fechaNacimiento = '2006-01-01';
         $paciente->idTipoSeguro = 1; // Asigna el ID del tipo de seguro correspondiente
+        $paciente->idHistorial = $historial5->id;
         $paciente->idUser = $user6->id;     // idUser 7
         $paciente->save();
 
@@ -72,6 +80,7 @@ class AnalisisSeeder extends Seeder
             $analisis->descripcion = $tipoAnalisis->nombre; // Acceder al nombre del tipo de análisis
             $analisis->idOrden = $orden->id;
             $analisis->save();
+
         }
 
         $this->command->info('¡Datos de análisis generados exitosamente!');
