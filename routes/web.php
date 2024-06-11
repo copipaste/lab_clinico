@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Route::resource('/analisis', AnalisisController::class)->names('analisis');
     Route::get('analisis',[AnalisisController::class, 'index'])->name('analisis.index');
+    Route::get('informe',[AnalisisController::class, 'informe'])->name('analisis.informe');
     Route::post('analisis', [AnalisisController::class, 'store'])->name('analisis.store');
     Route::delete('analisis/{analisis}', [AnalisisController::class, 'destroy'])->name('analisis.destroy');
     Route::get('/analisis/{id}/hemograma', [AnalisisController::class, 'hemograma'])->name('analisis.hemograma');

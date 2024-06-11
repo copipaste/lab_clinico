@@ -418,6 +418,12 @@ return [
                     'icon' => 'fas fa-fw fa-flask',
                     'can' => 'tipoanalisis.index',
                 ],
+                [
+                    'text' => 'Informe Analisis',
+                    'url' => '/informe',
+                    'icon' => 'fas fa-fw fa-flask',
+                    'can' => 'tipoanalisis.index',
+                ],
 
             ],
         ],

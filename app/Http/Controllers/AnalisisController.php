@@ -18,12 +18,13 @@ class AnalisisController extends Controller
      */
     public function index(Request $request)
     {
+
         $heads = [
             'Orden',
             'Id',
             'Descripcion',
             'Paciente',
-            'Fecha - Hora',
+            'Fecha',
             'Estado',
             ['label' => 'Acciones', 'no-export' => true],
         ];
@@ -42,7 +43,37 @@ class AnalisisController extends Controller
         }
 
         $tipoanalisis = TipoAnalisis::all();
-        return view('analisis.index', compact('analisis', 'tipoanalisis', 'heads', 'start_date', 'end_date'));
+        return view('analisis.index', compact('analisis', 'tipoanalisis', 'heads', 'start_date', 'end_date',));
+    }
+
+
+    public function informe(Request $request)
+    {
+        $heads = [
+            'Orden',
+            'Id',
+            'Descripcion',
+            'Paciente',
+            'Fecha',
+            'Costo',
+            ['label' => 'Estado', 'no-export' => true],
+        ];
+
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        if ($start_date && $end_date) {
+            // Apply date filter
+            $analisis = Analisis::whereDate('created_at', '>=', $start_date)
+                                ->whereDate('created_at', '<=', $end_date)
+                                ->get();
+        } else {
+            // Load all records if no date range is provided
+            $analisis = Analisis::all();
+        }
+
+        $tipoanalisis = TipoAnalisis::all();
+        return view('analisis.informe', compact('analisis', 'tipoanalisis', 'heads', 'start_date', 'end_date'));
     }
 
 
