@@ -17,11 +17,17 @@ use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\HemogramaCompletoController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HormonasController;
 use App\Http\Controllers\StripeController;
 use App\Models\HemogramaCompleto;
 use App\Http\Controllers\NotificationsController;
+<<<<<<< HEAD
 
+=======
+use App\Http\Controllers\PagoController;
+ 
+>>>>>>> 333b3e04e17eb682ea5d175b98e51bc76f7b4531
 
 /*
 |--------------------------------------------------------------------------
@@ -107,7 +113,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
     /* ------------------------------------- VISTA ESPECIALIDADES ----------------------------------------------------------- */
-Route::resource('/VistaEspecialidades', EspecialidadController::class)->names('especialidad');
+// Route::resource('/VistaEspecialidades', EspecialidadController::class)->names('especialidad');
 /* ---------------------------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------- VISTA ESPECIALIDADES ---------------------------------------------------------- */
@@ -138,12 +144,22 @@ Route::post('/log-window-close', 'UserController@logWindowClose')->name('log.win
 
 // rutas notificaciones
 
-Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
+// Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
 
 
 /* ------------------------------------- VISTA NOTIFICACIONES ---------------------------------------------------------- */
 Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
 
 
+<<<<<<< HEAD
 /*-------------------------------horario------------*/
 Route::resource('horario', HorarioController::class)->names('horario');
+=======
+/* ------------------------------------- VISTA PAGOS ---------------------------------------------------------- */
+Route::resource('/pagos', PagoController::class)->names('pagos');
+Route::post('/indexCuston', [PagoController::class, 'indexCustom'])->name('pagos.indexCustom');
+
+
+/* ---------------------------------------VISTA EMAIL-------------------------------------------------------------------- */
+Route::get('/send',[EmailController::class, 'sendEmail']); 
+>>>>>>> 333b3e04e17eb682ea5d175b98e51bc76f7b4531

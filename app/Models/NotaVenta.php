@@ -15,4 +15,13 @@ class NotaVenta extends Model
     {
         return $this->hasOne(Orden::class,  'idNotaVenta', 'id');
     }
+
+    public static function sumTotal()
+    {
+        return self::sum('precioTotal');
+    }
+
+    public static function totalPagos(){
+        return self::count();
+    }
 }
