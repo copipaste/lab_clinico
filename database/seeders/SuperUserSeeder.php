@@ -13,6 +13,7 @@ class SuperUserSeeder extends Seeder
      */
     public function run(): void
     {
+        // ID 1
         User::create([
             'name' => 'Super User',
             'email' => 'SuperUsuario@gmail.com',

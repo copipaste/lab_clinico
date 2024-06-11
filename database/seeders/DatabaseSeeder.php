@@ -29,10 +29,12 @@ class DatabaseSeeder extends Seeder
         $this->call(HemogramaSeeder::class);
         $this->call(HormonaSeeder::class);
         $this->call(HorarioSeeder::class);
-        //$this->call(OrdenSeeder::class);
+        $this->call(OrdenSeeder::class);
 
 
 
+
+        //USER ID 8
         \App\Models\User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@example.com',
