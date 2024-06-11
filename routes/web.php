@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ use App\Http\Controllers\HormonasController;
 use App\Http\Controllers\StripeController;
 use App\Models\HemogramaCompleto;
 use App\Http\Controllers\NotificationsController;
-use App\Models\Orden;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Route::resource('/analisis', AnalisisController::class)->names('analisis');
     Route::get('analisis',[AnalisisController::class, 'index'])->name('analisis.index');
+    Route::get('informe',[AnalisisController::class, 'informe'])->name('analisis.informe');
     Route::post('analisis', [AnalisisController::class, 'store'])->name('analisis.store');
     Route::delete('analisis/{analisis}', [AnalisisController::class, 'destroy'])->name('analisis.destroy');
     Route::get('/analisis/{id}/hemograma', [AnalisisController::class, 'hemograma'])->name('analisis.hemograma');
@@ -85,6 +87,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::post('/analisis/hormona', [AnalisisController::class, 'hormonaStore'])->name('analisis.hormonastore');
 
+
     //orden
     Route::resource('/orden', OrdenController::class)->names('orden');
     Route::post('/orden', [OrdenController::class, 'index1'])->name('orden1.index');
@@ -93,10 +96,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
     //hormona
+
     Route::get('hormonaCompleto/{id}',[HormonasController::class, 'show2'])->name('hormona.show2');
     Route::resource('/hormona', HormonasController::class)->names('hormona');
+
     Route::get('hemogramaCompleto/{id}',[HemogramaCompletoController::class, 'show2'])->name('hemograma.show2');
     Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
+    Route::get('hemogramaPdf/{id}', [HemogramaCompletoController::class, 'generatePDF'])->name('hemograma.generatePDF');
+
 });
 
 
@@ -138,3 +145,6 @@ Route::get('notifications/get',[NotificationsController::class, 'getNotification
 /* ------------------------------------- VISTA NOTIFICACIONES ---------------------------------------------------------- */
 Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
 
+
+/*-------------------------------horario------------*/
+Route::resource('horario', HorarioController::class)->names('horario');

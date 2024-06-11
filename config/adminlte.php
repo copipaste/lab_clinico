@@ -418,6 +418,12 @@ return [
                     'icon' => 'fas fa-fw fa-flask',
                     'can' => 'tipoanalisis.index',
                 ],
+                [
+                    'text' => 'Informe Analisis',
+                    'url' => '/informe',
+                    'icon' => 'fas fa-fw fa-flask',
+                    'can' => 'tipoanalisis.index',
+                ],
 
             ],
         ],
@@ -450,6 +456,12 @@ return [
             'can' => 'especialidad.index',
         ],
         [
+            'text' => 'Horario',
+            'route' => 'horario.index',
+            'icon' => 'fas fa-book-medical',
+            'can' => 'especialidad.index',
+        ],
+        [
             'text' => 'Recepcionistas',
             'route' => 'recepcionistas.index',
             'icon' => 'fas fa-book-medical',
@@ -463,7 +475,7 @@ return [
         ],
 
 
-        
+
         [
             'type' => 'navbar-notification',
             'id' => 'my-notification',                // An ID attribute (required).
@@ -484,7 +496,7 @@ return [
             'type' => 'darkmode-widget',
             'topnav_right' => true,     // Or "topnav => true" to place on the left.
         ]
-        
+
 
 
 

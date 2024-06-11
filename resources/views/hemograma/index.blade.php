@@ -35,9 +35,11 @@
                                 <a href="{{route('hemograma.show', $h->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
                                     <i class="fa fa-lg fa-fw fas fa-eye"></i>
                                 </a>
-                                <a href="{{route('hemograma.edit', $h->id) }}" class="btn btn-xs btn-default text-danger mx-1 shadow" title="PDF">
+                                <a href="{{ route('hemograma.generatePDF', ['id' => $h->id]) }}" class="btn btn-xs btn-default text-danger mx-1 shadow" title="PDF">
                                     <i class="fas fa-lg fa-fw fa-file-pdf"></i>
                                 </a>
+
+
                                 <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR" data-toggle="modal" data-target="#modalCustom{{ $h->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>
                                 </button>

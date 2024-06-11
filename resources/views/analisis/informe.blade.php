@@ -1,10 +1,14 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Analisis</h1>
+    <h1 class="m-0 text-dark">Informe de Analisis</h1>
 @stop
 
-
+<?php
+// Valores con PHP. Estos podrían venir de una base de datos o de cualquier lugar del servidor
+$etiquetas = ['Enero', 'Febrero', 'Marzo', 'Abril'];
+$datosVentas = [5000, 1500, 8000, 5102];
+?>
 
 @section('content')
 
@@ -15,7 +19,7 @@
         {{-- ---Custom modal-- --}}
         {{-- <x-adminlte-button label="Registrar" class="bg-white mb-2" title="Registrar" data-toggle="modal"
             data-target="#modalpromocion" /> --}}
-        <form action="{{ route('analisis.index') }}" method="GET">
+        <form action="{{ route('analisis.informe') }}" method="GET">
             @csrf
             <div class="flex items-center space-x-2">
                 <div>
@@ -53,6 +57,9 @@
     <div class="card">
         <div class="card-body">
             <x-adminlte-datatable id="table1" :heads="$heads" striped head-theme="white" with-buttons>
+                @php
+                    $totalCosto = 0; // Inicializa el total de costos como 0
+                @endphp
                 @foreach ($analisis as $o)
                     @php
                         $hemogramaExistente = App\Models\HemogramaCompleto::where('idAnalisis', $o->id)->exists();
@@ -65,46 +72,20 @@
                         <td>{{ $o->orden->paciente->nombre }}</td>
                         <td>{{ $o->created_at->format('Y-m-d') }}</td>
                         {{-- <td>{{ $o->bioquimico->nombre }}</td> --}}
+                        <td>
+                            @foreach ($o->orden->tipoanalisis as $tipo)
+                                @if ($o->descripcion == $tipo->nombre)
+                                    {{ $tipo->precio }}
+                                    @php
+                                    $totalCosto += $tipo->precio; // Agrega el precio de este tipo de análisis al total general
+                                @endphp
+                                @endif
+                            @endforeach
+                        </td>
+
                         <td>{{ $o->estado }}</td>
                         {{-- <td>{{ $o->orden->tipoAnalisis->nombre }}</td> --}}
 
-                        <td width="15px">
-
-                            <div class="d-flex">
-
-                                @if ($o->descripcion == 'Hemograma')
-                                    @if (!$hemogramaExistente)
-                                        <a href="{{ route('analisis.hemograma', $o->id) }}"
-                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
-                                            <i class="fa fa-lg fa-fw fa-plus"></i>
-                                        </a>
-                                    @else
-                                        <a href="{{ route('hemograma.show2', $o->id) }}"
-                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
-                                            <i class="fa fa-lg fa-fw fas fa-eye"></i>
-                                        </a>
-                                    @endif
-                                @endif
-                                @if ($o->descripcion == 'Hormona')
-                                    @if (!$hormonaExistente)
-                                        <a href="{{ route('analisis.hormona', $o->id) }}"
-                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
-                                            <i class="fa fa-lg fa-fw fa-plus"></i>
-                                        </a>
-                                    @else
-                                        <a href="{{ route('hormona.show2', $o->id) }}"
-                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
-                                            <i class="fa fa-lg fa-fw fas fa-eye"></i>
-                                        </a>
-                                    @endif
-                                @endif
-
-                                {{-- <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
-                                    data-toggle="modal" data-target="#modalCustom{{ $o->id }}">
-                                    <i class="fa fa-lg fa-fw fa-trash"></i>
-                                </button> --}}
-                            </div>
-                        </td>
 
                         {{-- <x-adminlte-modal id="modalCustom{{ $o->id }}" title="Eliminar" size="sm"
                             theme="warning" icon="fa-solid fa-triangle-exclamation" v-centered static-backdrop scrollable>
@@ -122,12 +103,15 @@
 
                     </tr>
                 @endforeach
-
             </x-adminlte-datatable>
+            <div class="flex justify-end"> <!-- Utiliza justify-end para alinear los elementos al extremo derecho -->
+                <p class="mr-20">Total: {{ $totalCosto }}</p> <!-- Muestra el total de costos -->
+            </div>
 
         </div>
     </div>
 @stop
+
 
 @section('plugins.DatatablesPlugin', true)
 @section('plugins.Datatables', true)
@@ -137,6 +121,8 @@
 @stop
 
 @section('js')
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
