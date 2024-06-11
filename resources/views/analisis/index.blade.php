@@ -13,9 +13,23 @@
     {{-- modal --}}
     <div class="form-group align-items-end">
         {{-- ---Custom modal-- --}}
-        <x-adminlte-button label="Registrar" class="bg-white mb-2" title="Registrar" data-toggle="modal"
-            data-target="#modalpromocion" />
+        {{-- <x-adminlte-button label="Registrar" class="bg-white mb-2" title="Registrar" data-toggle="modal"
+            data-target="#modalpromocion" /> --}}
+        <form action="{{ route('analisis.index') }}" method="GET">
+            @csrf
+            <div class="flex items-center space-x-2">
+                <div>
+                    <label for="start_date" class="text-gray-600 font-semibold text-sm">Fecha de inicio:</label>
+                    <input type="date" id="start_date" name="start_date" value="{{ $start_date }}"
+                        class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+                    <label for="end_date" class="text-gray-600 font-semibold text-sm">Fecha de fin:</label>
+                    <input type="date" id="end_date" name="end_date" value="{{ $end_date }}"
+                        class="px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </div>
 
+        </form>
 
         <x-adminlte-modal id="modalpromocion" title="Registrar" size="lg" theme="dark" v-centered static-backdrop
             scrollable>
@@ -49,6 +63,7 @@
                         <td>{{ $o->id }}</td>
                         <td>{{ $o->descripcion }}</td>
                         <td>{{ $o->orden->paciente->nombre }}</td>
+                        <td>{{ $o->created_at }}</td>
                         {{-- <td>{{ $o->bioquimico->nombre }}</td> --}}
                         <td>{{ $o->estado }}</td>
                         {{-- <td>{{ $o->orden->tipoAnalisis->nombre }}</td> --}}
@@ -64,7 +79,7 @@
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @else
-                                        <a href="{{ route('hemograma.show2',$o->id) }}"
+                                        <a href="{{ route('hemograma.show2', $o->id) }}"
                                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
                                             <i class="fa fa-lg fa-fw fas fa-eye"></i>
                                         </a>
@@ -77,7 +92,7 @@
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @else
-                                        <a href="{{ route('hormona.show2',$o->id) }}"
+                                        <a href="{{ route('hormona.show2', $o->id) }}"
                                             class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
                                             <i class="fa fa-lg fa-fw fas fa-eye"></i>
                                         </a>
@@ -106,7 +121,6 @@
                         </x-adminlte-modal> --}}
 
                     </tr>
-
                 @endforeach
 
             </x-adminlte-datatable>

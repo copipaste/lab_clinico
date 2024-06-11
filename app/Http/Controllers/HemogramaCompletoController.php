@@ -8,7 +8,7 @@ use App\Models\HemogramaCompleto;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Notificacion;
-
+use Dompdf\Dompdf;
 
 class HemogramaCompletoController extends Controller
 {
@@ -29,6 +29,22 @@ class HemogramaCompletoController extends Controller
         return view('hemograma.index', compact('hemograma', 'heads'));
     }
 
+    public function generatePDF($id)
+    {
+        // Obtener el hemograma utilizando el ID
+        $hemograma = HemogramaCompleto::findOrFail($id);
+        $bioquimico = Bioquimico::all();
+        // Renderizar la vista como HTML
+        $html = view('hemograma.pdf', compact('hemograma', 'bioquimico'))->render();
+
+        $dompdf = new Dompdf();
+        // Cargar el HTML en Dompdf
+        $dompdf->loadHtml($html);
+        // Renderizar el PDF
+        $dompdf->render();
+        // Descargar el PDF
+        return $dompdf->stream('pdf_example.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      */

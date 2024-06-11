@@ -86,6 +86,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::post('/analisis/hormona', [AnalisisController::class, 'hormonaStore'])->name('analisis.hormonastore');
 
+
     //orden
     Route::resource('/orden', OrdenController::class)->names('orden');
     Route::post('/orden', [OrdenController::class, 'index1'])->name('orden1.index');
@@ -94,10 +95,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
     //hormona
+
     Route::get('hormonaCompleto/{id}',[HormonasController::class, 'show2'])->name('hormona.show2');
     Route::resource('/hormona', HormonasController::class)->names('hormona');
+
     Route::get('hemogramaCompleto/{id}',[HemogramaCompletoController::class, 'show2'])->name('hemograma.show2');
     Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
+    Route::get('hemogramaPdf/{id}', [HemogramaCompletoController::class, 'generatePDF'])->name('hemograma.generatePDF');
+
 });
 
 

@@ -10,31 +10,49 @@ use App\Models\Notificacion;
 use App\Models\TipoAnalisis;
 use Illuminate\Http\Request;
 
+
 class AnalisisController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
+    public function index(Request $request)
     {
         $heads = [
             'Orden',
             'Id',
             'Descripcion',
             'Paciente',
+            'Fecha - Hora',
             'Estado',
             ['label' => 'Acciones', 'no-export' => true],
         ];
 
         $analisis = Analisis::all();
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        if ($start_date && $end_date) {
+            // Apply date filter
+            $analisis = Analisis::whereDate('created_at', '>=', $start_date)
+                                ->whereDate('created_at', '<=', $end_date)
+                                ->get();
+        } else {
+            // Load all records if no date range is provided
+            $analisis = Analisis::all();
+        }
+
         $tipoanalisis = TipoAnalisis::all();
         return view('analisis.index', compact('analisis', 'tipoanalisis', 'heads'));
+        return view('analisis.index', compact('analisis', 'tipoanalisis', 'heads', 'start_date', 'end_date'));
     }
 
 
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
         //
