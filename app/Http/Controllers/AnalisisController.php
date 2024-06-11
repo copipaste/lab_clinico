@@ -16,7 +16,6 @@ class AnalisisController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
     public function index(Request $request)
     {
         $heads = [
@@ -29,7 +28,6 @@ class AnalisisController extends Controller
             ['label' => 'Acciones', 'no-export' => true],
         ];
 
-        $analisis = Analisis::all();
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
 
@@ -44,7 +42,6 @@ class AnalisisController extends Controller
         }
 
         $tipoanalisis = TipoAnalisis::all();
-        return view('analisis.index', compact('analisis', 'tipoanalisis', 'heads'));
         return view('analisis.index', compact('analisis', 'tipoanalisis', 'heads', 'start_date', 'end_date'));
     }
 
