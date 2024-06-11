@@ -82,9 +82,9 @@
             <h1>Resultados de Análisis</h1>
         </div>
         <div class="content">
-            <h2>Estimado/a doctor/a, estos son los resultados del paciente {{$paciente}}</h2>
+            <h2>Resultados del paciente {{$paciente}}</h2>
             <p>
-                Nos complace informarle que los resultados del análisis realizado el {{$fecha}}. A continuación, se presentan los detalles:
+                Nos complace presentarle los resultados del análisis realizado en fecha {{$fecha}} al paciente {{$paciente}} . A continuación, se presentan los detalles:
             </p>
             <div class="results">
                 <p><strong>  SERIE ROJA</strong></p>

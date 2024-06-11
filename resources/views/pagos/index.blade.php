@@ -81,10 +81,10 @@
 
  
 
-                        <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
+                        {{-- <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
                             data-toggle="modal" data-target="#modalCustom{{ $pago->id }}">
                             <i class="fa fa-lg fa-fw fa-trash"></i>
-                        </button>
+                        </button> --}}
                         <a href="{{ route('pagos.show', $pago) }}"
                             class="btn btn-xs btn-default text-teal mx-1 shadow" title="DETALLES">
                             <i class="fa fa-lg fa-fw fa-eye"></i>
@@ -93,24 +93,37 @@
                     </div>
                 </td>
 
-                <x-adminlte-modal id="modalCustom{{ $pago->id }}" title="Eliminar" size="sm" theme="warning"
+                {{-- <x-adminlte-modal id="modalCustom{{ $pago->id }}" title="Eliminar" size="sm" theme="warning"
                     icon="fa-solid fa-triangle-exclamation" v-centered static-backdrop scrollable>
                     <div style="height: 50px;">¿Está seguro de eliminar el pago?</div>
                     <x-slot name="footerSlot">
-                        <form action="{{-- route('pagos.destroy', $pago) --}}" method="POST">
+                        <form action="{{ route('pagos.destroy', $pago) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <x-adminlte-button class="btn-flat" type="submit" label="Aceptar" theme="dark" />
                         </form>
                         <x-adminlte-button theme="light" label="Cancelar" data-dismiss="modal" />
                     </x-slot>
-                </x-adminlte-modal>
+                </x-adminlte-modal> --}}
             </tr>
             @endforeach
 
         </x-adminlte-datatable>
 
     </div>
+    <div class="card-footer text-right">
+        @if ($footer == true)
+        <p class="mb-1">
+            <strong>Total de pagos:</strong>
+            <span class="ml-1">{{ number_format($sumTotal, 2) }}</span>
+        </p>
+        <p class="mb-1">
+            <strong>Cantidad de pagos:</strong>
+            <span class="ml-1">{{ $totalPagos }}</span>
+        </p>            
+        @endif
+    </div>
+
 </div>
 @stop
 

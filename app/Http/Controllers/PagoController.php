@@ -19,7 +19,10 @@ class PagoController extends Controller
          ['label' => 'Acciones', 'no-export' => true]
         ];
         $pagos = NotaVenta::all();
-        return view('pagos.index', compact('pagos', 'heads'));
+        $sumTotal = NotaVenta::sumTotal();
+        $totalPagos = NotaVenta::totalPagos();
+        $footer = true;
+        return view('pagos.index', compact('pagos', 'heads', 'sumTotal', 'totalPagos', 'footer'));
     }
 
 
@@ -32,8 +35,8 @@ class PagoController extends Controller
     
             $heads = $this->filtrarPorCategoria($request->input('sel2Category'));
             $pagos = $this->filtrarPorFecha($request->input('drPlaceholder'));
-
-            return view('pagos.index', compact('heads', 'pagos'));
+            $footer = false;
+            return view('pagos.index', compact('heads', 'pagos', 'footer'));
 
         }
         
@@ -41,7 +44,8 @@ class PagoController extends Controller
                 
             $heads = $this->filtrarPorCategoria($request->input('sel2Category'));
             $pagos = NotaVenta::all();
-            return view('pagos.index', compact('heads', 'pagos'));
+            $footer = false;
+            return view('pagos.index', compact('heads', 'pagos', 'footer'));
         }
 
         
@@ -57,9 +61,10 @@ class PagoController extends Controller
                 'created_at' => 'Fecha',
              ['label' => 'Acciones', 'no-export' => true]
             ];
-            return view('pagos.index', compact('heads', 'pagos'));
+            $footer = false;
+            return view('pagos.index', compact('heads', 'pagos', 'footer'));
         }
-
+    
         return redirect()->route('pagos.index');
 
     }
@@ -104,10 +109,13 @@ class PagoController extends Controller
     
 
     public function show(NotaVenta $pago){
-        return view('pagos.show', compact('pago'));
+        $analisis = $pago->ordenes->analisis;
+        return view('pagos.show', compact('pago', 'analisis'));
     }
 
 
+    
  
+
 
 }

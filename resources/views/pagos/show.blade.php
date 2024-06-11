@@ -9,6 +9,13 @@
     <div class="card">
         <div class="card-body">
             <p><strong>Usuario:</strong> {{ $pago->ordenes->paciente->nombre }}</p>
+            <p><strong>Numero de Orden:</strong> {{ $pago->ordenes->nroOrden }}</p>
+            
+            <p><strong>Analisis:</strong>
+                @foreach ($analisis as $item)
+                    {{$item->descripcion}} <br>
+                @endforeach
+                 </p>
             <p><strong>Metodo de Pago:</strong> {{ $pago->metodoPago }}</p>
             <p><strong>Precio:</strong> {{ $pago->precio }}</p>
             <p><strong>Descuento:</strong> {{ $pago->descuento }}</p>

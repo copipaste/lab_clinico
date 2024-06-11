@@ -276,6 +276,21 @@ class PacienteSeeder extends Seeder
         $tipoAnalisis = TipoAnalisis::where('nombre', 'Hemograma')->first();
 
         DB::table('orden_analisis')->insert([
+            'orden_id' => $orden1->id,
+            'tipo_analisis_id' => $tipoAnalisis->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
+        
+        DB::table('orden_analisis')->insert([
+            'orden_id' => $orden2->id,
+            'tipo_analisis_id' => $tipoAnalisis->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('orden_analisis')->insert([
             'orden_id' => $orden3->id,
             'tipo_analisis_id' => $tipoAnalisis->id,
             'created_at' => now(),
@@ -289,6 +304,18 @@ class PacienteSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        $analisis = new Analisis();
+        $analisis->estado = 'Pendiente';
+        $analisis->descripcion = $tipoAnalisis->nombre; // Acceder al nombre del tipo de análisis
+        $analisis->idOrden = $orden1->id;
+        $analisis->save();
+        
+        
+        $analisis = new Analisis();
+        $analisis->estado = 'Pendiente';
+        $analisis->descripcion = $tipoAnalisis->nombre; // Acceder al nombre del tipo de análisis
+        $analisis->idOrden = $orden2->id;
+        $analisis->save();
 
         $analisis = new Analisis();
         $analisis->estado = 'Pendiente';

@@ -31,6 +31,10 @@ class Orden extends Model
         return $this->belongsTo(NotaVenta::class, 'idNotaVenta', 'id');
     }
 
+    public function analisis()
+    {
+        return $this->hasMany(Analisis::class, 'idOrden');
+    }
 
 
 }
