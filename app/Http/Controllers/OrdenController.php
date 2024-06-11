@@ -125,8 +125,8 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
      */
     public function store(Request $request)
     {
-        if($request->pacientes=="nada"){
         $user = Auth::user();
+        if($request->pacientes=="nada"){
         $paciente = Paciente::where('idUser', $user->id)->first();
         if(!$paciente){
         $paciente = new Paciente();
@@ -203,7 +203,17 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
             ->log('Se registró un análisis para la orden con el ID: ' . $idOrden);
 
         session()->flash('success', 'Se registró exitosamente');
-        return redirect()->route('analisis.index')->with('success', '¡El análisis se ha registrado exitosamente!');
+        if ($user->hasRole('Paciente')) {
+            return redirect()->route('orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
+
+            // El usuario tiene el rol de "Paciente"
+            // Puedes colocar aquí el código que deseas ejecutar para usuarios con este rol
+        } else {
+            return redirect()->route('analisis.index')->with('success', '¡El análisis se ha registrado exitosamente!');
+
+            // El usuario no tiene el rol de "Paciente"
+            // Puedes colocar aquí el código que deseas ejecutar para usuarios sin este rol
+        }
     }
 
 

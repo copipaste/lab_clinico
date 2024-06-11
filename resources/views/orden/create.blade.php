@@ -282,24 +282,71 @@
     </div>
     <div class="form-row mt-2">
         <div class="col">
-            <span>Tipo de Analisis</span>
+            <span>Tipo de Análisis - Hemograma Completo</span>
             <div class="input-group">
                 <br>
                 <div>
-                    @foreach ($hemogramacompleto as $o)
+
+                    <input class="form-check-input" type="checkbox" value="{{ 1 }}" id="tipoAnalisis{{ 1 }}" name="tipoAnalisisIds[]">
+                    <label class="form-check-label" for="tipoAnalisis{{ 1 }}">
+                        Hemograma
+                    </label>
+                    <label class="form-check-label" for="tipoAnalisis{{ 1 }}">
+                        | Precio: 50 bs.
+                    </label>
+
+
+                    @php
+                    $attributesHemograma = $hemogramacompleto->first()->getAttributes();
+                    $keysToExclude = ['id']; // Atributos a excluir
+                    $attributesHemograma = array_diff_key($attributesHemograma);
+                    $attributesHemograma = array_slice($attributesHemograma, 1, -5, true);
+                @endphp
+
+                @foreach ($attributesHemograma as $attribute => $value)
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="{{ $o->id }}"
-                                id="tipoAnalisis{{ $o->id }}" name="tipoAnalisisIds[]">
-                            <label class="form-check-label" for="tipoAnalisis{{ $o->id }}">
-                                {{ $o->nombre }}
-
-                            </label>
-                            <label class="form-check-label" for="tipoAnalisis{{ $o->id }}">
-                                | Precio: {{ $o->precio }} bs.
-
+                            <input class="form-check-input" type="checkbox" >
+                            <label class="form-check-label" >
+                                | {{ ucfirst($attribute) }}
                             </label>
                         </div>
                     @endforeach
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <span>Tipo de Análisis - Hormonas</span>
+            <div class="input-group">
+                <br>
+                <div>
+
+
+                        <input class="form-check-input" type="checkbox" value="{{ 2 }}" id="tipoAnalisis{{ 2 }}" name="tipoAnalisisIds[]">
+                        <label class="form-check-label" for="tipoAnalisis{{ 2}}">
+                            Hormona
+                        </label>
+                        <label class="form-check-label" for="tipoAnalisis{{ 2}}">
+                            | Precio: 100 bs.
+                        </label>
+
+                        @php
+                        $attributesHormonas = $hormonas->first()->getAttributes();
+                        $keysToExcludeHormonas = ['id']; // Atributos a excluir
+                        $attributesHormonas = array_diff_key($attributesHormonas);
+                        $attributesHormonas = array_slice($attributesHormonas, 1, -5, true);
+                    @endphp
+
+
+@foreach ($attributesHormonas as $attributeHormona => $valueHormona)                                <div class="form-check">
+                                <input class="form-check-input" type="checkbox" >
+                                <label class="form-check-label" >
+                                    | {{ ucfirst($attributeHormona) }}
+                                </label>
+                            </div>
+                        @endforeach
+
                 </div>
             </div>
         </div>
