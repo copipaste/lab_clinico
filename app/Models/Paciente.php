@@ -49,4 +49,9 @@ class Paciente extends Model
     {
         return $this->hasMany(Notificacion::class, 'pacienteId');
     }
+
+    public function ordenes()
+    {
+        return $this->hasMany(Orden::class, 'idPaciente');
+    }
 }

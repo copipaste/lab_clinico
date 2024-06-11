@@ -11,6 +11,11 @@ use App\Models\User;
 use App\Models\Paciente;
 use App\Models\Registro;
 use App\Models\Especialidad;
+use App\Models\NotaVenta;
+use App\Models\Orden;
+use App\Models\TipoAnalisis;
+use Illuminate\Support\Facades\DB;
+use App\Models\Analisis;
 
 class PacienteSeeder extends Seeder
 {
@@ -126,7 +131,7 @@ class PacienteSeeder extends Seeder
             'idUser' => $user3->id,
         ]);
 
-        Paciente::create([
+        $paciente4 = Paciente::create([
             'ci' => '654321',
             'nombre' => 'Tania Valdez 4',
             'fechaNacimiento' => '1990-01-02',
@@ -205,6 +210,101 @@ class PacienteSeeder extends Seeder
             'idBioquimico' => $bioquimico->id,
             'idHistorial' => $historial1->id
         ]);
+
+
+        $nota1 = NotaVenta::create([
+            'metodoPago' => 'Efectivo',
+            'precio' => 100,
+            'descuento' => 0,
+            'precioTotal' => 100,
+            'created_at' => '2024-06-10',
+        ]);
+
+        $nota2 = NotaVenta::create([
+            'metodoPago' => 'Tarjeta',
+            'precio' => 100,
+            'descuento' => 0,
+            'precioTotal' => 100,
+            'created_at' => '2024-06-10',
+        ]);
+
+        $nota3 = NotaVenta::create([
+            'metodoPago' => 'Efectivo',
+            'precio' => 100,
+            'descuento' => 0,
+            'precioTotal' => 100,
+            'created_at' => '2024-05-03',
+        ]);
+
+        $nota4 = NotaVenta::create([
+            'metodoPago' => 'Tarjeta',
+            'precio' => 100,
+            'descuento' => 0,
+            'precioTotal' => 100,
+            'created_at' => '2024-05-04',
+        ]);
+
+
+        $orden1 = Orden::create([
+            'nroOrden' => 'OR-31',
+            'estado' => 'en proceso',
+            'idPaciente' => $paciente4->id,
+            'idNotaVenta' => $nota1->id,
+        ]);
+
+        $orden2 = Orden::create([
+            'nroOrden' => 'OR-32',
+            'estado' => 'en proceso',
+            'idPaciente' => $paciente4->id,
+            'idNotaVenta' => $nota2->id,
+        ]);
+
+        $orden3 = Orden::create([
+            'nroOrden' => 'OR-33',
+            'estado' => 'en proceso',
+            'idPaciente' => $paciente4->id,
+            'idNotaVenta' => $nota3->id,
+        ]);
+
+        $orden4 = Orden::create([
+            'nroOrden' => 'OR-34',
+            'estado' => 'en proceso',
+            'idPaciente' => $paciente4->id,
+            'idNotaVenta' => $nota4->id,
+        ]);
+
+        $tipoAnalisis = TipoAnalisis::where('nombre', 'Hemograma')->first();
+
+        DB::table('orden_analisis')->insert([
+            'orden_id' => $orden3->id,
+            'tipo_analisis_id' => $tipoAnalisis->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('orden_analisis')->insert([
+            'orden_id' => $orden4->id,
+            'tipo_analisis_id' => $tipoAnalisis->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+
+        $analisis = new Analisis();
+        $analisis->estado = 'Pendiente';
+        $analisis->descripcion = $tipoAnalisis->nombre; // Acceder al nombre del tipo de análisis
+        $analisis->idOrden = $orden3->id;
+        $analisis->save();
+
+        $analisis = new Analisis();
+        $analisis->estado = 'Pendiente';
+        $analisis->descripcion = $tipoAnalisis->nombre; // Acceder al nombre del tipo de análisis
+        $analisis->idOrden = $orden4->id;
+        $analisis->save();
+
+
+        $this->command->info('¡Datos creados exitosamente jhoel!');
+
 
 
 

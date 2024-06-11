@@ -103,6 +103,10 @@ class AnalisisController extends Controller
         $analisis->save();
 
         $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id); // esta linea de codigo tengo que meter para crear la notificacion al paciente
+        
+         
+        $email = new EmailController();
+        $email->sendEmail($hemograma,'sistemasuagrm2023@gmail.com','hemograma'); // esta linea de codigo tengo que meter para enviar el email al paciente
 
         activity()
         ->causedBy(auth()->user())

@@ -25,8 +25,9 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoanalisisSeeder::class);
         $this->call(PacienteSeeder::class);
         $this->call(EspecialidadSeeder::class);
-        $this->call(AnalisisSeeder::class);
-        $this->call(HemogramaSeeder::class);
+      //!  $this->call(AnalisisSeeder::class);
+      //!  $this->call(HemogramaSeeder::class);
+        
         //$this->call(OrdenSeeder::class);
 
 

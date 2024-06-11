@@ -443,12 +443,12 @@ return [
             ],
         ],
         */
-        [
-            'text' => 'Especialidades',
-            'route' => 'especialidad.index',
-            'icon' => 'fas fa-book-medical',
-            'can' => 'especialidad.index',
-        ],
+        // [
+        //     'text' => 'Especialidades',
+        //     'route' => 'especialidad.index',
+        //     'icon' => 'fas fa-book-medical',
+        //     'can' => 'especialidad.index',
+        // ],
         [
             'text' => 'Recepcionistas',
             'route' => 'recepcionistas.index',
@@ -460,6 +460,11 @@ return [
             'route' => 'LandingPage.index',
             'icon' => 'fas fa-book-medical',
             'can' => 'landingpage.index',
+        ],
+        [
+            'text' => 'Pagos',
+            'route' => 'pagos.index',
+            'icon' => 'fas fa-book-medical',
         ],
 
 
@@ -642,6 +647,26 @@ return [
                     'type' => 'css',
                     'asset' => true,
                     'location' => 'vendor/datatables-plugins/buttons/css/buttons.bootstrap4.min.css',
+                ],
+            ],
+        ],
+        'DateRangePicker' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/moment/moment.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/daterangepicker/daterangepicker.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/daterangepicker/daterangepicker.css',
                 ],
             ],
         ],
