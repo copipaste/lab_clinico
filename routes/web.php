@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ use App\Http\Controllers\HormonasController;
 use App\Http\Controllers\StripeController;
 use App\Models\HemogramaCompleto;
 use App\Http\Controllers\NotificationsController;
-use App\Models\Orden;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -138,3 +139,6 @@ Route::get('notifications/get',[NotificationsController::class, 'getNotification
 /* ------------------------------------- VISTA NOTIFICACIONES ---------------------------------------------------------- */
 Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
 
+
+/*-------------------------------horario------------*/
+Route::resource('horario', HorarioController::class)->names('horario');

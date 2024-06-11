@@ -450,6 +450,12 @@ return [
             'can' => 'especialidad.index',
         ],
         [
+            'text' => 'Horario',
+            'route' => 'horario.index',
+            'icon' => 'fas fa-book-medical',
+            'can' => 'especialidad.index',
+        ],
+        [
             'text' => 'Recepcionistas',
             'route' => 'recepcionistas.index',
             'icon' => 'fas fa-book-medical',
@@ -463,7 +469,7 @@ return [
         ],
 
 
-        
+
         [
             'type' => 'navbar-notification',
             'id' => 'my-notification',                // An ID attribute (required).
@@ -484,7 +490,7 @@ return [
             'type' => 'darkmode-widget',
             'topnav_right' => true,     // Or "topnav => true" to place on the left.
         ]
-        
+
 
 
 

@@ -12,7 +12,8 @@ use App\Models\Bioquimico;
 use App\Models\Paciente;
 use App\Models\TipoSeguro;
 use App\Models\User;
-
+use App\Models\Hormonas;
+use App\Models\HemogramaCompleto;
 
 use Illuminate\Http\Request;
 
@@ -100,6 +101,9 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
     {   $user = Auth::user();
         $seguros = TipoSeguro::all();
 
+        $hemogramacompleto=HemogramaCompleto::all();
+        $hormonas=Hormonas::all();
+
         $paciente = Paciente::where('idUser', $user->id)->first();
         if($paciente){
         $seguropaciente = TipoSeguro::find($paciente->idTipoSeguro);
@@ -112,7 +116,8 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
 
-        return view('orden.create', compact('seguros','seguropaciente', 'paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
+        return view('orden.create', compact('seguros','seguropaciente',
+        'hemogramacompleto','hormonas','paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
     }
 
     /**
@@ -198,7 +203,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
             ->log('Se registró un análisis para la orden con el ID: ' . $idOrden);
 
         session()->flash('success', 'Se registró exitosamente');
-        return redirect()->route('orden.index')->with('success', '¡El análisis se ha registrado exitosamente!');
+        return redirect()->route('analisis.index')->with('success', '¡El análisis se ha registrado exitosamente!');
     }
 
 
@@ -349,6 +354,6 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         ->withProperties(request()->ip())
         ->log('Se elimino un análisis para la orden con el ID: ' . $orden->id);
         $orden->delete();
-        return redirect()->route('Orden.index')->with('success', 'Eliminado correctamente');
+        return redirect()->route('orden.index')->with('success', 'Eliminado correctamente');
     }
 }
