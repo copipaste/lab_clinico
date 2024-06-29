@@ -14,13 +14,6 @@ class Historial extends Model
     protected $table = 'historiales';
     protected $fillable = ['nroHistoria', 'fechaRegistro','antecedentesPatologicos'];
 
- 
-
-    // public function paciente()
-    // {
-    //     return $this->hasOne(Paciente::class, 'idHistorial', 'id');
-    // }
-
     public function paciente()
     {
         return $this->hasOne(Paciente::class, 'idHistorial', 'id');

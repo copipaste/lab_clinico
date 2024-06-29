@@ -29,12 +29,6 @@ class Paciente extends Model
         return $this->belongsTo(User::class, 'idUser', 'id');
     }
 
-
-
-    // public function historial()
-    // {
-    //     return $this->belongsTo(Historial::class, 'idHistorial', 'id');
-    // }
     public function historial()
     {
         return $this->belongsTo(Historial::class, 'idHistorial', 'id');

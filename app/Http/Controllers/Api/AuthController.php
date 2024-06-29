@@ -21,8 +21,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-
-
     public function index()
     {
         $user = array(); //this will return a set of user and doctor data
@@ -45,93 +43,31 @@ class AuthController extends Controller
             $user['tipo'] = 'Otro';
         }
 
-        /*
-        if ($paciente !== null) {
-            $user['ci'] = $paciente->ci;
-            $user['nombre'] = $paciente->nombre;
-            $user['fechaNacimiento'] = $paciente->fechaNacimiento;
-            $user['sexo'] = $paciente->sexo;
-            $user['telefono'] = $paciente->telefono;
-            $user['tipo'] = 'Paciente';
-        } else {
-            if ($bioquimico !== null) {
-                $user['ci'] = $bioquimico->ci;
-                $user['direccion'] = $bioquimico->direccion;
-                $user['nombre'] = $bioquimico->nombre;
-                $user['fechaNacimiento'] = $bioquimico->fechaNacimiento;
-                $user['sexo'] = $bioquimico->sexo;
-                $user['telefono'] = $bioquimico->telefono;
-                $user['tipo'] = 'Bioquimico';
-            } else {
-                $user['tipo'] = 'Otro';
-            }
-        }
-        */
-
         return $user; //return all data
     }
 
-
-    /*
-    public function index()
-    {
-        $user = array();
-        $user = Auth::user();
-
-        // Buscar el paciente asociado al usuario
-        $paciente = Paciente::where('idUser', $user->id)->first();
-        // Buscar el bioquímico asociado al usuario
-        $bioquimico = Bioquimico::where('idUser', $user->id)->first();
-
-        // Verificar si el usuario es un paciente
-        if ($paciente !== null) {
-            $user['ci'] = $paciente->ci;
-            $user['nombre'] = $paciente->nombre;
-            $user['fechaNacimiento'] = $paciente->fechaNacimiento;
-            $user['sexo'] = $paciente->sexo;
-            $user['telefono'] = $paciente->telefono;
-            $user['tipo'] = 'Paciente';
-        }
-        // Verificar si el usuario es un bioquímico
-        else if ($bioquimico !== null) {
-            $user['ci'] = $bioquimico->ci;
-            $user['direccion'] = $bioquimico->direccion;
-            $user['nombre'] = $bioquimico->nombre;
-            $user['fechaNacimiento'] = $bioquimico->fechaNacimiento;
-            $user['sexo'] = $bioquimico->sexo;
-            $user['telefono'] = $bioquimico->telefono;
-            $user['tipo'] = 'Bioquimico';
-        }
-        // Si el usuario no es ni paciente ni bioquímico
-        else {
-            $user['tipo'] = 'Otro';
-        }
-
-        return response()->json($user); // Devolver todos los datos como JSON
-    }
-
-    */
-
     public function login(Request $request)
     {
-        //validate incoming inputs
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        //check matching user
+        // Buscamos el usuario por el email
         $user = User::where('email', $request->email)->first();
 
-        //check password
+        // Verificamos que el usuario exista y que la contraseña sea correcta
         if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect'],
-            ]);
+            return response()->json(['error' => 'Credenciales incorrectas'], 401);
         }
 
-        //then return generated token
-        return $user->createToken($request->email)->plainTextToken;
+        // Verificamos que el usuario tenga el rol 'Paciente'
+        if (!$user->hasRole('Paciente')) {
+            return response()->json(['error' => 'No autorizado'], 403);
+        }
+
+        // Generamos el token y lo devolvemos en la respuesta
+        return response()->json(['token' => $user->createToken($request->email)->plainTextToken], 200);
     }
 
     public function register(Request $request)
@@ -169,8 +105,6 @@ class AuthController extends Controller
                 'fechaNacimiento' => $request->fechaNacimiento,
                 'sexo' => $request->sexo,
                 'telefono' => $request->telefono,
-                //'correo' => null,
-                //'idTipoSeguro' => null,
                 'idHistorial' => $historial->id,
                 'idUser' => $user->id,
             ]);
@@ -178,7 +112,7 @@ class AuthController extends Controller
             return response()->json($user, 201);
         } catch (\Exception $e) {
             // Registrar el error
-            //\Log::error('Error en el registro: ' . $e->getMessage());
+            Log::error('Error en el registro: ' . $e->getMessage());
 
             // Devolver una respuesta de error
             return response()->json(['error' => 'Error en el registro de usuario.'], 500);
