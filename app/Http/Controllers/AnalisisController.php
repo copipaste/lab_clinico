@@ -7,6 +7,7 @@ use App\Models\HemogramaCompleto;
 use App\Models\Bioquimico;
 use App\Models\Hormonas;
 use App\Models\Notificacion;
+use App\Models\Orden;
 use App\Models\TipoAnalisis;
 use Illuminate\Http\Request;
 
@@ -148,6 +149,9 @@ class AnalisisController extends Controller
         $analisis->estado = 'Realizado';                             // -->>>> cambia el estado cuando el bioquimico realiza el analisis
         $analisis->save();
 
+        // Después de guardar el análisis, verificar si todos los análisis de la orden están realizados
+        $this->verificarEstadoOrden($analisis->idOrden);
+
         $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id); // esta linea de codigo tengo que meter para crear la notificacion al paciente
 
         activity()
@@ -229,12 +233,15 @@ class AnalisisController extends Controller
         $analisis->idBioquimico = $request->input('idbioquimico');
         $analisis->save();
 
+        // Después de guardar el análisis, verificar si todos los análisis de la orden están realizados
+        $this->verificarEstadoOrden($analisis->idOrden);
+
         $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id);  // esta linea de codigo tengo que meter para crear la notificacion al paciente
         activity()
         ->causedBy(auth()->user())
         ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
         ->log('agrego una hormona');
-    session()->flash('success', 'Se registró exitosamente');
+        session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
     /**
@@ -264,5 +271,18 @@ class AnalisisController extends Controller
     session()->flash('success', 'Se registró exitosamente');
         $analisis->delete();
         return redirect()->route('analisis.index')->with('success', 'Eliminado correctamente');
+    }
+
+
+    private function verificarEstadoOrden($idOrden)
+    {
+        $orden = Orden::find($idOrden);
+        if ($orden) {
+            $todosRealizados = $orden->analisis()->where('estado', '!=', 'Realizado')->count() == 0;
+            if ($todosRealizados) {
+                $orden->estado = 'Finalizado';
+                $orden->save();
+            }
+        }
     }
 }
