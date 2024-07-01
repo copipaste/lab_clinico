@@ -112,41 +112,16 @@
         </div>
 
         <div class="form-row mt-2">
-            <div class="col">
-                <span>Tipo de Análisis - Hemograma Completo</span>
-                <div class="input-group">
-                    <br>
-                    <div>
-
-                        <input class="form-check-input" type="checkbox" value="{{ 1 }}" id="tipoAnalisis{{ 1 }}" name="tipoAnalisisIds[]">
-                        <label class="form-check-label" for="tipoAnalisis{{ 1 }}">
-                            Hemograma
+            @foreach ($tipoanalisis as $hemograma)
+                @if ($hemograma->tipo == 'Hemograma')
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $hemograma->id }}" id="analisis{{ $hemograma->id }}" name="analisisIds[]">
+                        <label class="form-check-label" for="analisis{{ $hemograma->id }}">
+                            {{ $hemograma->nombre }} | Precio: {{ $hemograma->precio }} bs.
                         </label>
-                        <label class="form-check-label" for="tipoAnalisis{{ 1 }}">
-                            | Precio: 50 bs.
-                        </label>
-
-
-                        @php
-                        $attributesHemograma = $hemogramacompleto->first()->getAttributes();
-                        $keysToExclude = ['id']; // Atributos a excluir
-                        $attributesHemograma = array_diff_key($attributesHemograma);
-                        $attributesHemograma = array_slice($attributesHemograma, 1, -5, true);
-                    @endphp
-
-                    @foreach ($attributesHemograma as $attribute => $value)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" >
-                                <label class="form-check-label" >
-                                    | {{ ucfirst($attribute) }}
-                                </label>
-                            </div>
-                        @endforeach
-
                     </div>
-                </div>
-            </div>
-
+                @endif
+            @endforeach
             <div class="col">
                 <span>Tipo de Análisis - Hormonas</span>
                 <div class="input-group">

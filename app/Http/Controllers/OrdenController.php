@@ -14,7 +14,7 @@ use App\Models\TipoSeguro;
 use App\Models\User;
 use App\Models\Hormonas;
 use App\Models\HemogramaCompleto;
-
+use App\Models\Selectanalisis;
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -177,7 +177,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
     }
 
 
-        $tipoAnalisisIds = $request->input('tipoAnalisisIds'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario
+        $tipoAnalisisIds = $request->input('analisisIds'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario
         foreach ($tipoAnalisisIds as $tipoAnalisisId) {
             // Insertar en la tabla intermedia
             DB::table('orden_analisis')->insert([
@@ -196,6 +196,15 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
             $analisis->descripcion =  $tipoAnalisis->nombre; // Acceder al nombre del tipo de análisis
             $analisis->idOrden = $idOrden;
             $analisis->save();
+        }
+
+        $selectedIds = $request->input('analisisIds', []);
+        // Asociar los análisis seleccionados con la nueva orden
+        foreach ($selectedIds as $id) {
+            $t = new Selectanalisis();
+            $t->idTipoanalisis = $id;
+            $t->idOrden = $idOrden;
+            $t->save();
         }
         activity()
             ->causedBy(auth()->user())
