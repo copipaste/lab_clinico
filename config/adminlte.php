@@ -418,13 +418,29 @@ return [
                     'icon' => 'fas fa-fw fa-flask',
                     'can' => 'tipoanalisis.index',
                 ],
+
+            ],
+        ],
+
+
+        //paquetes reportes
+        [
+            'text' => 'Reportes',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'analysis.package',
+            'submenu' => [
                 [
                     'text' => 'Informe Analisis',
                     'url' => '/informe',
                     'icon' => 'fas fa-fw fa-flask',
                     'can' => 'tipoanalisis.index',
                 ],
-
+                [
+                    'text' => 'Reporte de Pagos',
+                    'url' => '/reportepagos',
+                    'icon' => 'fas fa-fw fa-dollar-sign',
+                    'can' => 'tipoanalisis.index',
+                ],
             ],
         ],
 

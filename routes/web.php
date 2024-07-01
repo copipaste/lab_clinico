@@ -21,6 +21,7 @@ use App\Http\Controllers\HormonasController;
 use App\Http\Controllers\StripeController;
 use App\Models\HemogramaCompleto;
 use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\ReportepagosController;
 
 
 /*
@@ -68,6 +69,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     //ruta bioquimicos
     //Rutas Pacientes
     Route::resource('/bioquimicos', BioquimicoController::class)->names('bioquimicos');
+
+    //reportes pago
+    Route::resource('/reportepagos', ReportepagosController::class)->names('reportepago');
 
     //analisis
 
