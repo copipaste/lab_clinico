@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\TipoAnalisis; // Importa el modelo TipoAnalisis
 
 class TipoanalisisSeeder extends Seeder
 {
@@ -14,53 +14,34 @@ class TipoanalisisSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tipo_analisis')->insert([
+        TipoAnalisis::create([
             'nombre' => 'Hemograma',
             'descripcion' => 'General',
             'precio' => 50.00,
-            'tipo'=>'Hemograma',
-            'created_at' => now(),
-            'updated_at' => now(),
+            'tipo' => 'Hemograma',
         ]);
 
-        DB::table('tipo_analisis')->insert([
-            'nombre' => 'Hemograma2',
-            'descripcion' => 'General',
-            'precio' => 50.00,
-            'tipo'=>'Hemograma',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('tipo_analisis')->insert([
-            'nombre' => 'Hemograma3',
-            'descripcion' => 'General',
-            'precio' => 50.00,
-            'tipo'=>'Hemograma',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('tipo_analisis')->insert([
+        TipoAnalisis::create([
             'nombre' => 'Hormona',
             'descripcion' => 'General',
             'precio' => 100.00,
-            'tipo'=>'Hormona',
-            'created_at' => now(),
-            'updated_at' => now(),
+            'tipo' => 'Hormona',
         ]);
-        DB::table('tipo_analisis')->insert([
+
+        TipoAnalisis::create([
             'nombre' => 'Quimica',
             'descripcion' => 'General',
             'precio' => 80.00,
-            'created_at' => now(),
-            'updated_at' => now(),
+            'tipo' => 'Quimica',
         ]);
-        DB::table('tipo_analisis')->insert([
+
+        TipoAnalisis::create([
             'nombre' => 'Orina',
             'descripcion' => 'General',
             'precio' => 30.00,
-            'created_at' => now(),
-            'updated_at' => now(),
+            'tipo' => 'Orina',
         ]);
     }
 }
+
 
