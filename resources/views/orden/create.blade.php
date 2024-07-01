@@ -112,6 +112,11 @@
         </div>
 
         <div class="form-row mt-2">
+            <div class="col">
+                <span>Análisis - Hemograma Completo</span>
+                <div class="input-group">
+                    <br>
+                    <div>
             @foreach ($tipoanalisis as $hemograma)
                 @if ($hemograma->tipo == 'Hemograma')
                     <div class="form-check">
@@ -122,7 +127,100 @@
                     </div>
                 @endif
             @endforeach
+                </div>
+                </div>
+            </div>
             <div class="col">
+                <span>Análisis - Hormona</span>
+                <div class="input-group">
+                    <br>
+                    <div>
+            @foreach ($tipoanalisis as $hemograma)
+                @if ($hemograma->tipo == 'Hormona')
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $hemograma->id }}" id="analisis{{ $hemograma->id }}" name="analisisIds[]">
+                        <label class="form-check-label" for="analisis{{ $hemograma->id }}">
+                            {{ $hemograma->nombre }} | Precio: {{ $hemograma->precio }} bs.
+                        </label>
+                    </div>
+                @endif
+            @endforeach
+                </div>
+                </div>
+            </div>
+            <div class="col">
+                <span>Análisis - Quimica Sanguinea</span>
+                <div class="input-group">
+                    <br>
+                    <div>
+            @foreach ($tipoanalisis as $hemograma)
+                @if ($hemograma->tipo == 'Quimica')
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $hemograma->id }}" id="analisis{{ $hemograma->id }}" name="analisisIds[]">
+                        <label class="form-check-label" for="analisis{{ $hemograma->id }}">
+                            {{ $hemograma->nombre }} | Precio: {{ $hemograma->precio }} bs.
+                        </label>
+                    </div>
+                @endif
+            @endforeach
+                </div>
+                </div>
+            </div>
+            <div class="col">
+                <span>Análisis - Parasitologia Simple</span>
+                <div class="input-group">
+                    <br>
+                    <div>
+            @foreach ($tipoanalisis as $hemograma)
+                @if ($hemograma->tipo == 'Parasitologia Simple')
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $hemograma->id }}" id="analisis{{ $hemograma->id }}" name="analisisIds[]">
+                        <label class="form-check-label" for="analisis{{ $hemograma->id }}">
+                            {{ $hemograma->nombre }} | Precio: {{ $hemograma->precio }} bs.
+                        </label>
+                    </div>
+                @endif
+            @endforeach
+                </div>
+                </div>
+            </div>
+            <div class="col">
+                <span>Análisis -  Orina Completa</span>
+                <div class="input-group">
+                    <br>
+                    <div>
+            @foreach ($tipoanalisis as $hemograma)
+                @if ($hemograma->tipo == 'Orina')
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $hemograma->id }}" id="analisis{{ $hemograma->id }}" name="analisisIds[]">
+                        <label class="form-check-label" for="analisis{{ $hemograma->id }}">
+                            {{ $hemograma->nombre }} | Precio: {{ $hemograma->precio }} bs.
+                        </label>
+                    </div>
+                @endif
+            @endforeach
+                </div>
+                </div>
+            </div>
+            <div class="col">
+                <span>Análisis -  Reaccion de Widal</span>
+                <div class="input-group">
+                    <br>
+                    <div>
+            @foreach ($tipoanalisis as $hemograma)
+                @if ($hemograma->tipo == 'Reaccion de widal')
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $hemograma->id }}" id="analisis{{ $hemograma->id }}" name="analisisIds[]">
+                        <label class="form-check-label" for="analisis{{ $hemograma->id }}">
+                            {{ $hemograma->nombre }} | Precio: {{ $hemograma->precio }} bs.
+                        </label>
+                    </div>
+                @endif
+            @endforeach
+                </div>
+                </div>
+            </div>
+            {{-- <div class="col">
                 <span>Tipo de Análisis - Hormonas</span>
                 <div class="input-group">
                     <br>
@@ -156,8 +254,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div> --}}
+    </div>
         <button class="btn btn-adminlte bg-white text-dark border mt-2" type="submit">Registrar</button>
     </form>
 @else
