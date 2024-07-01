@@ -18,6 +18,24 @@ class TipoanalisisSeeder extends Seeder
             'nombre' => 'Hemograma',
             'descripcion' => 'General',
             'precio' => 50.00,
+            'tipo'=>'Hemograma',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('tipo_analisis')->insert([
+            'nombre' => 'Hemograma2',
+            'descripcion' => 'General',
+            'precio' => 50.00,
+            'tipo'=>'Hemograma',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('tipo_analisis')->insert([
+            'nombre' => 'Hemograma3',
+            'descripcion' => 'General',
+            'precio' => 50.00,
+            'tipo'=>'Hemograma',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -25,6 +43,7 @@ class TipoanalisisSeeder extends Seeder
             'nombre' => 'Hormona',
             'descripcion' => 'General',
             'precio' => 100.00,
+            'tipo'=>'Hormona',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
