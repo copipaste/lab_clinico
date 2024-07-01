@@ -18,6 +18,7 @@ class TipoanalisisSeeder extends Seeder
             'nombre' => 'Hemograma',
             'descripcion' => 'General',
             'precio' => 50.00,
+            'tipo'=>'Hemograma',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -25,6 +26,7 @@ class TipoanalisisSeeder extends Seeder
             'nombre' => 'Hormona',
             'descripcion' => 'General',
             'precio' => 100.00,
+            'tipo'=>'Hormona',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
