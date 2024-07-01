@@ -14,32 +14,30 @@ use App\Models\Paciente;
 use App\Models\Solicitud;
 use App\Models\TipoAnalisis;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Validation\ValidationException;
 
 class AppointmentController extends Controller
 {
     public function index()
-    {/*
-        $user = Auth::user();
-        $ordenes = Orden::where('idPaciente', $user->id)->get();
-        foreach ($ordenes as $orden) {
-            $tiposanalisis = $orden->tipoanalisis;
-            $orden['tiposanalisis'] = $tiposanalisis;
-        };
-        return $ordenes; //return all data
-*/
-        $user = Auth::user();
-        $paciente = Paciente::where('idUser', $user->id)->first();
-        //$ordenes = Orden::where('idPaciente', $paciente->id)->with('tipoanalisis')->get();
-        $ordenes = Orden::where('idPaciente', $paciente->id)->with('analisis')->get();
-        return $ordenes; //return all data with tiposanalisis
+    {
+        try {
+            $user = Auth::user();
+            $paciente = Paciente::where('idUser', $user->id)->first();
+            if (!$paciente) {
+                return response()->json(['error' => 'Paciente no encontrado.'], 404);
+            }
+            $ordenes = Orden::where('idPaciente', $paciente->id)->with('analisis')->get();
+            return response()->json($ordenes, 200);
+        } catch (\Exception $e) {
+            Log::error('Error al obtener las órdenes: ', ['exception' => $e]);
+            return response()->json(['error' => 'Error al obtener las órdenes.', 'details' => $e->getMessage()], 500);
+        }
     }
 
     public function registerOrder(Request $request)
     {
-
-        
         try {
             $datos = $request->all();
             if (count($datos) > 0) {
@@ -47,25 +45,12 @@ class AppointmentController extends Controller
                 $user = Auth::user();
                 // relaciona el user con su paciente
                 $paciente = Paciente::where('idUser', $user->id)->first();
-                /* Registra la nota de venta de la orden
-                $notaventa1 = NotaVenta::create([
-                    'metodoPago' => 'antes IF DATA',
-                    'precio' => count($request->all()),
-                    'descuento' => 0,
-                    'precioTotal' => 0,
-                ]);
-                */
-                // Obtener los datos JSON enviados desde Flutter
-                //$jsonData = $request->input('data');
-
-                // Decodificar el JSON a un array asociativo de PHP
-                //$analysisTypes = json_decode($jsonData, true);
+                if (!$paciente) {
+                    return response()->json(['error' => 'Paciente no encontrado.'], 404);
+                }
 
                 $orden = new Orden();
                 $orden->idPaciente = $paciente->id;
-                //$orden->estado = 'Pendiente';
-                //$orden->idNotaVenta = null;
-                //$orden->nroOrden = null;
                 $orden->save();
 
                 // Después de guardar la orden, obtén el ID asignado
@@ -101,12 +86,16 @@ class AppointmentController extends Controller
 
                 $orden->idNotaVenta = $notaventa->id;
                 $orden->save();
+
+                $ordenes = Orden::where('idPaciente', $paciente->id)->with('analisis')->get();
+                return response()->json($ordenes, 201);
+            } else {
+                return response()->json(['error' => 'Datos insuficientes para registrar la orden.'], 400);
             }
-            $ordenes = Orden::where('idPaciente', $paciente->id)->with('analisis')->get();
-            return response()->json($ordenes, 201);
+            
         } catch (\Exception $e) {
             // Registrar el error
-            //\Log::error('Error en el registro: ' . $e->getMessage());
+            Log::error('Error en el registro de orden: ', ['exception' => $e]);
 
             // Devolver una respuesta de error
             return response()->json(['error' => 'Error en el registro de orden.'], 500);
@@ -115,8 +104,15 @@ class AppointmentController extends Controller
 
     public function getallanalysis($analysisId)
     {    
-        $hemograma = HemogramaCompleto::where('idAnalisis', $analysisId)->first();
-        //return $hemograma; // Laravel automáticamente convierte el objeto en JSON si es un modelo de Eloquent
-        return response()->json($hemograma); // Especifica claramente que la respuesta debe ser JSON
+        try {
+            $hemograma = HemogramaCompleto::where('idAnalisis', $analysisId)->first();
+            if (!$hemograma) {
+                return response()->json(['error' => 'Análisis no encontrado.'], 404);
+            }
+            return response()->json($hemograma, 200);
+        } catch (\Exception $e) {
+            Log::error('Error al obtener el análisis: ', ['exception' => $e]);
+            return response()->json(['error' => 'Error al obtener el análisis.', 'details' => $e->getMessage()], 500);
+        }
     }
 }
