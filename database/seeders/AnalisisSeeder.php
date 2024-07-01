@@ -59,7 +59,7 @@ class AnalisisSeeder extends Seeder
         $orden->save();
 
         // Tipos de análisis a incluir en la orden (suponiendo que tienes un array de IDs de tipos de análisis)
-        $tipoAnalisisIds = [1, 2]; // Ejemplo de IDs de tipos de análisis
+        $tipoAnalisisIds = [1, 4]; // Ejemplo de IDs de tipos de análisis
 
         // Iterar sobre los tipos de análisis y crear análisis para la orden
         foreach ($tipoAnalisisIds as $tipoAnalisisId) {

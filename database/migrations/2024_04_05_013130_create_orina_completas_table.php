@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orina_completa', function (Blueprint $table) {
             $table->id();
-            $table->integer('volumen');
+            $table->integer('volumen')->nullable();
             $table->string('color')->nullable();
             $table->string('aspecto')->nullable();
             $table->float('densidad')->nullable();
@@ -41,7 +41,6 @@ return new class extends Migration
             $table->boolean('cilindrosLeucocitario')->nullable();
             $table->boolean('levaduras')->nullable();
             $table->boolean('fosfTripleDeAmonioYMagnesio')->nullable();
-            $table->decimal('precio', 10, 2);
             $table->string('estado')->default('pendiente');
             $table->unsignedBigInteger('idAnalisis');
             $table->foreign('idAnalisis')->references('id')->on('analisis')->onDelete('cascade');

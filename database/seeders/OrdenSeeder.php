@@ -22,7 +22,7 @@ class OrdenSeeder extends Seeder
     {
 
         // Crear una orden para el paciente 1 jHOEL DEBRAY
-        // Crear la nota de venta 
+        // Crear la nota de venta
         $notaventa1 = NotaVenta::create([
             'metodoPago' => 'Paypal',
             'precio' => 150,
@@ -101,6 +101,47 @@ class OrdenSeeder extends Seeder
         $analisis->estado = 'Pendiente';
         $analisis->descripcion = 'Hemograma';
         $analisis->idOrden = $orden2->id;   // Orden ID 3
+        $analisis->save();
+
+
+
+
+        // ID ORDEN 4
+        $orden3 = new Orden();
+        $orden3->idNotaVenta = $notaventa2->id;
+        $orden3->idPaciente = 1;    // Paciente ID 1 Jhoel Debray
+        $orden3->save();
+
+        // Asignar número de orden
+        $orden3->nroOrden = 'OR' . $orden3->id;
+        $orden3->save();
+
+        ordenAnalisis::create([
+            'orden_id' => $orden3->id,
+            'tipo_analisis_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Crear un nuevo análisis para la orden ID 4
+        $analisis = new Analisis();
+        $analisis->estado = 'Pendiente';
+        $analisis->descripcion = 'Quimica';
+        $analisis->idOrden = $orden3->id;   // Orden ID 4
+        $analisis->save();
+
+        ordenAnalisis::create([
+            'orden_id' => $orden3->id,
+            'tipo_analisis_id' => 4,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Crear un nuevo análisis para la orden ID 4
+        $analisis = new Analisis();
+        $analisis->estado = 'Pendiente';
+        $analisis->descripcion = 'Orina';
+        $analisis->idOrden = $orden3->id;   // Orden ID 4
         $analisis->save();
     }
 }

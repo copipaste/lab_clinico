@@ -17,7 +17,7 @@ class Analisis extends Model
     {
         return $this->belongsTo(Orden::class, 'idOrden');
     }
- 
+
     public function bioquimico()
     {
         return $this->belongsTo(Bioquimico::class, 'idBioquimico');
@@ -36,6 +36,13 @@ class Analisis extends Model
     {
         return $this->hasOne(Hormonas::class, 'idAnalisis');
     }
-
+    public function Quimicas()
+    {
+        return $this->hasOne(Quimicas::class, 'idAnalisis');
+    }
+    public function Orinas()
+    {
+        return $this->hasOne(Orinas::class, 'idAnalisis');
+    }
 
 }

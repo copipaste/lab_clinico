@@ -28,6 +28,20 @@ class TipoanalisisSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('tipo_analisis')->insert([
+            'nombre' => 'Quimica',
+            'descripcion' => 'General',
+            'precio' => 80.00,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('tipo_analisis')->insert([
+            'nombre' => 'Orina',
+            'descripcion' => 'General',
+            'precio' => 30.00,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
 

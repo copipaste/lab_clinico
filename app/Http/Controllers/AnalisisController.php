@@ -6,6 +6,8 @@ use App\Models\Analisis;
 use App\Models\HemogramaCompleto;
 use App\Models\Bioquimico;
 use App\Models\Hormonas;
+use App\Models\Orinas;
+use App\Models\Quimicas;
 use App\Models\Notificacion;
 use App\Models\Orden;
 use App\Models\TipoAnalisis;
@@ -244,6 +246,143 @@ class AnalisisController extends Controller
         session()->flash('success', 'Se registró exitosamente');
         return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
     }
+
+
+    ///Quimica Sanguinea
+
+    public function quimica($id)
+    {
+        $analisis = Analisis::findOrFail($id);
+        $idOrden = $analisis->orden->nroOrden;
+        $nombrepaciente = $analisis->orden->paciente->nombre;
+        // $nombrePaciente = $analisis->orden->paciente->nomwbre; // Asumiendo que tienes la relación definida
+        // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
+        $bioquimico = Bioquimico::all();
+
+
+        return view('analisis.quimicasanguinea', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
+    }
+
+    public function quimicastore(Request $request)
+    {
+
+        $quimica = new Quimicas();
+        $quimica->glucosa = $request->input('glucosa');
+        $quimica->urea = $request->input('urea');
+        $quimica->creatinina = $request->input('creatinina');
+        $quimica->acidoUrico = $request->input('acidoUrico');
+        $quimica->colesterol = $request->input('colesterol');
+        $quimica->trigliceridos = $request->input('trigliceridos');
+        $quimica->colesterolHDL = $request->input('colesterolHDL');
+        $quimica->colesterolLDL = $request->input('colesterolLDL');
+        $quimica->colesterolVLDL = $request->input('colesterolVLDL');
+        $quimica->lipidoTotales = $request->input('lipidoTotales');
+        $quimica->fosfolipidos = $request->input('fosfolipidos');
+        $quimica->proteinasTotales = $request->input('proteinasTotales');
+        $quimica->albuminas = $request->input('albuminas');
+        $quimica->globulina = $request->input('globulina');
+        $quimica->cloro = $request->input('cloro');
+        $quimica->sodio = $request->input('sodio');
+        $quimica->potasio = $request->input('potasio');
+        $quimica->calcio = $request->input('calcio');
+        $quimica->calcioIonico = $request->input('calcioIonico');
+        $quimica->troponina = $request->input('troponina');
+        $quimica->ferritina = $request->input('ferritina');
+        $quimica->transferrina = $request->input('transferrina');
+        $quimica->fosforo = $request->input('fosforo');
+        $quimica->hierro = $request->input('hierro');
+        $quimica->litio = $request->input('litio');
+        $quimica->magnesio = $request->input('magnesio');
+        $quimica->amilasa = $request->input('amilasa');
+        $quimica->lipasa = $request->input('lipasa');
+        $quimica->transaminasaGOT = $request->input('transaminasaGOT');
+        $quimica->transaminasaGPT = $request->input('transaminasaGPT');
+        $quimica->fosfatasaAlcalina = $request->input('fosfatasaAlcalina');
+        $quimica->fosfAcidaTotal = $request->input('fosfAcidaTotal');
+        $quimica->fostAcidaProstatica = $request->input('fostAcidaProstatica');
+        $quimica->creatinFosfoKinasaCPK = $request->input('creatinFosfoKinasaCPK');
+        $quimica->deshidrogemasaLacticaLDH = $request->input('deshidrogemasaLacticaLDH');
+        $quimica->idAnalisis = $request->input('idAnalisis');
+        $quimica->save();
+
+        $analisis = Analisis::find($request->input('idAnalisis'));
+        $analisis->estado = 'Realizado';
+        $analisis->idBioquimico = $request->input('idbioquimico');
+        $analisis->save();
+
+        // Después de guardar el análisis, verificar si todos los análisis de la orden están realizados
+        $this->verificarEstadoOrden($analisis->idOrden);
+
+        $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id);  // esta linea de codigo tengo que meter para crear la notificacion al paciente
+        activity()
+        ->causedBy(auth()->user())
+        ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+        ->log('agrego un analisis de quimica');
+        session()->flash('success', 'Se registró exitosamente');
+        return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
+    }
+
+///orinaaaa
+
+public function orina($id)
+{
+    $analisis = Analisis::findOrFail($id);
+    $idOrden = $analisis->orden->nroOrden;
+    $nombrepaciente = $analisis->orden->paciente->nombre;
+    $bioquimico = Bioquimico::all();
+    return view('analisis.orinacompleta', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
+}
+
+public function orinastore(Request $request)
+{
+
+    $orina = new Orinas();
+    $orina->volumen = $request->input('volumen');
+    $orina->color = $request->input('color');
+    $orina->aspecto = $request->input('aspecto');
+    $orina->densidad = $request->input('densidad');
+    $orina->ph = $request->input('ph');
+    $orina->olor = $request->input('olor');
+    $orina->proteinas = $request->input('proteinas');
+    $orina->glucosa = $request->input('glucosa');
+    $orina->cetonas = $request->input('cetonas');
+    $orina->urobilinogeno = $request->input('urobilinogeno');
+    $orina->hemoglobina = $request->input('hemoglobina');
+    $orina->nitritos = $request->input('nitritos');
+    $orina->bilirrubina = $request->input('bilirrubina');
+    $orina->sangre = $request->input('sangre');
+    $orina->celulasEpiteliales = $request->input('celulasEpiteliales');
+    $orina->eritrocitos = $request->input('eritrocitos');
+    $orina->leucocitos = $request->input('leucocitos');
+    $orina->bacterias = $request->input('bacterias');
+    $orina->filamentosDeMucus = $request->input('filamentosDeMucus');
+    $orina->cristalesUratosAmorfes = $request->input('cristalesUratosAmorfes');
+    $orina->cristalesOxalatoDeCalcio = $request->input('cristalesOxalatoDeCalcio');
+    $orina->cristalesFosfatosAmorfos = $request->input('cristalesFosfatosAmorfos');
+    $orina->cristalesDeAcidoUrico = $request->input('cristalesDeAcidoUrico');
+    $orina->cilindrosHialino = $request->input('cilindrosHialino');
+    $orina->cilindrosGranuloso = $request->input('cilindrosGranuloso');
+    $orina->cilindrosLeucocitario = $request->input('cilindrosLeucocitario');
+    $orina->levaduras = $request->input('levaduras');
+    $orina->fosfTripleDeAmonioYMagnesio = $request->input('fosfTripleDeAmonioYMagnesio');
+    $orina->save();
+
+    $analisis = Analisis::find($request->input('idAnalisis'));
+    $analisis->estado = 'Realizado';
+    $analisis->idBioquimico = $request->input('idbioquimico');
+    $analisis->save();
+
+    // Después de guardar el análisis, verificar si todos los análisis de la orden están realizados
+    $this->verificarEstadoOrden($analisis->idOrden);
+
+    $this->crearNotificacion($analisis->orden->paciente->id, $analisis->id);  // esta linea de codigo tengo que meter para crear la notificacion al paciente
+    activity()
+    ->causedBy(auth()->user())
+    ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+    ->log('agrego un analisis de quimica');
+    session()->flash('success', 'Se registró exitosamente');
+    return redirect()->route('analisis.index')->with('success', '¡Se ha registrado exitosamente!');
+}
     /**
      * Show the form for editing the specified resource.
      */

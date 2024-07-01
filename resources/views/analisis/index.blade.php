@@ -57,6 +57,8 @@
                     @php
                         $hemogramaExistente = App\Models\HemogramaCompleto::where('idAnalisis', $o->id)->exists();
                         $hormonaExistente = App\Models\Hormonas::where('idAnalisis', $o->id)->exists();
+                        $quimicaExistente = App\Models\Quimicas::where('idAnalisis', $o->id)->exists();
+                        $orinaExistente = App\Models\Orinas::where('idAnalisis', $o->id)->exists();
                     @endphp
                     <tr>
                         <td>{{ $o->orden->nroOrden }}</td>
@@ -99,6 +101,25 @@
                                     @endif
                                 @endif
 
+                                @if ($o->descripcion == 'Quimica')
+                                    @if (!$quimicaExistente)
+                                        <a href="{{ route('analisis.quimica', $o->id) }}"
+                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
+                                            <i class="fa fa-lg fa-fw fa-plus"></i>
+                                        </a>
+                                    @else
+                                    @endif
+                                @endif
+
+                                @if ($o->descripcion == 'Orina')
+                                    @if (!$orinaExistente)
+                                        <a href="{{ route('analisis.orina', $o->id) }}"
+                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
+                                            <i class="fa fa-lg fa-fw fa-plus"></i>
+                                        </a>
+                                    @else
+                                    @endif
+                                @endif
                                 {{-- <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"
                                     data-toggle="modal" data-target="#modalCustom{{ $o->id }}">
                                     <i class="fa fa-lg fa-fw fa-trash"></i>

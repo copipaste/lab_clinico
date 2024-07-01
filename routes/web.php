@@ -83,14 +83,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/analisis/{id}/hemograma', [AnalisisController::class, 'hemograma'])->name('analisis.hemograma');
     Route::post('/analisis/hemograma', [AnalisisController::class, 'hemogramaStore'])->name('analisis.hemogramastore');
     Route::get('/analisis/{id}/hormona', [AnalisisController::class, 'hormona'])->name('analisis.hormona');
+    Route::post('/analisis/hormona', [AnalisisController::class, 'hormonaStore'])->name('analisis.hormonastore');
+    Route::get('/analisis/{id}/quimica', [AnalisisController::class, 'quimica'])->name('analisis.quimica');
+    Route::post('/analisis/quimica', [AnalisisController::class, 'quimicastore'])->name('analisis.quimicastore');
+    Route::get('/analisis/{id}/orina', [AnalisisController::class, 'orina'])->name('analisis.orina');
+    Route::post('/analisis/orina', [AnalisisController::class, 'orinastore'])->name('analisis.orinastore');
+
 
     Route::get('Bitacora', [BitacoraController::class, 'index'])->name('bitacora.index');
 
     Route::post('Bitacora', [BitacoraController::class, 'index1'])->name('bitacora1.index');
-
-
-    Route::post('/analisis/hormona', [AnalisisController::class, 'hormonaStore'])->name('analisis.hormonastore');
-
 
     //orden
     Route::resource('/orden', OrdenController::class)->names('orden');
