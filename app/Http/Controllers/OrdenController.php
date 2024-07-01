@@ -212,7 +212,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
             return redirect()->route('analisis.index')->with('success', '¡El análisis se ha registrado exitosamente!');
 
             // El usuario no tiene el rol de "Paciente"
-            // Puedes colocar aquí el código que deseas ejecutar para usuarios sin este rol
+            /// Puedes colocar aquí el código que deseas ejecutar para usuarios sin este rol
         }
     }
 

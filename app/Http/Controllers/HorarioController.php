@@ -88,7 +88,7 @@ class HorarioController extends Controller
 
         $request->validate([
             'dia' => 'required|string|max:255',
-          // H:i para validar el formato de hora
+          /// H:i para validar el formato de hora
         ]);
 
         $horario = Horario::findOrFail($id);
