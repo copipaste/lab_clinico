@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_analisis', function (Blueprint $table) {
+        Schema::create('selectanalises', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->decimal('precio');
+            $table->unique(['idTipoanalisis', 'idOrden']);
+            $table->foreignId('idTipoanalisis')->nullable()->constrained('analisistotals');
+            $table->foreignId('idOrden')->nullable()->constrained('ordenes');
             $table->timestamps();
-        });
-    }
+    });
+}
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_analisis2s');
+        Schema::dropIfExists('analisistotals');
     }
 };

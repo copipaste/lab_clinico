@@ -10,13 +10,15 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {   Schema::create('selectanalises', function (Blueprint $table) {
-        $table->id();
-        $table->unique(['idTipoanalisis', 'idOrden']);
-        $table->foreignId('idTipoanalisis')->nullable()->constrained('tipo_analisis');
-        $table->foreignId('idOrden')->nullable()->constrained('ordenes');
-        $table->timestamps();
-    });
+    {
+        Schema::create('analisistotals', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->string('tipo');
+            $table->timestamps();
+        });
+ 
 
     }
 
