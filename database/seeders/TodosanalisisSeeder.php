@@ -42,6 +42,7 @@ class TodosanalisisSeeder extends Seeder
             analisistotal::create([
                 'nombre' => $atributo,
                 'descripcion' => 'General',
+                'precio' => $precio,
                 'tipo' => 'Hemograma',
             ]);
         }
@@ -86,6 +87,7 @@ class TodosanalisisSeeder extends Seeder
             analisistotal::create([
                 'nombre' => $atributo,
                 'descripcion' => 'General',
+                'precio' => $precio,
                 'tipo' => 'Hormona',
             ]);
         }
@@ -133,6 +135,7 @@ class TodosanalisisSeeder extends Seeder
             analisistotal::create([
                 'nombre' => $atributo,
                 'descripcion' => 'General',
+                'precio' => $precio,
                 'tipo' => 'Quimica',
             ]);
         }
@@ -167,6 +170,7 @@ class TodosanalisisSeeder extends Seeder
             analisistotal::create([
                 'nombre' => $atributo,
                 'descripcion' => 'General',
+                'precio' => $precio,
                 'tipo' => 'Orina',
             ]);
         }

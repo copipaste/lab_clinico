@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Especialidad;
 use App\Models\Bioquimico;
+use App\Models\HorarioBioquimico;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Horario;
 class BioquimicoController extends Controller
 {    /**
     * Display a listing of the resource.
@@ -23,11 +25,12 @@ class BioquimicoController extends Controller
        ];
        $Bioquimico = Bioquimico::all();
        $Especialidad = Especialidad::all();
+       $horario=Horario::all();
        // $Bioquimicos->each(function ($Bioquimico) {
        //     $Bioquimico->tipoSeguro = $Bioquimico->tipoSeguro->descripcion;
        // });
        // dd($Bioquimicos);
-       return view('bioquimicos.index', compact('Bioquimico', 'heads', 'Especialidad'));
+       return view('bioquimicos.index', compact('horario','Bioquimico', 'heads', 'Especialidad'));
    }
 
    /**
@@ -84,13 +87,52 @@ class BioquimicoController extends Controller
        return redirect()->route('bioquimicos.index')->with('success', 'Bioquimico creado con éxito');
    }
 
+   public function horario(Request $request, $idB)
+   {
+
+
+    $selectedIds = $request->input('analisisIds', []);
+    // Asociar los análisis seleccionados con la nueva orden
+    foreach ($selectedIds as $id) {
+        $Bioquimico = new HorarioBioquimico();
+        $Bioquimico->idBioquimico = $idB;
+        $Bioquimico->idHorario = $id;
+        $Bioquimico->save();
+    }
+
+
+       activity()
+       ->causedBy(auth()->user())
+       ->withProperties(request()->ip()) // Obtener la dirección IP del usuario
+       ->log('Registro un horario-bioquimico');
+   session()->flash('success', 'Se registró exitosamente');
+
+       return redirect()->route('bioquimicos.index')->with('success', 'Bioquimico creado con éxito');
+   }
+
    /**
     * Display the specified resource.
     */
-   public function show(Bioquimico $Bioquimico)
-   {
-       return view('bioquimicos.show', compact('Bioquimico'));
-   }
+    public function show(Bioquimico $Bioquimico)
+    {
+     $horariosBioquimico = HorarioBioquimico::where('idBioquimico', $Bioquimico->id)->get();
+
+     $horarios = collect();
+
+     // Iterar sobre los horarios bioquímicos y obtener los horarios correspondientes
+     foreach ($horariosBioquimico as $hb) {
+         // Obtener el horario específico usando el atributo idHorario de HorarioBioquimico
+         $horario = Horario::find($hb->idHorario);
+
+         // Si se encuentra el horario, agregarlo a la colección de horarios
+         if ($horario) {
+             $horarios->push($horario);
+         }
+     }
+
+        return view('bioquimicos.show', compact('Bioquimico', 'horarios'));
+    }
+
 
    /**
     * Show the form for editing the specified resource.

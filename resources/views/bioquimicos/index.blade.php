@@ -50,6 +50,7 @@
                                 </x-slot>
             </form>
         </x-adminlte-modal>
+
 </div>
 {{-- modal --}}
 
@@ -85,14 +86,53 @@
                                 <a href="{{ route('bioquimicos.show', $paciente) }}" class="btn btn-xs btn-default text-teal mx-1 shadow" title="DETALLES">
                                     <i class="fa fa-lg fa-fw fa-eye"></i>
                                 </a>
-                                <a href="{{-- route('promocion.show', $promocion) --}}" class="btn btn-xs btn-default text-info mx-1 shadow" title="HISTORIAL CLINICO">
+
+                                <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="horario" data-toggle="modal" data-target="#modalCustom1{{ $paciente->id }}">
                                     <i class="fa-solid fa-file-medical"></i>
-                                </a>
+                                </button>
 
 
                             </div>
                         </td>
+                        <x-adminlte-modal id="modalCustom1{{ $paciente->id }}" title="HORARIOS" size="lg" theme="dark" v-centered static-backdrop scrollable>
+                            <form action= "{{ route('bioquimico.horario', $paciente) }}" method="GET">
+                                        @method('POST')
+                                        @csrf
+                                        <div class="col">
+                                            <span style="background-color: #cecece; padding: 10px; border-radius: 5px; display: inline-block;">
+                                             Horarios para el bioquimico:  @foreach ($Bioquimico as $hemograma)
+@if($hemograma->id = $paciente->id)
+                                                 <label class="form-check-label" for="analisis{{ $hemograma->id }}">
+                                                     {{ $hemograma->nombre }}
+                                                 </label>
+@endif
+                                     @endforeach
+                                         </span>
 
+                                         <div class="input-group">
+                                             <br>
+                                             <div>
+                                     @foreach ($horario as $hemograma)
+
+                                             <div class="form-check">
+                                                 <input class="form-check-input" type="checkbox" value="{{ $hemograma->id }}" id="analisis{{ $hemograma->id }}" name="analisisIds[]">
+                                                 <label class="form-check-label" for="analisis{{ $hemograma->id }}">
+                                                     {{ $hemograma->dia }} : {{ $hemograma->horarioEntrada }} - {{ $hemograma->horarioSalida }}
+                                                 </label>
+                                             </div>
+
+                                     @endforeach
+                                         </div>
+                                         </div>
+                                     </div>
+                                                <x-adminlte-button  class="float-left mt-3" type="submit" label="Aceptar" theme="dark" />
+                                                <x-adminlte-button  class="btn btn-primary float-right mt-3" theme="light" label="Cancelar" data-dismiss="modal" />
+
+
+                                                <x-slot name="footerSlot" >
+                                                </x-slot>
+                            </form>
+                        </x-adminlte-modal>
                         <x-adminlte-modal id="modalCustom{{ $paciente->id }}" title="Eliminar" size="sm" theme="warning" icon="fa-solid fa-triangle-exclamation" v-centered static-backdrop scrollable>
                             <div style="height: 50px;">¿Está seguro de eliminar el bioquimico?</div>
                             <x-slot name="footerSlot">
