@@ -11,8 +11,9 @@ use App\Models\Quimicas;
 use App\Models\Notificacion;
 use App\Models\Orden;
 use App\Models\TipoAnalisis;
+use App\Models\Selectanalisis;
 use Illuminate\Http\Request;
-
+use JeroenNoten\LaravelAdminLte\View\Components\Form\Select;
 
 class AnalisisController extends Controller
 {
@@ -108,17 +109,16 @@ class AnalisisController extends Controller
     {
         $analisis = Analisis::findOrFail($id);
         // Obtener datos relacionados
-        $idOrden = $analisis->orden->nroOrden;
+        $idOrden = $analisis->orden->id;
         $nombrepaciente = $analisis->orden->paciente->nombre;
         $bioquimico = Bioquimico::all();
-
-
-        return view('analisis.hemograma', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
+        $selectanalisis = SelectAnalisis::all();
+        return view('analisis.hemograma', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente','selectanalisis'));
     }
     public function hemogramastore(Request $request)
     {
         $hemograma = new HemogramaCompleto();
-        $hemograma->globulosRojos = $request->input('globulosrojo');
+        $hemograma->globulosRojos = $request->input('globulosRojos');
         $hemograma->hematocrito = $request->input('hematocrito');
         $hemograma->hemoglobina = $request->input('hemoglobina');
         $hemograma->VCM = $request->input('VCM');
@@ -181,14 +181,13 @@ class AnalisisController extends Controller
     public function hormona($id)
     {
         $analisis = Analisis::findOrFail($id);
-        $idOrden = $analisis->orden->nroOrden;
+        $idOrden = $analisis->orden->id;
         $nombrepaciente = $analisis->orden->paciente->nombre;
-        // $nombrePaciente = $analisis->orden->paciente->nomwbre; // Asumiendo que tienes la relación definida
-        // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
+  
         $bioquimico = Bioquimico::all();
+        $selectanalisis = SelectAnalisis::all();
 
-
-        return view('analisis.hormona', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
+        return view('analisis.hormona', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente','selectanalisis'));
     }
 
     public function hormonastore(Request $request)

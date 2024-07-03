@@ -35,7 +35,10 @@ class TodosanalisisSeeder extends Seeder
             'basofilos' => 20.00,
             'blastos' => 30.00,
             'grupoSanguineo' => 50.00,
-            'factorRh' => 45.00
+            'factorRh' => 45.00,
+            'VDRL' => 45.00, // Añade los valores restantes con sus respectivos nombres
+            'baciloscopia' => 100.00,
+            'coproparasitologico' => 10.00,
         ];
 
         foreach ($hemogramaAtributos as $atributo => $precio) {
@@ -79,7 +82,7 @@ class TodosanalisisSeeder extends Seeder
             'acVanilMandelico' => 220.00,
             'IGFSomatomedinaC' => 220.00,
             'IGFBP3' => 230.00,
-            'insulinaPostPand' => 230.00
+            'insulinaPostPand' => 230.00,
         ];
 
         foreach ($hormonasAtributos as $atributo => $precio) {
