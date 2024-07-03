@@ -12,10 +12,17 @@ class TipoAnalisisController extends Controller
      */
     public function index()
     {
-
+        $heads = [
+            'Id',
+            'Nombre',
+            'Descripcion',
+            'Precio',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
         $tipoanalisis = TipoAnalisis::all();
-        return view('VistaTiposAnalisis.index', compact('tipoanalisis'));
+        return view('VistaTiposAnalisis.index', compact('tipoanalisis', 'heads'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -87,7 +94,6 @@ class TipoAnalisisController extends Controller
             'descripcion' => 'required|string|max:255',
             'precio' => 'required|numeric',
         ]);
-        $tipoanalisis = new TipoAnalisis();
 
         // Actualizar los datos del tipo de seguro
         $tipoanalisis->nombre = $request->nombre;
