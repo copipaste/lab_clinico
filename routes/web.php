@@ -67,8 +67,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
     //ruta bioquimicos
+
     //Rutas Pacientes
     Route::resource('/bioquimicos', BioquimicoController::class)->names('bioquimicos');
+    Route::get('bioquimicoshorario/{id}', [BioquimicoController::class, 'horario'])->name('bioquimico.horario');
+
 
     //reportes pago
     Route::resource('/reportepagos', ReportepagosController::class)->names('reportepago');

@@ -1,3 +1,7 @@
+@php
+  use App\Models\Recepcionista;
+  $contacts=Recepcionista::All();
+@endphp
 <!doctype html>
 <html lang="en">
 
@@ -11,12 +15,27 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   {{-- @vite('resources/css/app.css') --}}
- 
+
 
   <title>Clinica</title>
 
   <style>
-    
+     .editable-span {
+            display: inline-block;
+            padding: 5px;
+            border: 1px dashed transparent;
+            cursor: pointer;
+        }
+        .editable-span:hover {
+            border: 1px dashed #ccc;
+        }
+        .edit-input, .edit-select {
+            display: none;
+            color: black;
+        }
+        #edit-button {
+            display: none;
+        }
     #menu-toggle:checked+#menu {
       display: block;
     }
@@ -120,8 +139,17 @@
                     d="M14.594,13.994l-1.66,1.66c-0.577-0.109-1.734-0.471-2.926-1.66c-1.193-1.193-1.553-2.354-1.661-2.926l1.661-1.66 l0.701-0.701L5.295,3.293L4.594,3.994l-1,1C3.42,5.168,3.316,5.398,3.303,5.643c-0.015,0.25-0.302,6.172,4.291,10.766 C11.6,20.414,16.618,20.707,18,20.707c0.202,0,0.326-0.006,0.358-0.008c0.245-0.014,0.476-0.117,0.649-0.291l1-1l0.697-0.697 l-5.414-5.414L14.594,13.994z" />
                 </svg>
 
-                <span class="ml-2">+591 70960799</span>
-              </div>
+                <span class="editable-span ml-2" id="contact-span">
+                    +591 <span id="phone-display">70960799</span>
+                </span>
+                <select class="edit-select ml-2" id="edit-select">
+                    @foreach ($contacts as $contact)
+                        <option value="{{ $contact->telefono }}">{{ $contact->telefono }}</option>
+                    @endforeach
+                </select>
+                <input type="text" class="edit-input ml-2" id="edit-input">
+                <button id="edit-button">Save</button>
+                 </div>
             </li>
           </ul>
         </div>
@@ -228,7 +256,7 @@
         <div class="lg:w-3/4 xl:w-2/4 relative z-10 h-100 lg:mt-16">
           <div>
             <h1 class="text-white text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">Comienza tu viaje hacia una salud completa con resultados precisos.</h1>
-    
+
             <a href="#" class="px-8 py-4 bg-teal-500 text-white rounded inline-block mt-8 font-semibold">Solicitar Analisis</a>
           </div>
         </div>
@@ -350,7 +378,7 @@
       </div>
 
       <div class="md:flex mt-12 md:-mx-4">
-        
+
         {{-- <div class="md:px-4 md:w-1/2 xl:w-1/4">
           <div class="bg-white rounded border border-gray-300">
             <div class="w-full h-48 overflow-hidden bg-gray-300"></div>
@@ -374,7 +402,7 @@
       @foreach ($Comentarios as $comentario)
         <div class="md:px-4 md:w-1/2 xl:w-1/4 mt-4 md:mt-0">
           <div class="bg-white rounded border border-gray-300 ">
-             
+
             <div class="p-4">
               <div class="flex items-center text-sm">
                 <span class="text-teal-500 font-semibold">fecha</span>
@@ -572,7 +600,60 @@
 
     gtag('config', 'UA-131505823-4');
   </script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var span = document.getElementById('contact-span');
+            var phoneDisplay = document.getElementById('phone-display');
+            var select = document.getElementById('edit-select');
+            var input = document.getElementById('edit-input');
+            var button = document.getElementById('edit-button');
 
+            // Load saved phone number from local storage
+            var savedPhone = localStorage.getItem('savedPhone');
+            if (savedPhone) {
+                phoneDisplay.textContent = savedPhone;
+                select.value = savedPhone;
+            }
+
+            span.addEventListener('click', function () {
+                input.value = phoneDisplay.textContent.trim();
+                phoneDisplay.style.display = 'none';
+                span.style.display = 'none';
+                select.style.display = 'inline-block';
+                button.style.display = 'inline-block';
+                select.focus();
+            });
+
+            select.addEventListener('change', function () {
+                input.value = select.value;
+                input.style.display = 'inline-block';
+                select.style.display = 'none';
+                input.focus();
+            });
+
+            button.addEventListener('click', function () {
+                phoneDisplay.textContent = input.value;
+                phoneDisplay.style.display = 'inline-block';
+                span.style.display = 'inline-block';
+                input.style.display = 'none';
+                select.style.display = 'none';
+                button.style.display = 'none';
+
+                // Save the selected phone number to local storage
+                localStorage.setItem('savedPhone', input.value);
+            });
+
+            input.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    button.click();
+                }
+            });
+
+            input.addEventListener('blur', function () {
+                button.click();
+            });
+        });
+    </script>
 </body>
 
 </html>
