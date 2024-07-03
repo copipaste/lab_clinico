@@ -2,7 +2,8 @@
     <h2 style="text-align: center;">Análisis Clínico</h2>
     <div class="col-md-4">
         <div style="margin-top: 0.5rem; display: flex; gap: 2rem;">
-            <div><strong>Nro Orden:</strong> {{ $hemograma->analisis->orden->nroOrden }} <strong>Paciente:</strong> {{ $hemograma->analisis->orden->paciente->nombre }}</div>
+            <div class="text-primary"><strong>Nro Orden:</strong> {{ $hemograma->analisis->orden->nroOrden }}<strong >Paciente:</strong> {{ $hemograma->analisis->orden->paciente->nombre }}</div>
+        </div>
         </div>
     </div>
 

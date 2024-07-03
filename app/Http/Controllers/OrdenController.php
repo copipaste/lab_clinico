@@ -18,6 +18,7 @@ use App\Models\Selectanalisis;
 use App\Models\analisistotal;
 use Illuminate\Http\Request;
 
+
 class OrdenController extends Controller
 {
     /**

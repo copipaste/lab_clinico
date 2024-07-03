@@ -25,7 +25,7 @@
                     </div>
                     <select class="custom-select" id="idbioquimico" name="idbioquimico" required>
                         @foreach ($bioquimico as $b)
-                            <option value="{{$b->id}}">{{$b->nombre}}</option>
+                            <option value="{{ $b->id }}">{{ $b->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -38,7 +38,7 @@
                         <span class="input-group-text" id="inputGroupPrepend">Paciente</span>
                     </div>
                     <input type="text" class="form-control" id="validationCustomUsername" placeholder="Paciente"
-                        aria-describedby="inputGroupPrepend" value="{{$nombrepaciente}}" readonly>
+                        aria-describedby="inputGroupPrepend" value="{{ $nombrepaciente }}" readonly>
                 </div>
             </div>
             <div class="col-md-3">
@@ -53,24 +53,22 @@
         </div>
 
         <label class="mt-2">Orina Completa</label>
-        <div class="form-row">
-            <div class="col">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">Glucosa</span>
+        @foreach ($selectanalisis as $s)
+            @if ($s->idOrden == $idOrden)
+                <div class="form-row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">{{ $s->analisistotal->nombre }}</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="" name="{{ $s->analisistotal->nombre }}"
+                                id="{{ $s->analisistotal->nombre }}" aria-describedby="inputGroupPrepend">
+                        </div>
                     </div>
-                    <input type="text" class="form-control" name="glucosa" id="glucosa" aria-describedby="inputGroupPrepend">
                 </div>
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">Urea</span>
-                    </div>
-                    <input type="text" class="form-control" name="urea" id="urea" aria-describedby="inputGroupPrepend">
-                </div>
-            </div>
-        </div>
+            @endif
+        @endforeach
+
 
         <button class="btn btn-primary mt-2 mb-2" type="submit">Submit form</button>
     </form>
