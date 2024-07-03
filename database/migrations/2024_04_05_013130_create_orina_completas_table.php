@@ -42,6 +42,7 @@ return new class extends Migration
             $table->boolean('levaduras')->nullable();
             $table->boolean('fosfTripleDeAmonioYMagnesio')->nullable();
             $table->string('estado')->default('pendiente');
+            $table->string('resultado')->nullable();
             $table->unsignedBigInteger('idAnalisis');
             $table->foreign('idAnalisis')->references('id')->on('analisis')->onDelete('cascade');
             $table->timestamps();

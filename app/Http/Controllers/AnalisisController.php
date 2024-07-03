@@ -229,6 +229,7 @@ class AnalisisController extends Controller
         $hormonas->IGFBP3 = $request->input('IGFBP3');
         $hormonas->insulinaPostPand = $request->input('insulinaPostPand');
         $hormonas->idAnalisis = $request->input('idAnalisis');
+        $hormonas->resultado = $request->input('resultado');
         $hormonas->save();
         $analisis = Analisis::find($request->input('idAnalisis'));
         $analisis->estado = 'Realizado';
@@ -365,6 +366,7 @@ public function orinastore(Request $request)
     $orina->cilindrosLeucocitario = $request->input('cilindrosLeucocitario');
     $orina->levaduras = $request->input('levaduras');
     $orina->fosfTripleDeAmonioYMagnesio = $request->input('fosfTripleDeAmonioYMagnesio');
+    $orina->idAnalisis = $request->input('idAnalisis');
     $orina->save();
 
     $analisis = Analisis::find($request->input('idAnalisis'));

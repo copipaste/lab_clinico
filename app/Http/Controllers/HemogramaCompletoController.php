@@ -8,7 +8,8 @@ use App\Models\HemogramaCompleto;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Notificacion;
-use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class HemogramaCompletoController extends Controller
 {
@@ -29,21 +30,21 @@ class HemogramaCompletoController extends Controller
         return view('hemograma.index', compact('hemograma', 'heads'));
     }
 
+    // public function generatePDF($id)
+    // {
+    //     // Obtener el hemograma utilizando el ID
+    //     $hemograma = HemogramaCompleto::findOrFail($id);
+    //     $bioquimico = Bioquimico::all();
+    //     $pdf = Pdf::loadView('hemograma.pdf', compact('hemograma', 'bioquimico'));
+    //     return $pdf->stream();
+    // }
+
     public function generatePDF($id)
     {
-        // Obtener el hemograma utilizando el ID
         $hemograma = HemogramaCompleto::findOrFail($id);
         $bioquimico = Bioquimico::all();
-        // Renderizar la vista como HTML
-        $html = view('hemograma.pdf', compact('hemograma', 'bioquimico'))->render();
-
-        $dompdf = new Dompdf();
-        // Cargar el HTML en Dompdf
-        $dompdf->loadHtml($html);
-        // Renderizar el PDF
-        $dompdf->render();
-        // Descargar el PDF
-        return $dompdf->stream('pdf_example.pdf');
+        $pdf = PDF::loadView('hemograma.pdf', compact('hemograma', 'bioquimico'));
+        return $pdf->download('hemograma_' . $id . '.pdf');
     }
     /**
      * Show the form for creating a new resource.
@@ -83,19 +84,19 @@ class HemogramaCompletoController extends Controller
     public function show(HemogramaCompleto $hemograma)
     {
         //dd($hemograma);
-        $bioquimico= Bioquimico::all();
+        $bioquimico = Bioquimico::all();
         //! codigo jhoel
         $user = User::find(auth()->user()->id);
-        if( $user->hasRole('Paciente') ){
+        if ($user->hasRole('Paciente')) {
             $notificacion = Notificacion::where('analisisId', $hemograma->idAnalisis)->first();
-            if($user->paciente->id == $notificacion->pacienteId){
+            if ($user->paciente->id == $notificacion->pacienteId) {
                 $notificacion->read = 1;
                 $notificacion->save();
             }
         }
-         //! codigo jhoel
+        //! codigo jhoel
 
-        return view('hemograma.show', compact('hemograma','bioquimico'));
+        return view('hemograma.show', compact('hemograma', 'bioquimico'));
     }
     public function show2(string $id)
     {
@@ -116,8 +117,8 @@ class HemogramaCompletoController extends Controller
      */
     public function edit(HemogramaCompleto $hemograma)
     {
-        $bioquimico= Bioquimico::all();
-        return view('hemograma.edit', compact('hemograma','bioquimico'));
+        $bioquimico = Bioquimico::all();
+        return view('hemograma.edit', compact('hemograma', 'bioquimico'));
     }
 
 

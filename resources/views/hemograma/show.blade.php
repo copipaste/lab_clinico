@@ -37,16 +37,23 @@
 
     <div class="form-row">
         <div class="col-md-6">
-            <div class="mt-1 text-danger"><strong>Serie Roja</strong></div>
+            <div class="mt-1 text-primary"><strong>Serie Roja</strong></div>
         </div>
         <div class="col-md-6">
-            <div class="mt-2 text-danger"><strong>Valores de Referencia</strong></div>
+            <div class="mt-2 text-primary"><strong>Valores de Referencia</strong></div>
         </div>
     </div>
     <div class="form-row">
+        @if ( $hemograma->globulosRojos >= 4.2 && $hemograma->globulosRojos <= 5.6)
+            <div class="col-md-6">
+                <div class=""><strong>Globulos Rojos:</strong> {{ $hemograma->globulosRojos }}</div>
+            </div>
+        @else
         <div class="col-md-6">
             <div class=""><strong>Globulos Rojos:</strong> {{ $hemograma->globulosRojos }}</div>
         </div>
+        @endif
+
         @if ($edad >= 50)
             <div class="col-md-6">
                 <div class=""><strong>Hombre: </strong> 4.2 - 5.6 millones mm3</div>

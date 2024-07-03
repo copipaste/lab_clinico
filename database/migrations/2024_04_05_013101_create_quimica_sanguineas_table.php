@@ -49,6 +49,7 @@ return new class extends Migration
             $table->decimal('creatinFosfoKinasaCPK', 10, 2)->nullable();
             $table->decimal('deshidrogemasaLacticaLDH', 10, 2)->nullable();
             $table->string('estado')->default('pendiente');
+            $table->string('resultado')->nullable();
             $table->unsignedBigInteger('idAnalisis');
             $table->foreign('idAnalisis')->references('id')->on('analisis')->onDelete('cascade');
             $table->timestamps();

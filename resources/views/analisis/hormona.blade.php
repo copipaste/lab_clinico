@@ -345,11 +345,11 @@
                 </div>
             </div>
         </div>
-        <label class="mt-2">Descripcion</label>
+        <label class="mt-2">Resultado</label>
         <div class="form-row">
             <div class="col">
                 <div class="input-group">
-                    <textarea class="form-control"  name="descripcion" id="descripcion" placeholder=""></textarea>
+                    <textarea class="form-control"  name="resultado" id="resultado" placeholder=""></textarea>
                 </div>
             </div>
         </div>
