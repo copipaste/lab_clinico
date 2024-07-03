@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(superUserSeeder::class);
         $this->call(TipoanalisisSeeder::class);
+        $this->call(TodosanalisisSeeder::class);
         $this->call(PacienteSeeder::class);
         $this->call(EspecialidadSeeder::class);
         $this->call(AnalisisSeeder::class);
