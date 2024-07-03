@@ -46,11 +46,11 @@
     <div class="form-row">
         @if ( $hemograma->globulosRojos >= 4.2 && $hemograma->globulosRojos <= 5.6)
             <div class="col-md-6">
-                <div class=""><strong>Globulos Rojos:</strong> {{ $hemograma->globulosRojos }}</div>
+                <div class="text-success"><strong>Globulos Rojos:</strong> {{ $hemograma->globulosRojos }}</div>
             </div>
         @else
         <div class="col-md-6">
-            <div class=""><strong>Globulos Rojos:</strong> {{ $hemograma->globulosRojos }}</div>
+            <div class="text-warning"><strong>Globulos Rojos:</strong> {{ $hemograma->globulosRojos }}</div>
         </div>
         @endif
 
