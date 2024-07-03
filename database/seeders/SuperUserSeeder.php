@@ -19,5 +19,10 @@ class SuperUserSeeder extends Seeder
             'email' => 'SuperUsuario@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Admin');
+        User::create([
+            'name' => 'Super User',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123'),
+        ])->assignRole('Admin');
     }
 }

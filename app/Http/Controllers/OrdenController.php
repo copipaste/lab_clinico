@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\Hormonas;
 use App\Models\HemogramaCompleto;
 use App\Models\Selectanalisis;
+use App\Models\analisistotal;
 use Illuminate\Http\Request;
 
 class OrdenController extends Controller
@@ -114,10 +115,11 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $orden = Orden::all();
         $ordenesConAnalisis = Orden::with('ordenAnalisis')->get();
         $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
-        $tipoanalisis = TipoAnalisis::all();
+        $tipoanalisisT = TipoAnalisis::all();
+        $tipoanalisis = analisistotal::all();
 
         return view('orden.create', compact('seguros','seguropaciente',
-        'hemogramacompleto','hormonas','paciente','tipoanalisis', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
+        'hemogramacompleto','hormonas','paciente','tipoanalisis','tipoanalisisT', 'user','orden', 'datosOrdenAnalisis', 'ordenesConAnalisis'));
     }
 
     /**
@@ -177,7 +179,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
     }
 
 
-        $tipoAnalisisIds = $request->input('analisisIds'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario
+        $tipoAnalisisIds = $request->input('analisisIdsT'); // Suponiendo que tienes un array de IDs de tipo de análisis desde el formulario
         foreach ($tipoAnalisisIds as $tipoAnalisisId) {
             // Insertar en la tabla intermedia
             DB::table('orden_analisis')->insert([
