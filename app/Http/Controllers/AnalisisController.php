@@ -183,7 +183,7 @@ class AnalisisController extends Controller
         $analisis = Analisis::findOrFail($id);
         $idOrden = $analisis->orden->id;
         $nombrepaciente = $analisis->orden->paciente->nombre;
-  
+
         $bioquimico = Bioquimico::all();
         $selectanalisis = SelectAnalisis::all();
 
@@ -253,14 +253,14 @@ class AnalisisController extends Controller
     public function quimica($id)
     {
         $analisis = Analisis::findOrFail($id);
-        $idOrden = $analisis->orden->nroOrden;
+        $idOrden = $analisis->orden->id;
         $nombrepaciente = $analisis->orden->paciente->nombre;
         // $nombrePaciente = $analisis->orden->paciente->nomwbre; // Asumiendo que tienes la relación definida
         // $nombreSeguro = $analisis->orden->paciente->tipoSeguro->descripcion; // Asumiendo que tienes la relación definida
         $bioquimico = Bioquimico::all();
+        $selectanalisis = SelectAnalisis::all();
 
-
-        return view('analisis.quimicasanguinea', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
+        return view('analisis.quimicasanguinea', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente','selectanalisis'));
     }
 
     public function quimicastore(Request $request)
@@ -327,10 +327,11 @@ class AnalisisController extends Controller
 public function orina($id)
 {
     $analisis = Analisis::findOrFail($id);
-    $idOrden = $analisis->orden->nroOrden;
+    $idOrden = $analisis->orden->id;
     $nombrepaciente = $analisis->orden->paciente->nombre;
     $bioquimico = Bioquimico::all();
-    return view('analisis.orinacompleta', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente'));
+    $selectanalisis = SelectAnalisis::all();
+    return view('analisis.orinacompleta', compact('analisis', 'idOrden', 'bioquimico', 'nombrepaciente','selectanalisis'));
 }
 
 public function orinastore(Request $request)
