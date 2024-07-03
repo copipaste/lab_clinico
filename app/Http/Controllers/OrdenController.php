@@ -92,7 +92,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
         $bioquimico = Bioquimico::all();
         $paciente = Paciente::all();
-        return view('Orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
+        return view('Orden.index', compact('start_date', 'end_date','ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
 
 
     }

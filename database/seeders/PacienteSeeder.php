@@ -26,14 +26,14 @@ class PacienteSeeder extends Seeder
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
 
-        // ID USER 3 
+        // ID USER 3
         $user2 = User::create([
             'name' => 'Manuel medrano 2',
             'email' => 'paciente2@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
 
-        // ID USER 4 
+        // ID USER 4
         $user3 = User::create([
             'name' => 'Carla Zapata 3',
             'email' => 'paciente3@gmail.com',
@@ -46,7 +46,7 @@ class PacienteSeeder extends Seeder
             'email' => 'paciente4@gmail.com',
             'password' => bcrypt('password'),
         ])->assignRole('Paciente');
-       
+
         // ID USER 6
         $user5 = User::create([
             'name' => 'Dr. Juan Perez 1',
@@ -101,7 +101,7 @@ class PacienteSeeder extends Seeder
         // PACIENTE ID 1
         Paciente::create([
             'ci' => '123456',
-            'nombre' => 'Jhoel Debray 1',
+            'nombre' => 'Jhoel Debray ',
             'fechaNacimiento' => '1990-01-01',
             'sexo' => 'MASCULINO',
             'telefono' => '70016993',
@@ -113,7 +113,7 @@ class PacienteSeeder extends Seeder
         // PACIENTE ID 2
         Paciente::create([
             'ci' => '654321',
-            'nombre' => 'Manuel medrano 2',
+            'nombre' => 'Manuel medrano ',
             'fechaNacimiento' => '1990-01-02',
             'sexo' => 'MASCULINO',
             'telefono' => '60960799',
@@ -125,7 +125,7 @@ class PacienteSeeder extends Seeder
         // PACIENTE ID 3
         Paciente::create([
             'ci' => '334455',
-            'nombre' => 'Carla Zapata 3',
+            'nombre' => 'Carla Zapata ',
             'fechaNacimiento' => '1990-01-01',
             'sexo' => 'FEMENINO',
             'telefono' => '70016993',
@@ -137,7 +137,7 @@ class PacienteSeeder extends Seeder
         // PACIENTE ID 4
         Paciente::create([
             'ci' => '654321',
-            'nombre' => 'Tania Valdez 4',
+            'nombre' => 'Tania Valdez ',
             'fechaNacimiento' => '1990-01-02',
             'sexo' => 'FEMENINO',
             'telefono' => '60960799',
@@ -155,10 +155,21 @@ class PacienteSeeder extends Seeder
         $bioquimico = Bioquimico::create([
             'ci' => '123456',
             'direccion' => 'av. 6 de agosto',
-            'nombre' => 'Juan Perez 1',
+            'nombre' => 'Juan Perez ',
             'fechaNacimiento' => '1990-01-01',
             'sexo' => 'MASCULINO',
             'telefono' => '70016993',
+            'idEspecialidad' => $especialidad->id,
+        ]);
+
+          // BIOQUÍMICO NO RELACIONADO A NINGÚN USER
+          $bioquimico = Bioquimico::create([
+            'ci' => '321456',
+            'direccion' => 'av. 7 de agosto',
+            'nombre' => 'Arturo Ramon ',
+            'fechaNacimiento' => '1990-01-01',
+            'sexo' => 'MASCULINO',
+            'telefono' => '70831779',
             'idEspecialidad' => $especialidad->id,
         ]);
 
