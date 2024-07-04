@@ -435,12 +435,7 @@ return [
                     'icon' => 'fas fa-fw fa-flask',
                     'can' => 'tipoanalisis.index',
                 ],
-                [
-                    'text' => 'Reporte de Pagos',
-                    'url' => '/reportepagos',
-                    'icon' => 'fas fa-fw fa-dollar-sign',
-                    'can' => 'tipoanalisis.index',
-                ],
+             
             ],
         ],
 
