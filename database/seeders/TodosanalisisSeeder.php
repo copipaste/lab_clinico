@@ -22,6 +22,7 @@ class TodosanalisisSeeder extends Seeder
             'HCM' => 15.00,
             'CHCM' => 20.00,
             'VSG' => 40.00,
+            'recuento' => 35.00,
             'plaquetas' => 35.00,
             'globulosBlancos' => 50.00,
             'promielocitos' => 45.00,
@@ -39,6 +40,8 @@ class TodosanalisisSeeder extends Seeder
             'VDRL' => 45.00, // Añade los valores restantes con sus respectivos nombres
             'baciloscopia' => 100.00,
             'coproparasitologico' => 10.00,
+            'metodo' => 100.00,
+            'resultado' => 10.00,
         ];
 
         foreach ($hemogramaAtributos as $atributo => $precio) {
