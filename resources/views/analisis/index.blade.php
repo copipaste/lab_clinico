@@ -58,8 +58,8 @@
                         try {
                             $hemogramaExistente = App\Models\HemogramaCompleto::where('idAnalisis', $o->id)->exists();
                             $hormonaExistente = App\Models\Hormonas::where('idAnalisis', $o->id)->exists();
-                            $quimicaExistente = App\Models\Quimicas::where('idAnalisis', $o->id)->exists();
-                            $orinaExistente = App\Models\Orinas::where('idAnalisis', $o->id)->exists();
+                            $quimicaExistente = App\Models\quimicas::where('idAnalisis', $o->id)->exists();
+                            $orinaExistente = App\Models\orinas::where('idAnalisis', $o->id)->exists();
                         } catch (\Exception $e) {
                             // Manejar la excepción aquí, por ejemplo:
                             $hemogramaExistente = false;
