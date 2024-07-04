@@ -42,6 +42,20 @@ class OrdenSeeder extends Seeder
         $orden->nroOrden = 'OR' . $orden->id;
         $orden->save();
 
+        DB::table('orden_analisis')->insert([
+            'orden_id' => $orden->id,
+            'tipo_analisis_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('orden_analisis')->insert([
+            'orden_id' => $orden->id,
+            'tipo_analisis_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+         /*
         $ordenanalisis = new ordenAnalisis();
         $ordenanalisis->orden_id = $orden->id;
         $ordenanalisis->tipo_analisis_id = 1;
@@ -51,7 +65,7 @@ class OrdenSeeder extends Seeder
         $ordenanalisis->orden_id = $orden->id;
         $ordenanalisis->tipo_analisis_id = 2;
         $ordenanalisis->save();
-        /*
+       
         ordenAnalisis::create([
             'orden_id' => $orden->id,
             'tipo_analisis_id' => 1,
@@ -132,11 +146,18 @@ class OrdenSeeder extends Seeder
         $orden2->nroOrden = 'OR' . $orden2->id;
         $orden2->save();
 
+        DB::table('orden_analisis')->insert([
+            'orden_id' => $orden2->id,
+            'tipo_analisis_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        /*
         $ordenanalisis = new ordenAnalisis();
         $ordenanalisis->orden_id = $orden2->id;
         $ordenanalisis->tipo_analisis_id = 1;
         $ordenanalisis->save();
-        /*
+        
         ordenAnalisis::create([
             'orden_id' => $orden2->id,
             'tipo_analisis_id' => 1,
@@ -189,11 +210,18 @@ class OrdenSeeder extends Seeder
         $orden3->nroOrden = 'OR' . $orden3->id;
         $orden3->save();
 
+        DB::table('orden_analisis')->insert([
+            'orden_id' => $orden3->id,
+            'tipo_analisis_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        /*
         $ordenanalisis = new ordenAnalisis();
         $ordenanalisis->orden_id = $orden3->id;
         $ordenanalisis->tipo_analisis_id = 2;
         $ordenanalisis->save();
-        /*
+        
         ordenAnalisis::create([
             'orden_id' => $orden3->id,
             'tipo_analisis_id' => 2,

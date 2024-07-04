@@ -16,6 +16,7 @@ use App\Models\Selectanalisis;
 use App\Models\Solicitud;
 use App\Models\TipoAnalisis;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Validation\ValidationException;
@@ -67,10 +68,18 @@ class AppointmentController extends Controller
                     $montoTotal = $montoTotal + floatval($analysisType['precio']);
 
                     // Relacionar la orden con el tipo de análisis en la tabla orden_analisis
+                    DB::table('orden_analisis')->insert([
+                        'orden_id' => $orden->id,
+                        'tipo_analisis_id' => intval($analysisType['id']),
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                    /*
                     ordenAnalisis::create([
                         'orden_id' => $orden->id,
                         'tipo_analisis_id' => intval($analysisType['id']),
                     ]);
+                    */
 
                     // Crear un nuevo análisis para la orden
                     $analisis = new Analisis();
