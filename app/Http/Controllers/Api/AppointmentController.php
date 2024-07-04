@@ -70,8 +70,6 @@ class AppointmentController extends Controller
                     ordenAnalisis::create([
                         'orden_id' => $orden->id,
                         'tipo_analisis_id' => intval($analysisType['id']),
-                        'created_at' => now(),
-                        'updated_at' => now(),
                     ]);
 
                     // Crear un nuevo análisis para la orden
@@ -89,8 +87,6 @@ class AppointmentController extends Controller
                         Selectanalisis::create([
                             'idTipoanalisis' => $atributo->id,
                             'idOrden' => $orden->id,
-                            'created_at' => now(),
-                            'updated_at' => now(),
                         ]);
                     }
                 }

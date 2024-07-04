@@ -42,6 +42,16 @@ class OrdenSeeder extends Seeder
         $orden->nroOrden = 'OR' . $orden->id;
         $orden->save();
 
+        $ordenanalisis = new ordenAnalisis();
+        $ordenanalisis->orden_id = $orden->id;
+        $ordenanalisis->tipo_analisis_id = 1;
+        $ordenanalisis->save();
+
+        $ordenanalisis = new ordenAnalisis();
+        $ordenanalisis->orden_id = $orden->id;
+        $ordenanalisis->tipo_analisis_id = 2;
+        $ordenanalisis->save();
+        /*
         ordenAnalisis::create([
             'orden_id' => $orden->id,
             'tipo_analisis_id' => 1,
@@ -51,6 +61,7 @@ class OrdenSeeder extends Seeder
             'orden_id' => $orden->id,
             'tipo_analisis_id' => 2,
         ]);
+        */
 
         // Crear un nuevo análisis para la orden ID 2
         $analisis = new Analisis();
@@ -71,10 +82,16 @@ class OrdenSeeder extends Seeder
 
         // Relacionar la orden con los atributos en la tabla selectanalises
         foreach ($atributos1 as $atributo1) {
+            $selectedanalisis = new Selectanalisis();
+            $selectedanalisis->idTipoanalisis = $atributo1->id;
+            $selectedanalisis->idOrden = $orden->id;
+            $selectedanalisis->save();
+            /*
             Selectanalisis::create([
                 'idTipoanalisis' => $atributo1->id,
                 'idOrden' => $orden->id,
             ]);
+            */
         }
 
         // Obtener todos los atributos correspondientes al tipo de análisis
@@ -82,15 +99,22 @@ class OrdenSeeder extends Seeder
 
         // Relacionar la orden con los atributos en la tabla selectanalises
         foreach ($atributos2 as $atributo2) {
+            $selectedanalisis = new Selectanalisis();
+            $selectedanalisis->idTipoanalisis = $atributo2->id;
+            $selectedanalisis->idOrden = $orden->id;
+            $selectedanalisis->save();
+            /*
             Selectanalisis::create([
                 'idTipoanalisis' => $atributo2->id,
                 'idOrden' => $orden->id,
             ]);
+            */
         }
 
 
         // NUEVA ORDEN
         // Crear la nota de venta
+        
         $notaventa2 = NotaVenta::create([
             'metodoPago' => 'Paypal',
             'precio' => 50,
@@ -108,11 +132,16 @@ class OrdenSeeder extends Seeder
         $orden2->nroOrden = 'OR' . $orden2->id;
         $orden2->save();
 
-
+        $ordenanalisis = new ordenAnalisis();
+        $ordenanalisis->orden_id = $orden2->id;
+        $ordenanalisis->tipo_analisis_id = 1;
+        $ordenanalisis->save();
+        /*
         ordenAnalisis::create([
             'orden_id' => $orden2->id,
             'tipo_analisis_id' => 1,
         ]);
+        */
 
         // Crear un nuevo análisis para la orden ID 3
         $analisis = new Analisis();
@@ -126,10 +155,16 @@ class OrdenSeeder extends Seeder
 
         // Relacionar la orden con los atributos en la tabla selectanalises
         foreach ($atributos3 as $atributo) {
+            $selectedanalisis = new Selectanalisis();
+            $selectedanalisis->idTipoanalisis = $atributo->id;
+            $selectedanalisis->idOrden = $orden2->id;
+            $selectedanalisis->save();
+            /*
             Selectanalisis::create([
                 'idTipoanalisis' => $atributo->id,
                 'idOrden' => $orden2->id,
             ]);
+            */
         }
 
 
@@ -154,10 +189,16 @@ class OrdenSeeder extends Seeder
         $orden3->nroOrden = 'OR' . $orden3->id;
         $orden3->save();
 
+        $ordenanalisis = new ordenAnalisis();
+        $ordenanalisis->orden_id = $orden3->id;
+        $ordenanalisis->tipo_analisis_id = 2;
+        $ordenanalisis->save();
+        /*
         ordenAnalisis::create([
             'orden_id' => $orden3->id,
             'tipo_analisis_id' => 2,
         ]);
+        */
 
         // Crear un nuevo análisis para la orden ID 4
         $analisis = new Analisis();
@@ -171,10 +212,16 @@ class OrdenSeeder extends Seeder
 
         // Relacionar la orden con los atributos en la tabla selectanalises
         foreach ($atributos4 as $atributo4) {
+            $selectedanalisis = new Selectanalisis();
+            $selectedanalisis->idTipoanalisis = $atributo4->id;
+            $selectedanalisis->idOrden = $orden3->id;
+            $selectedanalisis->save();
+            /*
             Selectanalisis::create([
                 'idTipoanalisis' => $atributo4->id,
                 'idOrden' => $orden3->id,
             ]);
+            */
         }
 
     }
