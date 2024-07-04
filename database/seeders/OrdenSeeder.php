@@ -114,7 +114,7 @@ class OrdenSeeder extends Seeder
 
         // NUEVA ORDEN
         // Crear la nota de venta
-        
+
         $notaventa2 = NotaVenta::create([
             'metodoPago' => 'Paypal',
             'precio' => 50,

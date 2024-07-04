@@ -55,10 +55,18 @@
             <x-adminlte-datatable id="table1" :heads="$heads" striped head-theme="white" with-buttons>
                 @foreach ($analisis as $o)
                     @php
-                        $hemogramaExistente = App\Models\HemogramaCompleto::where('idAnalisis', $o->id)->exists();
-                        $hormonaExistente = App\Models\Hormonas::where('idAnalisis', $o->id)->exists();
-                        $quimicaExistente = App\Models\Quimicas::where('idAnalisis', $o->id)->exists();
-                        $orinaExistente = App\Models\Orinas::where('idAnalisis', $o->id)->exists();
+                        try {
+                            $hemogramaExistente = App\Models\HemogramaCompleto::where('idAnalisis', $o->id)->exists();
+                            $hormonaExistente = App\Models\Hormonas::where('idAnalisis', $o->id)->exists();
+                            $quimicaExistente = App\Models\Quimicas::where('idAnalisis', $o->id)->exists();
+                            $orinaExistente = App\Models\Orinas::where('idAnalisis', $o->id)->exists();
+                        } catch (\Exception $e) {
+                            // Manejar la excepción aquí, por ejemplo:
+                            $hemogramaExistente = false;
+                            $hormonaExistente = false;
+                            $quimicaExistente = false;
+                            $orinaExistente = false;
+                        }
                     @endphp
                     <tr>
                         <td>{{ $o->orden->nroOrden }}</td>
@@ -108,10 +116,10 @@
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @else
-                                    <a href="{{ route('quimica.show2', $o->id) }}"
-                                        class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
-                                        <i class="fa fa-lg fa-fw fas fa-eye"></i>
-                                    </a>
+                                        <a href="{{ route('quimica.show2', $o->id) }}"
+                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
+                                            <i class="fa fa-lg fa-fw fas fa-eye"></i>
+                                        </a>
                                     @endif
                                 @endif
 
