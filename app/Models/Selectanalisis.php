@@ -18,6 +18,6 @@ class Selectanalisis extends Model
     // Relación con Analisistotal
     public function analisistotal()
     {
-        return $this->belongsTo(Analisistotal::class, 'idTipoanalisis');
+        return $this->belongsTo(analisistotal::class, 'idTipoanalisis');
     }
 }
