@@ -110,11 +110,10 @@ class AuthController extends Controller
             ]);
 
             return response()->json($user, 201);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         } catch (\Exception $e) {
-            // Registrar el error
-            Log::error('Error en el registro: ' . $e->getMessage());
-
-            // Devolver una respuesta de error
+            Log::error('Error en el registro: ', ['exception' => $e]);
             return response()->json(['error' => 'Error en el registro de usuario.'], 500);
         }
     }
@@ -127,6 +126,7 @@ class AuthController extends Controller
         $request->validate([
             'ci' => 'required',
         ]);
+        /*
 
         //busca al paciente con determinado ci
         $user = Paciente::where('ci', $request->ci)->first();
@@ -140,6 +140,10 @@ class AuthController extends Controller
 
         //retorna el paciente
         return $user;
+        */
+
+        $exists = Paciente::where('ci', $request->ci)->exists();
+        return response()->json($exists);
     }
 
     // Verifica si ya existe un paciente con el email ingresado en el formulario de registro
@@ -149,6 +153,7 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required',
         ]);
+        /*
 
         //busca al paciente con determinado email
         $user = User::where('email', $request->email)->first();
@@ -162,6 +167,11 @@ class AuthController extends Controller
 
         //retorna el paciente
         return $user;
+        */
+
+        //$email = $request->input('email');
+        $exists = User::where('email', $request->email)->exists();
+        return response()->json($exists);
     }
 
 
