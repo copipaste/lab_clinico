@@ -25,18 +25,18 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoanalisisSeeder::class);
         $this->call(PacienteSeeder::class);
         $this->call(EspecialidadSeeder::class);
-<<<<<<< HEAD
+
         $this->call(AnalisisSeeder::class);
         $this->call(HemogramaSeeder::class);
         $this->call(HormonaSeeder::class);
         $this->call(HorarioSeeder::class);
         $this->call(OrdenSeeder::class);
-=======
+
       //!  $this->call(AnalisisSeeder::class);
       //!  $this->call(HemogramaSeeder::class);
         
         //$this->call(OrdenSeeder::class);
->>>>>>> 333b3e04e17eb682ea5d175b98e51bc76f7b4531
+
 
 
 

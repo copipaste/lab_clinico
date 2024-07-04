@@ -139,12 +139,12 @@ class PacienteSeeder extends Seeder
             'idUser' => $user3->id,     //idUser 4
         ]);
 
-<<<<<<< HEAD
+
         // PACIENTE ID 4
-        Paciente::create([
-=======
+        
+
         $paciente4 = Paciente::create([
->>>>>>> 333b3e04e17eb682ea5d175b98e51bc76f7b4531
+
             'ci' => '654321',
             'nombre' => 'Tania Valdez 4',
             'fechaNacimiento' => '1990-01-02',

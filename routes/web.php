@@ -22,12 +22,7 @@ use App\Http\Controllers\HormonasController;
 use App\Http\Controllers\StripeController;
 use App\Models\HemogramaCompleto;
 use App\Http\Controllers\NotificationsController;
-<<<<<<< HEAD
-
-=======
 use App\Http\Controllers\PagoController;
- 
->>>>>>> 333b3e04e17eb682ea5d175b98e51bc76f7b4531
 
 /*
 |--------------------------------------------------------------------------
@@ -146,20 +141,21 @@ Route::post('/log-window-close', 'UserController@logWindowClose')->name('log.win
 
 // Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
 
-
 /* ------------------------------------- VISTA NOTIFICACIONES ---------------------------------------------------------- */
 Route::get('notifications/get',[NotificationsController::class, 'getNotificationsData'])->name('notifications.get');
 
-
-<<<<<<< HEAD
 /*-------------------------------horario------------*/
 Route::resource('horario', HorarioController::class)->names('horario');
-=======
+
 /* ------------------------------------- VISTA PAGOS ---------------------------------------------------------- */
 Route::resource('/pagos', PagoController::class)->names('pagos');
+
 Route::post('/indexCuston', [PagoController::class, 'indexCustom'])->name('pagos.indexCustom');
 
+Route::get('/pagosCliente', [PagoController::class, 'pagoCliente'])->name('pagos.indexCliente');
+//PARA GENERAR UN PDF
+//Route::get('/pagos/{id}/pdf', [PagoController::class, 'downloadPDF'])->name('orden.pdf');
 
 /* ---------------------------------------VISTA EMAIL-------------------------------------------------------------------- */
 Route::get('/send',[EmailController::class, 'sendEmail']); 
->>>>>>> 333b3e04e17eb682ea5d175b98e51bc76f7b4531
+
