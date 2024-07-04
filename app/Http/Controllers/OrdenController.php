@@ -52,7 +52,7 @@ $datosOrdenAnalisis = OrdenAnalisis::with('tipoAnalisis')->get();
         $tipoanalisis = TipoAnalisis::all();
         $bioquimico = Bioquimico::all();
         $paciente = Paciente::all();
-        return view('orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
+        return view('Orden.index', compact('ordenesConAnalisis','user', 'paciente', 'datosOrdenAnalisis', 'orden', 'tipoanalisis', 'bioquimico', 'heads'));
     }
 
     public function index1(Request $request)
