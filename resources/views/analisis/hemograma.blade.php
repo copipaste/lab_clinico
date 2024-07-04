@@ -73,7 +73,16 @@
                 </div>
             @endif
         @endforeach
-
+        <div class="form-row mt-1">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend">Resultado</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder=""  name="resultado" id="resultado" aria-describedby="inputGroupPrepend">
+                </div>
+            </div>
+        </div>
         <button class="btn btn-primary mt-2 mb-2" type="submit">Submit form</button>
     </form>
 @endsection

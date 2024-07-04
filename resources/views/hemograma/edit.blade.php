@@ -268,25 +268,10 @@
                 </div>
             </div>
         </div>
-        <label class="mt-2">COPROPARASITOLOGICO</label>
-        <div class="form-row">
-            <div class="col">
-                <div class="input-group">
-                    <textarea class="form-control" name="coproparasitologico" id="coproparasitologico">{{$hemograma->coproparasitologico}}</textarea>
-                </div>
-            </div>
-        </div>
-
+    
         <label class="mt-2">DIAGNOSTICO DE LA ENFERMEDAD DE CHAGAS</label>
         <div class="form-row mt-1">
-            <div class="col">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">Metodo</span>
-                    </div>
-                    <input type="text" class="form-control"  name="metodo" id="metodo" placeholder="" aria-describedby="inputGroupPrepend" value="{{ $hemograma->metodo}}">
-                </div>
-            </div>
+
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-prepend">
