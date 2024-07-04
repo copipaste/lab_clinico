@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HorarioSeeder::class);
         $this->call(OrdenSeeder::class);
 
+        $this->call(SelectanalisisSeeder::class);
 
 
 
