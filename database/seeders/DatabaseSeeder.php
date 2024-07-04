@@ -32,9 +32,9 @@ class DatabaseSeeder extends Seeder
         $this->call(HemogramaSeeder::class);
         $this->call(HormonaSeeder::class);
         $this->call(HorarioSeeder::class);
-        // $this->call(OrdenSeeder::class);
+        $this->call(OrdenSeeder::class);
 
-        // $this->call(SelectanalisisSeeder::class);
+        $this->call(SelectanalisisSeeder::class);
 
 
 
