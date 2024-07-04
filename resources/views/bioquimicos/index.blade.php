@@ -101,7 +101,7 @@
                                         <div class="col">
                                             <span style="background-color: #cecece; padding: 10px; border-radius: 5px; display: inline-block;">
                                              Horarios para el bioquimico:  @foreach ($Bioquimico as $hemograma)
-@if($hemograma->id = $paciente->id)
+@if($hemograma->id == $paciente->id)
                                                  <label class="form-check-label" for="analisis{{ $hemograma->id }}">
                                                      {{ $hemograma->nombre }}
                                                  </label>
