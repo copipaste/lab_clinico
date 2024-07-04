@@ -21,6 +21,8 @@ use App\Http\Controllers\HormonasController;
 use App\Http\Controllers\StripeController;
 use App\Models\HemogramaCompleto;
 use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\OrinaCompletaController;
+use App\Http\Controllers\QuimicaSanguineaController;
 use App\Http\Controllers\ReportepagosController;
 
 
@@ -113,6 +115,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('hemogramaCompleto/{id}',[HemogramaCompletoController::class, 'show2'])->name('hemograma.show2');
     Route::resource('/hemograma', HemogramaCompletoController::class)->names('hemograma');
     Route::get('hemogramaPdf/{id}', [HemogramaCompletoController::class, 'generatePDF'])->name('hemograma.generatePDF');
+
+
+    Route::resource('/orina', OrinaCompletaController::class)->names('orina');
+    Route::get('orinaCompleto/{id}', [OrinaCompletaController::class, 'show2'])->name('orina.show2');
+
+    Route::resource('/quimica', QuimicaSanguineaController::class)->names('quimica');
+    Route::get('quimicasanguinea/{id}', [QuimicaSanguineaController::class, 'show2'])->name('quimica.show2');
 
 });
 

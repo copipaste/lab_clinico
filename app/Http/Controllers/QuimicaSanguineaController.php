@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Quimicas;
 use App\Models\QuimicaSanguinea;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,19 @@ class QuimicaSanguineaController extends Controller
         //
     }
 
+    public function show2(string $id)
+    {
+        $heads = [
+            'Orden',
+            'Id',
+            'Bioquimico',
+            'Paciente',
+            'Fecha',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $quimicas = Quimicas::where('idAnalisis', $id)->get();
+        return view('quimica.index', compact('quimicas', 'heads','id'));
+    }
     /**
      * Show the form for creating a new resource.
      */

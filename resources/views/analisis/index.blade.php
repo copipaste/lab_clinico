@@ -108,6 +108,10 @@
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @else
+                                    <a href="{{ route('quimica.show2', $o->id) }}"
+                                        class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
+                                        <i class="fa fa-lg fa-fw fas fa-eye"></i>
+                                    </a>
                                     @endif
                                 @endif
 
@@ -118,6 +122,10 @@
                                             <i class="fa fa-lg fa-fw fa-plus"></i>
                                         </a>
                                     @else
+                                        <a href="{{ route('orina.show2', $o->id) }}"
+                                            class="btn btn-xs btn-default text-primary mx-1 shadow" title="Registrar">
+                                            <i class="fa fa-lg fa-fw fas fa-eye"></i>
+                                        </a>
                                     @endif
                                 @endif
                                 {{-- <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR"

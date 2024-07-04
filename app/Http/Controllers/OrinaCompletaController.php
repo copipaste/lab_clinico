@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrinaCompleta;
+use App\Models\Orinas;
 use Illuminate\Http\Request;
 
 class OrinaCompletaController extends Controller
@@ -15,6 +16,19 @@ class OrinaCompletaController extends Controller
         //
     }
 
+    public function show2(string $id)
+    {
+        $heads = [
+            'Orden',
+            'Id',
+            'Bioquimico',
+            'Paciente',
+            'Fecha',
+            ['label' => 'Acciones', 'no-export' => true],
+        ];
+        $orinas = Orinas::where('idAnalisis', $id)->get();
+        return view('orina.index', compact('orinas', 'heads','id'));
+    }
     /**
      * Show the form for creating a new resource.
      */

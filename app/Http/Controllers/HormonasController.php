@@ -73,7 +73,7 @@ class HormonasController extends Controller
             'Fecha',
             ['label' => 'Acciones', 'no-export' => true],
         ];
-        $hormonas = Hormonas::all();
+        $hormonas = Hormonas::where('idAnalisis', $id)->get();
         return view('hormona.index', compact('hormonas', 'heads','id'));
     }
     /**
