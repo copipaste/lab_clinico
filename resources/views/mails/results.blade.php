@@ -78,7 +78,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://i.ibb.co/vscmqg7/lab-bg.jpg" alt="Logo de la Clínica"> 
+            <img src="https://i.ibb.co/k9W6cr2/lab-bg.jpg" alt="Logo de la Clínica"> 
             <h1>Resultados de Análisis</h1>
         </div>
         <div class="content">

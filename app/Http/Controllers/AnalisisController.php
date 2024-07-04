@@ -106,7 +106,7 @@ class AnalisisController extends Controller
         
          
         $email = new EmailController();
-        $email->sendEmail($hemograma,'sistemasuagrm2023@gmail.com','hemograma'); // esta linea de codigo tengo que meter para enviar el email al paciente
+        $email->sendEmail($hemograma,'jonatanqt38@gmail.com','hemograma'); // esta linea de codigo tengo que meter para enviar el email al paciente
 
         activity()
         ->causedBy(auth()->user())
