@@ -10,6 +10,10 @@ class Selectanalisis extends Model
     use HasFactory;
 
     protected $table = 'selectanalises'; // Nombre de la tabla si es diferente
+    protected $fillable = [
+        'idTipoanalisis',
+        'idOrden',
+    ];
 
     // Relación con Analisistotal
     public function analisistotal()
