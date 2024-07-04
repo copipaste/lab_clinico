@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Analisis;
+use App\Models\analisistotal;
 use App\Models\CourseStudent;
 use App\Models\HemogramaCompleto;
 use App\Models\NotaVenta;
 use App\Models\Orden;
 use App\Models\ordenAnalisis;
 use App\Models\Paciente;
+use App\Models\Selectanalisis;
 use App\Models\Solicitud;
 use App\Models\TipoAnalisis;
 use Illuminate\Support\Facades\Auth;
@@ -63,17 +65,34 @@ class AppointmentController extends Controller
                 // Procesar los tipos de análisis recibidos
                 foreach ($datos as $analysisType) {
                     $montoTotal = $montoTotal + floatval($analysisType['precio']);
+
+                    // Relacionar la orden con el tipo de análisis en la tabla orden_analisis
                     ordenAnalisis::create([
                         'orden_id' => $orden->id,
                         'tipo_analisis_id' => intval($analysisType['id']),
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);
+
+                    // Crear un nuevo análisis para la orden
                     $analisis = new Analisis();
                     $analisis->estado = 'Pendiente';
                     $analisis->descripcion =  $analysisType['nombre']; // Acceder al nombre del tipo de análisis
                     $analisis->idOrden = $idOrden;
                     $analisis->save();
+
+                    // Obtener todos los atributos correspondientes al tipo de análisis
+                    $atributos = analisistotal::where('tipo', $analysisType['nombre'])->get();
+
+                    // Relacionar la orden con los atributos en la tabla selectanalises
+                    foreach ($atributos as $atributo) {
+                        Selectanalisis::create([
+                            'idTipoanalisis' => $atributo->id,
+                            'idOrden' => $orden->id,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    }
                 }
 
                 // Crear la nota de venta

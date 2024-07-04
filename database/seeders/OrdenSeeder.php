@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Paciente;
 use App\Models\Orden;
 use App\Models\Analisis;
+use App\Models\analisistotal;
 use App\Models\NotaVenta;
 use App\Models\ordenAnalisis;
+use App\Models\Selectanalisis;
 use App\Models\TipoAnalisis;
 
 class OrdenSeeder extends Seeder
@@ -68,6 +70,32 @@ class OrdenSeeder extends Seeder
         $analisis->idOrden = $orden->id;    // Orden ID 2
         $analisis->save();
 
+        // Obtener todos los atributos correspondientes al tipo de análisis
+        $atributos1 = analisistotal::where('tipo', 'Hemograma')->get();
+
+        // Relacionar la orden con los atributos en la tabla selectanalises
+        foreach ($atributos1 as $atributo1) {
+            Selectanalisis::create([
+                'idTipoanalisis' => $atributo1->id,
+                'idOrden' => $orden->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        // Obtener todos los atributos correspondientes al tipo de análisis
+        $atributos2 = analisistotal::where('tipo', 'Hormona')->get();
+
+        // Relacionar la orden con los atributos en la tabla selectanalises
+        foreach ($atributos2 as $atributo2) {
+            Selectanalisis::create([
+                'idTipoanalisis' => $atributo2->id,
+                'idOrden' => $orden->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
 
         // NUEVA ORDEN
         // Crear la nota de venta
@@ -81,7 +109,7 @@ class OrdenSeeder extends Seeder
         // ID ORDEN 3
         $orden2 = new Orden();
         $orden2->idNotaVenta = $notaventa2->id;
-        $orden2->idPaciente = 3;    // Paciente ID 1 Jhoel Debray
+        $orden2->idPaciente = 1;    // Paciente ID 1 Jhoel Debray
         $orden2->save();
 
         // Asignar número de orden
@@ -103,13 +131,35 @@ class OrdenSeeder extends Seeder
         $analisis->idOrden = $orden2->id;   // Orden ID 3
         $analisis->save();
 
+        // Obtener todos los atributos correspondientes al tipo de análisis
+        $atributos3 = analisistotal::where('tipo', 'Hemograma')->get();
+
+        // Relacionar la orden con los atributos en la tabla selectanalises
+        foreach ($atributos3 as $atributo) {
+            Selectanalisis::create([
+                'idTipoanalisis' => $atributo->id,
+                'idOrden' => $orden2->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+
 
 
 
         // ID ORDEN 4
+        // Crear la nota de venta
+        $notaventa3 = NotaVenta::create([
+            'metodoPago' => 'Paypal',
+            'precio' => 120,
+            'descuento' => 0,
+            'precioTotal' => 120,
+        ]);
+
         $orden3 = new Orden();
-        $orden3->idNotaVenta = $notaventa2->id;
-        $orden3->idPaciente = 4;    // Paciente ID 1 Jhoel Debray
+        $orden3->idNotaVenta = $notaventa3->id;
+        $orden3->idPaciente = 4;    
         $orden3->save();
 
         // Asignar número de orden
@@ -118,7 +168,7 @@ class OrdenSeeder extends Seeder
 
         ordenAnalisis::create([
             'orden_id' => $orden3->id,
-            'tipo_analisis_id' => 3,
+            'tipo_analisis_id' => 2,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -126,22 +176,22 @@ class OrdenSeeder extends Seeder
         // Crear un nuevo análisis para la orden ID 4
         $analisis = new Analisis();
         $analisis->estado = 'Pendiente';
-        $analisis->descripcion = 'Quimica';
+        $analisis->descripcion = 'Hormona';
         $analisis->idOrden = $orden3->id;   // Orden ID 4
         $analisis->save();
 
-        ordenAnalisis::create([
-            'orden_id' => $orden3->id,
-            'tipo_analisis_id' => 4,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // Obtener todos los atributos correspondientes al tipo de análisis
+        $atributos4 = analisistotal::where('tipo', 'Hormona')->get();
 
-        // Crear un nuevo análisis para la orden ID 4
-        $analisis = new Analisis();
-        $analisis->estado = 'Pendiente';
-        $analisis->descripcion = 'Orina';
-        $analisis->idOrden = $orden3->id;   // Orden ID 4
-        $analisis->save();
+        // Relacionar la orden con los atributos en la tabla selectanalises
+        foreach ($atributos4 as $atributo4) {
+            Selectanalisis::create([
+                'idTipoanalisis' => $atributo4->id,
+                'idOrden' => $orden3->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
     }
 }
