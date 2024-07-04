@@ -78,7 +78,7 @@ class SelectanalisisSeeder extends Seeder
             'idTipoanalisis' => 16,
             'idOrden' => 1,
         ]);
-
+        /*
         Selectanalisis::create([
             'idTipoanalisis' => 10,
             'idOrden' => 2,
@@ -93,6 +93,7 @@ class SelectanalisisSeeder extends Seeder
             'idTipoanalisis' => 50,
             'idOrden' => 3,
         ]);
+        
 
 
 
@@ -100,6 +101,7 @@ class SelectanalisisSeeder extends Seeder
             'idTipoanalisis' => 1,
             'idOrden' => 4,
         ]);
+        */
 
 
     }
