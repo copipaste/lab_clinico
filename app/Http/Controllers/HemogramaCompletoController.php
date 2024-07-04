@@ -44,8 +44,11 @@ class HemogramaCompletoController extends Controller
         $hemograma = HemogramaCompleto::findOrFail($id);
         $bioquimico = Bioquimico::all();
         $pdf = PDF::loadView('hemograma.pdf', compact('hemograma', 'bioquimico'));
-        return $pdf->download('hemograma_' . $id . '.pdf');
+
+        // Para mostrar el PDF en lugar de descargarlo automáticamente
+        return $pdf->stream('hemograma_' . $id . '.pdf');
     }
+
     /**
      * Show the form for creating a new resource.
      */
