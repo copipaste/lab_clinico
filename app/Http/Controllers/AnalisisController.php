@@ -128,8 +128,8 @@ class AnalisisController extends Controller
         $hemograma->plaquetas = $request->input('plaquetas');
         $hemograma->recuento = $request->input('recuento');
         $hemograma->globulosBlancos = $request->input('globulosBlancos');
-        $hemograma->promielocitos = $request->input('promielocito');
-        $hemograma->mielocitos = $request->input('mielocito');
+        $hemograma->promielocitos = $request->input('promielocitos');
+        $hemograma->mielocitos = $request->input('mielocitos');
         $hemograma->metamielocitos = $request->input('metamielocitos');
         $hemograma->cayados = $request->input('cayados');
         $hemograma->segmentados = $request->input('segmentados');
@@ -137,8 +137,8 @@ class AnalisisController extends Controller
         $hemograma->monocitos = $request->input('monocitos');
         $hemograma->eosinofilos = $request->input('eosinofilos');
         $hemograma->basofilos = $request->input('basofilos');
-        $hemograma->grupoSanguineo = $request->input('gruposanguineo');
-        $hemograma->factorRh = $request->input('factorrh');
+        $hemograma->grupoSanguineo = $request->input('grupoSanguineo');
+        $hemograma->factorRh = $request->input('factorRh');
         $hemograma->VDRL = $request->input('VDRL');
         $hemograma->baciloscopia = $request->input('baciloscopia');
         $hemograma->coproparasitologico = $request->input('coproparasitologico');
