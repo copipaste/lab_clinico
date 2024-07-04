@@ -59,7 +59,7 @@
 
         <label class="mt-2">Hemograma</label>
         @foreach ($selectanalisis as $s)
-            @if ($s->idOrden == $idOrden)
+            @if ($s->idOrden == $idOrden && $s->analisistotal->tipo == 'Hemograma')
                 <div class="form-row">
                     <div class="col">
                         <div class="input-group">

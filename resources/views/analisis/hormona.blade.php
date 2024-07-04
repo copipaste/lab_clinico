@@ -54,7 +54,7 @@
 
         <label class="mt-2">Hormona</label>
         @foreach ($selectanalisis as $s)
-            @if ($s->idOrden == $idOrden)
+            @if ($s->idOrden == $idOrden  && $s->analisistotal->tipo == 'Hormona')
                 <div class="form-row">
                     <div class="col">
                         <div class="input-group">
