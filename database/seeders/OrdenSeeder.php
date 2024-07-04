@@ -45,15 +45,11 @@ class OrdenSeeder extends Seeder
         ordenAnalisis::create([
             'orden_id' => $orden->id,
             'tipo_analisis_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
 
         ordenAnalisis::create([
             'orden_id' => $orden->id,
             'tipo_analisis_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
 
         // Crear un nuevo análisis para la orden ID 2
@@ -78,8 +74,6 @@ class OrdenSeeder extends Seeder
             Selectanalisis::create([
                 'idTipoanalisis' => $atributo1->id,
                 'idOrden' => $orden->id,
-                'created_at' => now(),
-                'updated_at' => now(),
             ]);
         }
 
@@ -91,8 +85,6 @@ class OrdenSeeder extends Seeder
             Selectanalisis::create([
                 'idTipoanalisis' => $atributo2->id,
                 'idOrden' => $orden->id,
-                'created_at' => now(),
-                'updated_at' => now(),
             ]);
         }
 
@@ -120,8 +112,6 @@ class OrdenSeeder extends Seeder
         ordenAnalisis::create([
             'orden_id' => $orden2->id,
             'tipo_analisis_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
 
         // Crear un nuevo análisis para la orden ID 3
@@ -139,8 +129,6 @@ class OrdenSeeder extends Seeder
             Selectanalisis::create([
                 'idTipoanalisis' => $atributo->id,
                 'idOrden' => $orden2->id,
-                'created_at' => now(),
-                'updated_at' => now(),
             ]);
         }
 
@@ -169,8 +157,6 @@ class OrdenSeeder extends Seeder
         ordenAnalisis::create([
             'orden_id' => $orden3->id,
             'tipo_analisis_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
 
         // Crear un nuevo análisis para la orden ID 4
@@ -188,8 +174,6 @@ class OrdenSeeder extends Seeder
             Selectanalisis::create([
                 'idTipoanalisis' => $atributo4->id,
                 'idOrden' => $orden3->id,
-                'created_at' => now(),
-                'updated_at' => now(),
             ]);
         }
 
