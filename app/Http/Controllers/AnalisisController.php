@@ -127,7 +127,7 @@ class AnalisisController extends Controller
         $hemograma->VSG = $request->input('VSG');
         $hemograma->plaquetas = $request->input('plaquetas');
         $hemograma->recuento = $request->input('recuento');
-        $hemograma->globulosBlancos = $request->input('globulosblanco');
+        $hemograma->globulosBlancos = $request->input('globulosBlancos');
         $hemograma->promielocitos = $request->input('promielocito');
         $hemograma->mielocitos = $request->input('mielocito');
         $hemograma->metamielocitos = $request->input('metamielocitos');

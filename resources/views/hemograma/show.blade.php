@@ -185,20 +185,30 @@
     </div>
     <div class="form-row">
         <div class="col-md-6">
-            <div class=""><strong>Linfocitos:</strong> {{ $hemograma->linfocitos }}</div>
+            @if ($hemograma->linfocitos >= 25 && $hemograma->linfocitos <= 35)
+                <div class="text-success"><strong>Linfocitos:</strong> {{ $hemograma->linfocitos }}</div>
+            @else
+                <div class="text-warning"><strong>Linfocitos:</strong> {{ $hemograma->linfocitos }}</div>
+            @endif
         </div>
         <div class="col-md-6">
             <div class=""><strong></strong>25 - 35 %</div>
         </div>
     </div>
+
     <div class="form-row">
         <div class="col-md-6">
-            <div class=""><strong>Eosinofilos:</strong> {{ $hemograma->eosinofilos }}</div>
+            @if ($hemograma->eosinofilos >= 2 && $hemograma->eosinofilos <= 5)
+                <div class="text-success"><strong>Eosinofilos:</strong> {{ $hemograma->eosinofilos }}</div>
+            @else
+                <div class="text-warning"><strong>Eosinofilos:</strong> {{ $hemograma->eosinofilos }}</div>
+            @endif
         </div>
         <div class="col-md-6">
             <div class=""><strong></strong>2 - 5 %</div>
         </div>
     </div>
+
     <div class="form-row">
         <div class="col-md-6">
             <div class=""><strong>Grupo Sanguineo:</strong> {{ $hemograma->grupoSanguineo }}</div>
@@ -228,7 +238,6 @@
     <div class="form-row mt-2 mb-3">
         <div class="col-md-12">
             <div class=""><strong>DIAGNOSTICO DE LA ENFERMEDAD DE CHAGAS</strong></div>
-            <div class=""><strong>Metodo :</strong>{{ $hemograma->metodo }}</div>
             <div class=""><strong>Resultado :</strong>{{ $hemograma->resultado }}</div>
         </div>
     </div>
