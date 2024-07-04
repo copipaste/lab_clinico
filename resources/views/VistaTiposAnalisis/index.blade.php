@@ -1,118 +1,121 @@
 @extends('adminlte::page')
-@section('title', 'Tipo Analisis')
-@section('css')
-    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap4.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.1/css/responsive.bootstrap4.css">
-@endsection
-{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
+@section('content_header')
+    <h1 class="m-0 text-dark">Tipo Analisis</h1>
+@stop
+
+
+
 @section('content')
-    <div class="container py-4">
-        <!-- Botón para abrir el modal -->
-        <div class="mb-2">
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
-                Añadir
-            </button>
-        </div>
-        {{-- Modal --}}
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Añadir Tipo de Analisis</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('tipoanalisis.store') }}" method="POST">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="nombre">Nombre:</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre"
-                                        placeholder="Ingrese el nombre">
-                                </div>
-                                <div class="form-group">
-                                    <label for="descripcion">Descripción:</label>
-                                    <input type="text" class="form-control" id="descripcion" name="descripcion"
-                                        placeholder="Ingrese la descripción">
-                                </div>
-                                <div class="form-group">
-                                    <label for="precio">Precio:</label>
-                                    <input type="number" class="form-control" id="precio" name="precio"
-                                        placeholder="Ingrese el precio">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> --}}
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                            </div>
-                        </form>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
 
 
 
-        <table id="myTable" class="table table-striped table-bordered" style="width:100%">
-            <thead>
+{{-- modal --}}
+<div class="form-group align-items-end">
+        {{-- ---Custom modal-- --}}
+        <x-adminlte-button label="Registrar Analisis" class="bg-white" title="Registrar Tipo Analisis"
+        data-toggle="modal" data-target="#modalpromocion" />
+
+        <x-adminlte-modal id="modalpromocion" title="Registrar Tipo de Analisis" size="lg" theme="dark" v-centered static-backdrop scrollable>
+            <form action="" method="POST">
+                        @method('POST')
+                        @csrf
+                        <x-adminlte-input name="nombre" type="text" label="Nombre" />
+
+                                <x-adminlte-input name="descripcion" type="text" label="Descripcion" />
+                                <x-adminlte-input name="precio" type="number" label="Precio" />
+                                <x-adminlte-button  class="float-left mt-3" type="submit" label="Aceptar" theme="dark" />
+                                <x-adminlte-button  class="btn btn-primary float-right mt-3" theme="light" label="Cancelar" data-dismiss="modal" />
+
+                                <x-slot name="footerSlot" >
+                                </x-slot>
+            </form>
+        </x-adminlte-modal>
+</div>
+{{-- modal --}}
+
+
+
+<div class="card">
+    <div class="card-body">
+        <x-adminlte-datatable id="table1" :heads="$heads" striped head-theme="white" with-buttons>
+            @foreach($tipoanalisis as $t)
                 <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Precio</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($tipoanalisis as $t)
-                <tr>
-                    <td>{{$t->id}}</td>
-                    <td>{{$t->nombre}}</td>
-                    <td>{{$t->descripcion}}</td>
-                    <td>{{$t->precio}}</td>
-                    <td>
-                        <!-- Botón para editar -->
-                        <a href="{{ route('tipoanalisis.edit', $t->id) }}" class="btn btn-primary btn-sm">Editar</a>
 
-                        <!-- Botón para eliminar (usando un formulario) -->
-                        <form action="{{ route('tipoanalisis.destroy', $t->id) }}" method="POST" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este elemento?')">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        <td>{{ $t->id }}</td>
+                        <td>{{ $t->nombre }}</td>
+                        <td>{{ $t->descripcion }}</td>
+                        <td>{{ $t->precio }}</td>
+                        <td width="15px">
+                            <div class="d-flex">
 
+                                {{-- esto es para el de editar membresía --}}
+                              {{-- esto es para el de editar membresía --}}
+                              <a href="{{route('tipoanalisis.edit', $t->id) }}" class="btn btn-xs btn-default text-primary mx-1 shadow" title="EDITAR">
+                                <i class="fa fa-lg fa-fw fa-pen"></i>
+                            </a>
+                                <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="ELIMINAR" data-toggle="modal" data-target="#modalCustom{{ $t->id }}">
+                                    <i class="fa fa-lg fa-fw fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+
+                        <x-adminlte-modal id="modalCustom{{ $t->id }}" title="Eliminar" size="sm" theme="warning" icon="fa-solid fa-triangle-exclamation" v-centered static-backdrop scrollable>
+                            <div style="height: 50px;">¿Está seguro de eliminar el seguro?</div>
+                            <x-slot name="footerSlot">
+                                <form action="{{ route('tipoanalisis.destroy', $t->id) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <x-adminlte-button class="btn-flat" type="submit" label="Aceptar" theme="dark" />
+                                </form>
+
+                                <x-adminlte-button theme="light" label="Cancelar" data-dismiss="modal" />
+                            </x-slot>
+                        </x-adminlte-modal>
+
+                </tr>
+            @endforeach
+
+        </x-adminlte-datatable>
 
     </div>
-@endsection
+</div>
+@stop
+
+@section('plugins.DatatablesPlugin', true)
+@section('plugins.Datatables', true)
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/fontawesome-free-6.5.2-web/css/all.min.css')}}">
+
+@stop
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap4.js"></script>
-    <script src=" https://cdn.datatables.net/responsive/3.0.1/js/dataTables.responsive.js"></script>
-    <script src="https://cdn.datatables.net/responsive/3.0.1/js/responsive.bootstrap4.js"></script>
-    {{-- <script src="//cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable({
-                responsive: true,
-                language: {
-                    url: 'https://cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json'
-                }
+        $(function() {
+            var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
             });
+            @if (session('success'))
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            });
+            @endif
+
+            @if (session('deleted'))
+            Toast.fire({
+                icon: 'info',
+                title: '{{ session('deleted') }}'
+            });
+            @endif
+
+
         });
     </script>
-@endsection
+@stop

@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
+            $table->string('precio');
             $table->string('tipo');
             $table->timestamps();
         });
- 
+
 
     }
 
