@@ -182,7 +182,7 @@ class OrdenSeeder extends Seeder
 
         $orden3 = new Orden();
         $orden3->idNotaVenta = $notaventa3->id;
-        $orden3->idPaciente = 4;    
+        $orden3->idPaciente = 4;
         $orden3->save();
 
         // Asignar número de orden
