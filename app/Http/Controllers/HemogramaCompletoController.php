@@ -131,7 +131,7 @@ class HemogramaCompletoController extends Controller
 
         // Actualizar los glóbulos rojos del hemograma
         $hemograma->update([
-            'globulosRojos' => $request->globulosrojos,
+            'globulosRojos' => $request->globulosRojos,
             'hematocrito' => $request->hematocrito,
             'hemoglobina' => $request->hemoglobina,
             'VCM' => $request->VCM,
@@ -142,7 +142,7 @@ class HemogramaCompletoController extends Controller
             'recuento' => $request->recuento,
             'globulosBlancos' => $request->globulosblanco,
             'promielocitos' => $request->promielocito,
-            'mielocitos' => $request->mielocito,
+            'mielocitos' => $request->mielocitos,
             'metamielocitos' => $request->metamielocitos,
             'cayados' => $request->cayados,
             'segmentados' => $request->segmentados,
@@ -151,8 +151,8 @@ class HemogramaCompletoController extends Controller
             'eosinofilos' => $request->eosinofilos,
             'basofilos' => $request->basofilos,
             'blastos' => $request->blastos,
-            'grupoSanguineo' => $request->gruposanguineo,
-            'factorRh' => $request->factorrh,
+            'grupoSanguineo' => $request->grupoSanguineo,
+            'factorRh' => $request->factorRh,
             'VDRL' => $request->VDRL,
             'baciloscopia' => $request->baciloscopia,
             'coproparasitologico' => $request->coproparasitologico,
